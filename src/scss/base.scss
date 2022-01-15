@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+// Config
+@import "./config/reset";
+@import "./config/variable";
+
+// Components 
+@import "./components/Banner.scss";
+@import "./components/Nav.scss";
+@import "./components/Row.scss";
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(20,20,20,1);
+    padding-top: 90px;
+    color: #ffff;
+}
+
+a {
+    all: unset;
+    text-decoration: none;
+    color: inherit;
+}
+
+*{
+    margin: 0;
+}
