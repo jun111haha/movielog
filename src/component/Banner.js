@@ -1,23 +1,25 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
+import { moviesApi, tvApi } from '../Api.js';
 
 const Container = styled.div`
-    color:white;
+    color:#e6e6e6;
     object-fit: contain;
-    height: 448px;
+    height: 600px;
 `;
 
 const BannerContents = styled.div`
     margin-left: 30px;
     padding-top:140px;
     height: 190px;
-`
+`;
 
 const BannerTitle = styled.h1`
     font-size: 3rem;
     font-weight: 800;
     padding-bottom: 0.3rem;;
-`
+`;
 
 const BannerButton = styled.div`
     cursor:pointer;
@@ -37,43 +39,80 @@ const BannerButton = styled.div`
         background-color: #e6e6e6;
         transition: all 0.2s;
     }
-`
+`;
 
 const BannerDescription = styled.h1`
     width: 45rem;
     line-height: 1.3;
     padding-top:1rem;
-    font-size:0.8rem;
+    font-size:1rem;
     max-width: 360px;
     height:80px;
-`
+    margin:20px;
+`;
 
 const BannerButtonGroup = styled.div`
     width: 90%;
     margin: 10px;
     display: flex;
-`
+`;
+
 const BannerFadeBottom = styled.div`
-    height: 7.4rem;
+    height: 16.9rem;
     background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), #111)
-`
+`;
 
 
 
 function Banner(){
+
+    const [movie, setMovie] = useState([]);
+
+    useEffect(()=>{
+        async function fetchData(){
+            const request = await tvApi.netflixOriginals();
+
+            setMovie(
+                request.data.results[
+                  Math.floor(Math.random() * request.data.results.length)       
+                ]
+            );
+        }
+
+        fetchData();
+    }, []);
+    
+    function truncate(str, n) {
+        
+        if(str){
+            return str.length > n ? str.substr(0, n - 1) + ".." : str;
+        }else{
+            return "영화 설명이 없습니다.";    
+        }
+
+      }
+
+
     return(
         <div>
-            <Container>
+            <Container
+                  style={{
+                    backgroundSize: "cover",
+                    backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`,
+                    backgroundPosition: "center",
+                  }}> 
+
                 <BannerContents>
                     <BannerTitle>
-                        타이틀
+                        {movie.title || movie.name || movie.original_name}
                     </BannerTitle>
+
                     <BannerButtonGroup>
                         <BannerButton>play</BannerButton>
                         <BannerButton>List</BannerButton>
                     </BannerButtonGroup>
+                        {truncate(movie.overview, 500)}
                     <BannerDescription>
-                        배너 설명창
                     </BannerDescription>
                 </BannerContents>
                 <BannerFadeBottom></BannerFadeBottom>

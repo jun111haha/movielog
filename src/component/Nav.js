@@ -10,8 +10,6 @@ const Container = styled.div`
     padding: 20px;
     height: 30px;
     z-index: 1;
-
-    /* Animations */
     transition-timing-function: ease-in;
     transition:all 0.5s;
 `
@@ -34,8 +32,8 @@ position: fixed;
 function Nav (){
     return(
         <Container>
-            <Log src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"/>
-            <Avatar src="http://pngimg.com/uploads/netflix/netflix_PNG8.png"/>
+            {/* <Log src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"/>
+            <Avatar src="http://pngimg.com/uploads/netflix/netflix_PNG8.png"/> */}
         </Container>
     );
 }

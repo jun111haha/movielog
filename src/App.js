@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import "./scss/base.scss";
-import Banner from "./component/Banner.js";
-import Nav from "./component/Nav";
-
+import React from "react";
+import { Home,Intro } from "./views";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import GlobalStyle from "./config/global";
 function App() {
   return (
-    <div className="app">
-      <Nav/>
-      <Banner/>
-
-
-    </div>
+    <>
+    <GlobalStyle/>
+      <Router>
+        <Routes>
+            <Route path="/" element={<Intro></Intro>} />
+            <Route path="/home" element={<Home></Home>} />
+        </Routes>
+      </Router>
+    </>
 
   );
 }
