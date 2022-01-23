@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 
 const Container = styled.div`
+    background-image: ${(props) => `url("https://image.tmdb.org/t/p/original/${props.backdropPath}")`};
     color:#e6e6e6;
     object-fit: contain;
-    height: 448px;
+    height: 700px;
+    background-size: cover;
+    background-position : center center;
 `;
 
 const BannerContents = styled.div`
@@ -56,15 +59,46 @@ const BannerButtonGroup = styled.div`
 `;
 
 const BannerFadeBottom = styled.div`
-    height: 7.4rem;
+    height: 23.1rem;
     background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), #111)
 `;
 
+function truncate(str, n) {
+        
+    if(str){
+        return str.length > n ? str.substr(0, n - 1) + ".." : str;
+    }else{
+        return "설명이 없습니다.";    
+    }
+
+  }
 
 const BannerPresenter = (props) => {
+    console.log(props);
     return(
         <>
-            <Container/>
+            <>
+            <Container backdropPath={props.movie.backdrop_path}> 
+                <BannerContents>
+                    <BannerTitle>
+                        {props.movie.title || props.movie.name || props.movie.original_name}
+                    </BannerTitle>
+
+                    <BannerButtonGroup>
+                        <BannerButton>play</BannerButton>
+                        <BannerButton>List</BannerButton>
+                    </BannerButtonGroup>
+                        
+                        <BannerDescription>
+
+                            {truncate(props.movie.overview, 300)}
+
+                        </BannerDescription>
+                        
+                </BannerContents>
+                <BannerFadeBottom/>
+            </Container>
+        </>
         </>
     )
 }

@@ -28,17 +28,17 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 1.5em;
+  font-size: 4.0em;
   margin : 100px;
 `;
 
 const Name = styled.p`
-  font-size: 1.3em;
+  font-size: 2.0em;
   margin-bottom: 10px
 `;
 
 const MoreButton = styled.button`
-  width: 250px;
+  width: 230px;
   padding: 0.8rem 0;
   border: 3px solid white;
   background-color: rgba(0, 0, 0, 0.3);
