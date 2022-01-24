@@ -74,7 +74,6 @@ function truncate(str, n) {
   }
 
 const BannerPresenter = (props) => {
-    console.log(props);
     return(
         <>
             <>

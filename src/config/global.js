@@ -1,6 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`  
+
+::-webkit-scrollbar {
+   width: 8px; 
+  } 
+
+::-webkit-scrollbar-thumb { 
+  background-color: #424242;; 
+   border-radius: 30px;
+  }
+
+::-webkit-scrollbar-track { 
+  background-color: rgba(0,0,0,0.85);
+   border-radius: 10px; 
+   box-shadow: inset 0px 0px 5px rgba(0,0,0,0.85); 
+  }
+
 
   div,
   span,
@@ -40,11 +56,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Roboto Regular";
     background-color: rgba(20,20,20,1);
     border: 0;
     font-size: 100%;
-    font: inherit;
     margin : 0;
     padding: 0;
   }
@@ -73,6 +88,7 @@ const GlobalStyle = createGlobalStyle`
   p,h2 {
     margin: 0;
   }
+
 `;
 
 export default GlobalStyle;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { moviesApi, tvApi } from "../../Api";
-import HomePresenter from "./HomePresenter";
+import { moviesApi } from "../../Api";
+import MoviePresenter from "./MoviePresenter";
 
-const HomeContainer = () =>{
+const MovieContainer = () =>{
     const [moviePopular, setMoviePopular] = useState([]);
     const [movieUpcoming, setMovieUpComing] = useState([]);
     const [movieNowPlaying, setMovieNowPlaying] = useState([]);
@@ -26,7 +26,7 @@ const HomeContainer = () =>{
 
     return(
         <>
-            <HomePresenter   
+        <MoviePresenter   
             moviePopular = {moviePopular}
             movieUpcoming = {movieUpcoming}
             movieNowPlaying = {movieNowPlaying}/>
@@ -34,4 +34,4 @@ const HomeContainer = () =>{
     )
 }
 
-export default HomeContainer;
+export default MovieContainer;
