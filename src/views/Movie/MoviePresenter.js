@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import BannerContainer from "../Banner/BannerContainer";
 import Poster from "../../component/Poster";
+import Nav from "../../component/Nav";
 
 const Container = styled.div`
     padding: 50px;
@@ -21,6 +22,7 @@ const Title = styled.h2`
 
 const Grid = styled.div`
     margin-top: 30px;
+    margin-bottom : 50px;
     padding: 0px 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 220px);
@@ -45,14 +47,43 @@ const StyledAlwaysScrollSection = styled.div`
 const MoviePresenter = (props) =>{
     return(
         <>
+        <Nav></Nav>
         <BannerContainer/>
             <Container>
                 <Title>인기영화</Title>
                     <Grid>
                         {
-                            props.moviePopular.map((data, i)=>{
+                            props.moviePopular.map((data, index)=>{
                                 return(
-                                    <Poster key ={i}
+                                    <Poster key ={index}
+                                            imgUrl={data.backdrop_path}
+                                            title ={data.title}
+                                            rating={data.vote_average}>
+                                    </Poster>
+                                    )
+                            })
+                        }
+                    </Grid>
+                <Title>개봉예정 영화</Title>
+                    <Grid>
+                        {
+                            props.movieUpcoming.map((data, index)=>{
+                                return(
+                                    <Poster key ={index}
+                                            imgUrl={data.backdrop_path}
+                                            title ={data.title}
+                                            rating={data.vote_average}>
+                                    </Poster>
+                                    )
+                            })
+                        }
+                    </Grid>
+                <Title>상영중인 영화</Title>
+                    <Grid>
+                        {
+                            props.movieNowPlaying.map((data, index)=>{
+                                return(
+                                    <Poster key ={index}
                                             imgUrl={data.backdrop_path}
                                             title ={data.title}
                                             rating={data.vote_average}>

@@ -30,16 +30,17 @@ const Rating = styled.p`
 `
 
 const Name = styled.h2`
+   font-family: "Roboto Bold";
    color: #dcdcdc;
    font-weight: 500px;
    font-size: 1.1rem;
 `
 
 
-const Poster = ({key, imgUrl, title, rating}) => {
+const Poster = ({index, imgUrl, title, rating}) => {
     return(
         <>
-            <ImgBox key = {key}>
+            <ImgBox index = {index}>
                 <Img bgUrl = {imgUrl}/>
                 <Name>{title}</Name>
                 <Rating>⭐: {rating}</Rating>
