@@ -19,13 +19,14 @@ thumb
 sketch
 
 ### VisualStudioCode ###
-.Api.js
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+
+src/Api.js
 
 # Local History for Visual Studio Code
 .history/
