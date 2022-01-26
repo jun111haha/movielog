@@ -19,7 +19,7 @@ thumb
 sketch
 
 ### VisualStudioCode ###
-./src/Api.js
+.Api.js
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
