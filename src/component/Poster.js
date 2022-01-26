@@ -30,7 +30,7 @@ const Rating = styled.p`
 `
 
 const Name = styled.h2`
-   font-family: "Roboto Bold";
+   font-family: "Apple Gothic B";
    color: #dcdcdc;
    font-weight: 500px;
    font-size: 1.1rem;

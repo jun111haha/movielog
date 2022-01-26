@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { tvApi } from '../../Api';
+import { moviesApi } from '../../Api';
 import BannerPresenter from "./BannerPresenter";
 
 const BannerContainer = () => {
@@ -8,8 +8,8 @@ const BannerContainer = () => {
 
   useEffect(()=>{
       async function fetchData(){
-          const request = await tvApi.netflixOriginals();
-
+          const request = await moviesApi.upcoming();
+          
           setMovie(
               request.data.results[
                 Math.floor(Math.random() * request.data.results.length)       

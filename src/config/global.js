@@ -56,12 +56,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "Roboto Regular";
+    font-family: "Apple Gothic R";
     background-color: rgba(20,20,20,1);
     border: 0;
     font-size: 100%;
     margin : 0;
     padding: 0;
+    overflow-x:hidden;
+    overflow-y:auto;
   }
   
   *, *:before, *:after {
@@ -87,6 +89,10 @@ const GlobalStyle = createGlobalStyle`
   }
   p,h2 {
     margin: 0;
+  }
+
+  input, button {
+    background-color: transparent;
   }
 
 `;

@@ -17,6 +17,7 @@ const BannerContents = styled.div`
 `;
 
 const BannerTitle = styled.h1`
+    margin : 10px;
     font-size: 3rem;
     font-weight: 800;
     padding-bottom: 0.3rem;;

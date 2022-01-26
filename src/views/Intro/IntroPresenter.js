@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Layout = styled.div`
@@ -80,7 +80,8 @@ height: 100vh;
 
 
 const IntroPresenter = (props) =>{
-  let navigate = useNavigate();
+
+  let history = useHistory();
 
   return (
   <>
@@ -96,7 +97,7 @@ const IntroPresenter = (props) =>{
                           <Title>오늘의 추천 영화</Title>
                           <Name>{props.movie.original_title}</Name>
                           <Name>{props.movie.title}</Name>
-                          <MoreButton onClick={()=> navigate("/home")}>더 보기</MoreButton>
+                           <MoreButton onClick={() =>{history.push("/home")}}>더 보기</MoreButton>
                       </Container>
               </HomeIntro>
           </Main>
