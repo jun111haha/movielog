@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
     background-image: ${(props) => `url("https://image.tmdb.org/t/p/original/${props.backdropPath}")`};
@@ -77,7 +78,13 @@ function truncate(str, n) {
 const BannerPresenter = (props) => {
     return(
         <>
-            <>
+        {
+            props.loading ?
+            <div className={"iconArea"}>
+                <CircularProgress />
+            </div>
+            :
+
             <Container backdropPath={props.movie.backdrop_path}> 
                 <BannerContents>
                     <BannerTitle>
@@ -98,7 +105,7 @@ const BannerPresenter = (props) => {
                 </BannerContents>
                 <BannerFadeBottom/>
             </Container>
-        </>
+        }
         </>
     )
 }

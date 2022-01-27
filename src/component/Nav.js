@@ -1,12 +1,13 @@
-import React from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 
 const SLink  = styled(Link)`
   padding: 15px 20px;
-  color: ${props => props.current ? "white" : "gray"};
+  color: ${props => props.selected ? "#ffffff" : "#808080"};
   border-bottom: 4px solid 
-  ${props => props.current ? "white" : "transparent"};
+  ${props => props.selected ? "#ffffff" : "transparent"};
 `;
 
 const SItem  = styled.li`
@@ -45,19 +46,19 @@ const Nav = (props) => {
 
                 <SList>
                     <SItem>
-                         <SLink current={false} to="/">소개</SLink>                       
+                         <SLink selected={pathname === "/"} to="/">소개</SLink>                       
                     </SItem>             
                 </SList>
 
                 <SList>
                     <SItem>
-                         <SLink current={pathname === "/tv"} to="/tv">TV프로그램</SLink>                       
+                         <SLink selected={pathname === "/tv"} to="/tv">TV프로그램</SLink>                       
                     </SItem>             
                 </SList>
 
                 <SList>
                     <SItem>
-                         <SLink current={pathname === "/home"} to="/home">영화</SLink>                       
+                         <SLink selected={pathname === "/home"} to="/home">영화</SLink>                       
                     </SItem>             
                 </SList>
 

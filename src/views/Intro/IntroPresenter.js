@@ -85,28 +85,31 @@ const IntroPresenter = (props) =>{
 
   return (
   <>
-  {props.loading ? (
+    {props.loading ? (
       <div className={"iconArea"}>
         <CircularProgress />
       </div>
-    ) : (
-      <Layout>
+    ):(
+
+        <Layout>
           <Main>
               <HomeIntro>
                       <Container>
                           <Title>오늘의 추천 영화</Title>
-                          <Name>{props.movie.original_title}</Name>
-                          <Name>{props.movie.title}</Name>
-                           <MoreButton onClick={() =>{history.push("/home")}}>더 보기</MoreButton>
+                            <Name>{props.movie.original_title}</Name>
+                            <Name>{props.movie.title}</Name>
+                          <MoreButton onClick={() =>{history.push("/home")}}>더 보기</MoreButton>
                       </Container>
               </HomeIntro>
           </Main>
-        <Background backdropPath={props.movie.backdrop_path}/>
+            <Background backdropPath={props.movie.backdrop_path} />
       </Layout>
     )
-  }
+    }
   </>
   );
 }
 
 export default IntroPresenter;
+
+

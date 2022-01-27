@@ -3,29 +3,35 @@ import { moviesApi } from "../../Api";
 import IntroPresenter from "./IntroPresenter";
 
 const IntroContainer = () => {
+
+    const [loading, setLoading] = useState(true);
     const [movie, setMovie] = useState([]);
-    const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
-        async function fetchData(){
-
-            setLoading(true);
-
-            const request = await moviesApi.popular();
-
+    const fetchData = async () => {
+        try {
+            const { data : { results : popular }} = await moviesApi.popular()
+            
             setMovie(
-                request.data.results[
-                  Math.floor(Math.random() * request.data.results.length)       
+                popular [
+                    Math.floor(Math.random() * popular.length)       
                 ]
             );
+
             setLoading(false);
-        }
+
+        } catch (error) {
+            console.log(error);
+        }    
+      };
+
+    useEffect(()=>{
 
         fetchData();
     }, []);
     
     return (
-        <IntroPresenter movie = {movie}
+
+        <IntroPresenter movie = {!loading && movie}
                         loading ={loading}/>
     );
 }

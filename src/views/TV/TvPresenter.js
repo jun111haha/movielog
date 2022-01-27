@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BannerContainer from "../Banner/BannerContainer";
 import Poster from "../../component/Poster";
 import Nav from "../../component/Nav";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
     padding: 50px;
@@ -36,12 +37,19 @@ const TvPresenter = (props) => {
         <BannerContainer/>
             <Container>
                 <Title>넷플릭스 오리지날</Title>
+                {
+                    props.loading ? 
+                    <div className={"iconArea"}>
+                        <CircularProgress />
+                    </div>
+                    :
+                    <>
                     <Grid>
                         {
                             props.netflixOriginals.map((data, index)=>{
                                 return(
                                     <Poster key ={index}
-                                            imgUrl={data.backdrop_path}
+                                            imgUrl={data.backdrop_path || data.poster_path}
                                             title ={data.name}
                                             rating={data.vote_average}>
                                     </Poster>
@@ -55,7 +63,7 @@ const TvPresenter = (props) => {
                             props.popular.map((data, index)=>{
                                 return(
                                     <Poster key ={index}
-                                            imgUrl={data.backdrop_path}
+                                            imgUrl={data.backdrop_path || data.poster_path}
                                             title ={data.name}
                                             rating={data.vote_average}>
                                     </Poster>
@@ -63,13 +71,13 @@ const TvPresenter = (props) => {
                             })
                         }
                     </Grid>
-                <Title>순위 프로그램</Title>
+                <Title>평점 순위 프로그램</Title>
                     <Grid>
                         {
                             props.topRated.map((data, index)=>{
                                 return(
                                     <Poster key ={index}
-                                            imgUrl={data.backdrop_path}
+                                            imgUrl={data.backdrop_path || data.poster_path}
                                             title ={data.name}
                                             rating={data.vote_average}>
                                     </Poster>
@@ -77,6 +85,8 @@ const TvPresenter = (props) => {
                             })
                         }
                     </Grid>
+                    </>
+                }
             </Container>  
         </>
     )

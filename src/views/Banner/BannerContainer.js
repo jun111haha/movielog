@@ -5,24 +5,29 @@ import BannerPresenter from "./BannerPresenter";
 const BannerContainer = () => {
 
   const [movie, setMovie] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function fetchData(){
+      const request = await moviesApi.upcoming();
+      
+      setMovie(
+          request.data.results[
+            Math.floor(Math.random() * request.data.results.length)       
+          ]
+      );
+
+      setLoading(false);
+  }
 
   useEffect(()=>{
-      async function fetchData(){
-          const request = await moviesApi.upcoming();
-          
-          setMovie(
-              request.data.results[
-                Math.floor(Math.random() * request.data.results.length)       
-              ]
-          );
-      }
 
       fetchData();
   }, []);
   
     return(
         <>
-          <BannerPresenter movie={movie}/>
+          <BannerPresenter movie={movie}
+                           loading ={loading}/>
         </>
     )
 }

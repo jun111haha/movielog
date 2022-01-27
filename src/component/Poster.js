@@ -41,7 +41,7 @@ const Poster = ({index, imgUrl, title, rating}) => {
     return(
         <>
             <ImgBox index = {index}>
-                <Img bgUrl = {imgUrl}/>
+                 <Img bgUrl = {imgUrl}/>
                 <Name>{title}</Name>
                 <Rating>⭐: {rating}</Rating>
             </ImgBox>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BannerContainer from "../Banner/BannerContainer";
 import Poster from "../../component/Poster";
 import Nav from "../../component/Nav";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
     padding: 50px;
@@ -51,6 +52,13 @@ const MoviePresenter = (props) =>{
         <BannerContainer/>
             <Container>
                 <Title>인기영화</Title>
+                {
+                    props.loading ? 
+                    <div className={"iconArea"}>
+                        <CircularProgress />
+                    </div>
+                    :
+                    <>
                     <Grid>
                         {
                             props.moviePopular.map((data, index)=>{
@@ -92,6 +100,8 @@ const MoviePresenter = (props) =>{
                             })
                         }
                     </Grid>
+                    </>
+                }
             </Container>  
         </>
     )
