@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Loading from "../Loading/Loading";
 
 const Container = styled.div`
     background-image: ${(props) => `url("https://image.tmdb.org/t/p/original/${props.backdropPath}")`};
@@ -61,28 +61,24 @@ const BannerButtonGroup = styled.div`
 `;
 
 const BannerFadeBottom = styled.div`
-    height: 23.1rem;
+    height: 23.2rem;
     background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), #111)
 `;
 
-function truncate(str, n) {
-        
+const truncate = (str, n) =>{
     if(str){
-        return str.length > n ? str.substr(0, n - 1) + ".." : str;
+        return str.length > n ? str.substr(0, n - 1) + "...": str;
     }else{
-        return "설명이 없습니다.";    
+        return "설명이 없습니다.";
     }
-
-  }
+}
 
 const BannerPresenter = (props) => {
     return(
         <>
         {
             props.loading ?
-            <div className={"iconArea"}>
-                <CircularProgress />
-            </div>
+                <Loading/>
             :
 
             <Container backdropPath={props.movie.backdrop_path}> 

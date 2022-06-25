@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BannerContainer from "../Banner/BannerContainer";
 import Poster from "../../component/Poster";
 import Nav from "../../component/Nav";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Loading from "../Loading/Loading";
 
 const Container = styled.div`
     padding: 50px;
@@ -54,9 +54,7 @@ const MoviePresenter = (props) =>{
                 <Title>인기영화</Title>
                 {
                     props.loading ? 
-                    <div className={"iconArea"}>
-                        <CircularProgress />
-                    </div>
+                        <Loading/>
                     :
                     <>
                     <Grid>

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Loading from "../Loading/Loading";
+
 
 const Layout = styled.div`
   display: flex;
@@ -86,16 +88,14 @@ const IntroPresenter = (props) =>{
   return (
   <>
     {props.loading ? (
-      <div className={"iconArea"}>
-        <CircularProgress />
-      </div>
+      <Loading></Loading>
     ):(
 
         <Layout>
           <Main>
               <HomeIntro>
                       <Container>
-                          <Title>오늘의 추천 영화</Title>
+                          <Title>오늘의 영화</Title>
                             <Name>{props.movie.original_title}</Name>
                             <Name>{props.movie.title}</Name>
                           <MoreButton onClick={() =>{history.push("/home")}}>더 보기</MoreButton>
