@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BannerContainer from "../Banner/BannerContainer";
 import Poster from "../../component/Poster";
 import Nav from "../../component/Nav";
-import Loading from "../Loading/Loading";
+import Loading from "../../component/Loading";
 
 const Container = styled.div`
     padding: 50px;
@@ -28,21 +28,6 @@ const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, 220px);
     grid-gap: 20px;
-`;
-
-const StyledAlwaysScrollSection = styled.div`
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.4);
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-  }
 `;
 
 const MoviePresenter = (props) =>{

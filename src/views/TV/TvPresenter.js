@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BannerContainer from "../Banner/BannerContainer";
 import Poster from "../../component/Poster";
 import Nav from "../../component/Nav";
-import Loading from "../Loading/Loading";
+import Loading from "../../component/Loading";
 
 const Container = styled.div`
     padding: 50px;

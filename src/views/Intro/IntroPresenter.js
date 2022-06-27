@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Loading from "../Loading/Loading";
-
+import { useHistory } from "react-router-dom";
+import Loading from "../../component/Loading";
 
 const Layout = styled.div`
   display: flex;

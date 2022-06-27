@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import Loading from "../Loading/Loading";
+import Loading from "../../component/Loading";
 
 const Container = styled.div`
     background-image: ${(props) => `url("https://image.tmdb.org/t/p/original/${props.backdropPath}")`};
