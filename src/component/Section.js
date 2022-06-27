@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: left;
   max-width: 2400px;
   flex-wrap: wrap;
   @media (max-width: 768px) {

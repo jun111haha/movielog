@@ -13,24 +13,16 @@ const Container = styled.div`
     }
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
+    align-items: center;
     padding: 0px 20px;
     color : white;
-    font-size: 2.8rem;
+    font-size: 2.0rem;
     font-weight: 600;
     margin-top :10px;
-    text-align: center;
+    display:flex;
 `;
 
-
-const Grid = styled.div`
-    margin-top: 30px;
-    margin-bottom : 50px;
-    padding: 0px 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 220px);
-    grid-gap: 20px;
-`;
 
 const TvPresenter = (props) => {
     return(
