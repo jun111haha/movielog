@@ -7,8 +7,12 @@ const Container = styled.div`
     color:#e6e6e6;
     object-fit: contain;
     height: 700px;
+    width: 100%;
     background-size: cover;
     background-position : center center;
+    @media (max-width: 768px) {
+        height: 100%;
+      }
 `;
 
 const BannerContents = styled.div`
@@ -78,26 +82,18 @@ const BannerPresenter = (props) => {
         <>
         {
             props.loading ?
-                <Loading/>
-            :
-
+                <Loading/>:
             <Container backdropPath={props.movie.backdrop_path}> 
                 <BannerContents>
                     <BannerTitle>
                         {props.movie.title || props.movie.name || props.movie.original_name}
                     </BannerTitle>
-
                     <BannerButtonGroup>
-                        <BannerButton>play</BannerButton>
-                        <BannerButton>List</BannerButton>
+                        <BannerButton>예고편 play</BannerButton>
                     </BannerButtonGroup>
-                        
                         <BannerDescription>
-
                             {truncate(props.movie.overview, 300)}
-
                         </BannerDescription>
-                        
                 </BannerContents>
                 <BannerFadeBottom/>
             </Container>
