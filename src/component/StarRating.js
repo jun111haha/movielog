@@ -1,5 +1,5 @@
-import React  from "react";
-import StarRatings from 'react-star-ratings';
+import React from "react";
+import StarRatings from "react-star-ratings";
 
 const StarRating = ({ voteAverage }) => {
   return (
