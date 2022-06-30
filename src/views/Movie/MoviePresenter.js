@@ -43,7 +43,7 @@ const MoviePresenter = (props) => {
                     imgUrl={data.poster_path}
                     title={data.title ? data.title : data.original_title}
                     rating={data.vote_average}
-                    isMove={true}
+                    isMovie={true}
                   ></Poster>
                 );
               })}
@@ -58,7 +58,7 @@ const MoviePresenter = (props) => {
                     imgUrl={data.poster_path}
                     title={data.title ? data.title : data.original_title}
                     rating={data.vote_average}
-                    isMove={true}
+                    isMovie={true}
                   ></Poster>
                 );
               })}
@@ -73,7 +73,7 @@ const MoviePresenter = (props) => {
                     imgUrl={data.poster_path}
                     title={data.title ? data.title : data.original_title}
                     rating={data.vote_average}
-                    isMove={true}
+                    isMovie={true}
                   ></Poster>
                 );
               })}

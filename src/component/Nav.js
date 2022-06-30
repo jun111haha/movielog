@@ -10,15 +10,15 @@ const SLink = styled(Link)`
     ${(props) => (props.selected ? "#ffffff" : "transparent")};
 `;
 
-const SItem = styled.li`
+const Item = styled.li`
   text-align: center;
 `;
 
-const SList = styled.ul`
+const List = styled.ul`
   display: flex;
 `;
 
-const SHeader = styled.header`
+const Header = styled.header`
   position: fixed;
   display: flex;
   padding: 0px 30px;
@@ -37,31 +37,31 @@ const Nav = (props) => {
 
   return (
     <>
-      <SHeader>
-        <SList>
-          <SItem>
+      <Header>
+        <List>
+          <Item>
             <SLink selected={pathname === "/"} to="/">
               소개
             </SLink>
-          </SItem>
-        </SList>
+          </Item>
+        </List>
 
-        <SList>
-          <SItem>
+        <List>
+          <Item>
             <SLink selected={pathname === "/tv"} to="/tv">
               TV프로그램
             </SLink>
-          </SItem>
-        </SList>
+          </Item>
+        </List>
 
-        <SList>
-          <SItem>
-            <SLink selected={pathname === "/home"} to="/home">
+        <List>
+          <Item>
+            <SLink selected={pathname === "/movie"} to="/movie">
               영화
             </SLink>
-          </SItem>
-        </SList>
-      </SHeader>
+          </Item>
+        </List>
+      </Header>
     </>
   );
 };

@@ -28,13 +28,13 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 4.0em;
-  margin : 100px;
+  font-size: 4em;
+  margin: 100px;
 `;
 
 const Name = styled.p`
-  font-size: 2.0em;
-  margin-bottom: 10px
+  font-size: 2em;
+  margin-bottom: 10px;
 `;
 
 const MoreButton = styled.button`
@@ -57,57 +57,61 @@ const Main = styled.main`
   align-items: center;
 `;
 
-
 const Background = styled.div`
-position: absolute;
-left: 0;
-top: 0;
-width: 100%;
-background: ${(props) => `url("https://image.tmdb.org/t/p/original/${props.backdropPath}") center no-repeat`};
-background-size: cover;
-height: 100vh;
-&:after {
-  content: '';
   position: absolute;
-  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: black;
-  opacity: 0.3;
-}
+  top: 0;
+  width: 100%;
+  background: ${(props) =>
+    `url("https://image.tmdb.org/t/p/original/${props.backdropPath}") center no-repeat`};
+  background-size: cover;
+  height: 100vh;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.3;
+  }
 `;
 
-
-const IntroPresenter = (props) =>{
-
+const IntroPresenter = (props) => {
   let history = useHistory();
 
   return (
-  <>
-    {props.loading ? (
-      <Loading></Loading>
-    ):(
-
+    <>
+      {props.loading ? (
+        <Loading></Loading>
+      ) : (
         <Layout>
           <Main>
-              <HomeIntro>
-                      <Container>
-                          <Title>오늘의 영화</Title>
-                            <Name>{props.movie.original_title}</Name>
-                            <Name>{props.movie.title}</Name>
-                          <MoreButton onClick={() =>{history.push("/home")}}>더 보기</MoreButton>
-                      </Container>
-              </HomeIntro>
+            <HomeIntro>
+              <Container>
+                <Title>오늘의 영화</Title>
+                <Name>{props.movie.original_title}</Name>
+                <Name>{props.movie.title}</Name>
+                <MoreButton
+                  onClick={() => {
+                    history.push("/movie");
+                  }}
+                >
+                  더 보기
+                </MoreButton>
+              </Container>
+            </HomeIntro>
           </Main>
-            <Background backdropPath={props.movie.backdrop_path} />
-      </Layout>
-    )
-    }
-  </>
+          <Background
+            backdropPath={
+              props.movie.backdrop_path && props.movie.backdrop_path
+            }
+          />
+        </Layout>
+      )}
+    </>
   );
-}
+};
 
 export default IntroPresenter;
-
-

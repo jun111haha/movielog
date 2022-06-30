@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import StarRating from "./StarRating";
+import { Link } from "react-router-dom";
 
 const Img = styled.img`
   background: url(${(props) => `https://image.tmdb.org/t/p/w500${props.bgUrl}`})
@@ -66,26 +67,30 @@ const Title = styled.div`
   font-size: 18px;
 `;
 
-const Poster = ({ index, imgUrl, title, rating, isMovie }) => {
+const Poster = ({ index, id, imgUrl, title, rating, isMovie }) => {
   return (
     <Container>
-      <ImageContainer>
-        <Image
-          bgUrl={
-            imgUrl
-              ? `https://image.tmdb.org/t/p/original/${imgUrl}`
-              : require("../assets/noposter.png")
-          }
-        />
-      </ImageContainer>
-      <Items>
-        <Title>
-          {title && title.length > 15 ? `${title.substring(0, 15)}...` : title}
-        </Title>
-        <Rating>
-          <StarRating voteAverage={rating} /> ({rating})
-        </Rating>
-      </Items>
+      <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
+        <ImageContainer>
+          <Image
+            bgUrl={
+              imgUrl
+                ? `https://image.tmdb.org/t/p/original/${imgUrl}`
+                : require("../assets/noposter.png")
+            }
+          />
+        </ImageContainer>
+        <Items>
+          <Title>
+            {title && title.length > 15
+              ? `${title.substring(0, 15)}...`
+              : title}
+          </Title>
+          <Rating>
+            <StarRating voteAverage={rating} /> ({rating})
+          </Rating>
+        </Items>
+      </Link>
     </Container>
   );
 };
