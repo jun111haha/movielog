@@ -12,12 +12,11 @@ const DetailCantainer = () => {
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
-  const pathname = useLocation().pathname.substring(0, 6);
-  console.log(pathname);
+  const pathname = useLocation().pathname.split("/")[1];
 
   const getDetail = async () => {
     try {
-      if (pathname === "/movie") {
+      if (pathname === "movie") {
         const { data: movieResult } = await moviesApi.movieDetail(id);
         setMovieResult(movieResult);
 

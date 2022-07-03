@@ -15,12 +15,16 @@ const BackgroundImage = styled.div`
   z-index: -1;
 `;
 
+const Container = styled.div``;
+
 const DetailPresenter = (props) => {
   return (
-    <BackgroundImage>
-      bgImage=
-      {`https://image.tmdb.org/t/p/original/${props.movieDetail.backgroundImage}`}
-    </BackgroundImage>
+    <Container>
+      <BackgroundImage>
+        bgImage=
+        {`https://image.tmdb.org/t/p/original/${props.movieDetail.backgroundImage}`}
+      </BackgroundImage>
+    </Container>
   );
 };
 

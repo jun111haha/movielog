@@ -26,7 +26,7 @@ const Title = styled.h1`
 const TvPresenter = (props) => {
   return (
     <>
-      <Nav></Nav>
+      <Nav/>
       <BannerContainer />
       <Container>
         <Title>넷플릭스 오리지날</Title>

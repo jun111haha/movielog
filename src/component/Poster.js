@@ -67,7 +67,7 @@ const Title = styled.div`
   font-size: 18px;
 `;
 
-const Poster = ({ index, id, imgUrl, title, rating, isMovie }) => {
+const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
   return (
     <Container>
       <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
