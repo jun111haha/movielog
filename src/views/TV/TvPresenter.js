@@ -5,6 +5,7 @@ import Poster from "../../component/Poster";
 import Nav from "../../component/Nav";
 import Loading from "../../component/Loading";
 import { Section } from "../../component/Section";
+import PageHeader from "../../component/PageHeader";
 
 const Container = styled.div`
   padding: 50px;
@@ -24,11 +25,13 @@ const Title = styled.h1`
 `;
 
 const TvPresenter = (props) => {
+  console.log(props.location);
   return (
     <>
-      <Nav/>
+      <Nav />
       <BannerContainer />
       <Container>
+        <PageHeader />
         <Title>넷플릭스 오리지날</Title>
         {props.loading ? (
           <Loading />

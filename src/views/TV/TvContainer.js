@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { tvApi } from "../../Api";
 import TvPresenter from "./TvPresenter";
 
-const TvContainer = () => {
+const TvContainer = (props) => {
+  const {
+    location: { pathname },
+  } = props;
+
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
   // const [airingToday, setAiringToday] = useState([]);
@@ -38,6 +42,7 @@ const TvContainer = () => {
         popular={popular}
         netflixOriginals={netflixOriginals}
         loading={loading}
+        location={pathname}
       />
     </>
   );

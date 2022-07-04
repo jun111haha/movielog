@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Loading from "../../component/Loading";
 
 const BackgroundImage = styled.div`
   position: fixed;
@@ -15,15 +16,25 @@ const BackgroundImage = styled.div`
   z-index: -1;
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 600px;
+  width: 100%;
+  padding: 0 8%;
+  @media (max-width: 768px) {
+    height: 100%;
+  }
+`;
 
 const DetailPresenter = (props) => {
   return (
     <Container>
-      <BackgroundImage>
-        bgImage=
-        {`https://image.tmdb.org/t/p/original/${props.movieDetail.backgroundImage}`}
-      </BackgroundImage>
+      {props.loading ? (
+        <Loading />
+      ) : (
+        <BackgroundImage
+          bgImage={`https://image.tmdb.org/t/p/original/${props.movieDetail.backdrop_path}`}
+        />
+      )}
     </Container>
   );
 };
