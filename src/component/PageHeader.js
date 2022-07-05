@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const SLink = styled(Link)`
+  color: ${(props) => (props.selected ? "red" : "#808080")};
   padding: 15px 20px;
   &:hover {
     color: red;
@@ -69,11 +70,8 @@ const PageHeader = ({ location: { pathname } }) => {
       <Header>
         <List>
           <Item>
-            <SLink
-              selected={pathname === "/tv/netflix-original"}
-              to="/tv/netflix-original"
-            >
-              넷플릭스 오리지날
+            <SLink selected={pathname === "/tv"} to="/tv">
+              현재 상영중인 프로그램
             </SLink>
           </Item>
         </List>

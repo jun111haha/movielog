@@ -9,21 +9,32 @@ const TvContainer = (props) => {
 
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
-  // const [airingToday, setAiringToday] = useState([]);
+  const [airingToday, setAiringToday] = useState([]);
   const [netflixOriginals, setNetflixOriginals] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function fetchData() {
     try {
-      const topRatedRequest = await tvApi.topRated();
-      const topPopularRequest = await tvApi.popular();
-      // const airingTodayRequest = await tvApi.airingToday();
-      const netflixOriginalsRequest = await tvApi.netflixOriginals();
+      const {
+        data: { results: topRatedRequest },
+      } = await tvApi.topRated();
 
-      setTopRated(topRatedRequest.data.results);
-      setPopular(topPopularRequest.data.results);
-      // setAiringToday(airingTodayRequest.data.results);
-      setNetflixOriginals(netflixOriginalsRequest.data.results);
+      const {
+        data: { results: topPopularRequest },
+      } = await tvApi.popular();
+
+      // const {
+      //   data: { results: netflixOriginals },
+      // } = await tvApi.netflixOriginals();
+
+      const {
+        data: { results: airingToday },
+      } = await tvApi.airingToday();
+
+      setTopRated(topRatedRequest);
+      setPopular(topPopularRequest);
+      setAiringToday(airingToday);
+      // setNetflixOriginals(netflixOriginals);
 
       setLoading(false);
     } catch (error) {
@@ -40,7 +51,7 @@ const TvContainer = (props) => {
       <TvPresenter
         topRated={topRated}
         popular={popular}
-        netflixOriginals={netflixOriginals}
+        airingToday={airingToday}
         loading={loading}
         location={pathname}
       />

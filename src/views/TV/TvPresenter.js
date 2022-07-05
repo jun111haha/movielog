@@ -7,11 +7,15 @@ import Loading from "../../component/Loading";
 import { Section } from "../../component/Section";
 import PageHeader from "../../component/PageHeader";
 
+// const Container = styled.div`
+//   padding: 50px;
+//   :not(:last-child) {
+//     margin-bottom: 50px;
+//   }
+// `;
+
 const Container = styled.div`
-  padding: 50px;
-  :not(:last-child) {
-    margin-bottom: 50px;
-  }
+  padding: 0 20px;
 `;
 
 const Title = styled.h1`
@@ -22,66 +26,77 @@ const Title = styled.h1`
   font-weight: 600;
   margin-top: 10px;
   display: flex;
+  justify-content: center;
 `;
+const Div = styled.div``;
 
 const TvPresenter = (props) => {
   console.log(props.location);
   return (
-    <>
+    <Div>
       <Nav />
       <BannerContainer />
       <Container>
         <PageHeader />
-        <Title>넷플릭스 오리지날</Title>
         {props.loading ? (
           <Loading />
         ) : (
-          <>
-            <Section>
-              {props.netflixOriginals.map((data, index) => {
-                return (
-                  <Poster
-                    key={index}
-                    id={data.id}
-                    imgUrl={data.poster_path}
-                    title={data.name}
-                    rating={data.vote_average}
-                  ></Poster>
-                );
-              })}
-            </Section>
-            <Title>인기방영 프로그램</Title>
-            <Section>
-              {props.popular.map((data, index) => {
-                return (
-                  <Poster
-                    key={index}
-                    id={data.id}
-                    imgUrl={data.poster_path}
-                    title={data.name}
-                    rating={data.vote_average}
-                  ></Poster>
-                );
-              })}
-            </Section>
-            <Title>평점 순위 프로그램</Title>
-            <Section>
-              {props.topRated.map((data, index) => {
-                return (
-                  <Poster
-                    key={index}
-                    id={data.id}
-                    imgUrl={data.poster_path}
-                    title={data.name}
-                    rating={data.vote_average}
-                  ></Poster>
-                );
-              })}
-            </Section>
-          </>
+          <Div>
+            {props.location === "/tv" && props.airingToday.length > 0 && (
+              <Div>
+                <Section>
+                  {props.airingToday.map((data, index) => {
+                    return (
+                      <Poster
+                        key={index}
+                        id={data.id}
+                        imgUrl={data.poster_path}
+                        title={data.name}
+                        rating={data.vote_average}
+                      ></Poster>
+                    );
+                  })}
+                </Section>
+              </Div>
+            )}
+            {props.location === "/tv/popular-tv" && props.popular.length > 0 && (
+              <Div>
+                <Section>
+                  {props.popular.map((data, index) => {
+                    return (
+                      <Poster
+                        key={index}
+                        id={data.id}
+                        imgUrl={data.poster_path}
+                        title={data.name}
+                        rating={data.vote_average}
+                      ></Poster>
+                    );
+                  })}
+                </Section>
+              </Div>
+            )}
+            {props.location === "/tv/top-rated" && props.topRated.length > 0 && (
+              <Div>
+                <Section>
+                  {props.topRated.map((data, index) => {
+                    return (
+                      <Poster
+                        key={index}
+                        id={data.id}
+                        imgUrl={data.poster_path}
+                        title={data.name}
+                        rating={data.vote_average}
+                      ></Poster>
+                    );
+                  })}
+                </Section>
+              </Div>
+            )}
+          </Div>
         )}
       </Container>
-    </>
+    </Div>
   );
 };
 

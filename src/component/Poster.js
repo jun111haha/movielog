@@ -3,30 +3,11 @@ import styled from "styled-components";
 import StarRating from "./StarRating";
 import { Link } from "react-router-dom";
 
-const Img = styled.img`
-  background: url(${(props) => `https://image.tmdb.org/t/p/w500${props.bgUrl}`})
-    no-repeat center center;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  background-repeat: no-repeat;
-  background-position: center center;
-  backgorund-size: 100% 100%;
-  @media (max-width: 768px) {
-    height: 220px;
-  }
-`;
-
-const Rating = styled.div`
-  font-size: 14px;
-  color: #dcdcdc;
-`;
-
 const Container = styled.div`
   font-size: 12px;
   transition: 0.2s linear;
   width: 220px;
-  margin: 10px;
+  margin: 12px;
   @media (max-width: 768px) {
     width: 140px;
   }
@@ -65,6 +46,11 @@ const Items = styled.div`
 const Title = styled.div`
   color: white;
   font-size: 18px;
+`;
+
+const Rating = styled.div`
+  font-size: 14px;
+  color: #dcdcdc;
 `;
 
 const Poster = ({ id, imgUrl, title, rating, isMovie }) => {

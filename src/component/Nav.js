@@ -5,9 +5,9 @@ import styled from "styled-components";
 
 const SLink = styled(Link)`
   padding: 15px 20px;
-  color: ${(props) => (props.selected ? "#ffffff" : "#808080")};
+  color: ${(props) => (props.selected ? "#f0e9c8" : "#808080")};
   border-bottom: 4px solid
-    ${(props) => (props.selected ? "#ffffff" : "transparent")};
+    ${(props) => (props.selected ? "#f0e9c8" : "transparent")};
 `;
 
 const Item = styled.li`
@@ -48,7 +48,7 @@ const Nav = (props) => {
 
         <List>
           <Item>
-            <SLink selected={pathname === "/tv"} to="/tv">
+            <SLink selected={pathname.includes("/tv")} to="/tv">
               TV프로그램
             </SLink>
           </Item>
@@ -56,7 +56,7 @@ const Nav = (props) => {
 
         <List>
           <Item>
-            <SLink selected={pathname === "/movie"} to="/movie">
+            <SLink selected={pathname.includes("/movie")} to="/movie">
               영화
             </SLink>
           </Item>
