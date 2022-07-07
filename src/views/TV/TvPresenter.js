@@ -6,6 +6,7 @@ import Nav from "../../component/Nav";
 import Loading from "../../component/Loading";
 import { Section } from "../../component/Section";
 import PageHeader from "../../component/PageHeader";
+import Loader from "../../component/Loader";
 
 // const Container = styled.div`
 //   padding: 50px;
@@ -96,6 +97,7 @@ const TvPresenter = (props) => {
           </Div>
         )}
       </Container>
+      <div ref={props.target}>{props.isLoader && <Loader />}</div>
     </Div>
   );
 };

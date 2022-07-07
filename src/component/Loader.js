@@ -3,12 +3,12 @@ import styled from "styled-components";
 import React, { memo } from "react";
 
 const LoaderWrap = styled.div`
-    width : 100%;
-    height : 80%
-    display : flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 `;
 
 const Loader = () => {
@@ -19,4 +19,4 @@ const Loader = () => {
   );
 };
 
-export default memo(Loader);
+export default Loader;
