@@ -1,6 +1,6 @@
 import ReactLoading from "react-loading";
 import styled from "styled-components";
-import React, { memo } from "react";
+import React from "react";
 
 const LoaderWrap = styled.div`
   width: 100%;
@@ -11,7 +11,12 @@ const LoaderWrap = styled.div`
   align-items: center;
 `;
 
-const Loader = () => {
+const Title = styled.div`
+  font-size: 34px;
+  color: white;
+`;
+
+export const Loader = () => {
   return (
     <LoaderWrap>
       <ReactLoading type="spin" color="#A593E0"></ReactLoading>
@@ -19,4 +24,10 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export const NotFindData = () => {
+  return (
+    <LoaderWrap>
+      <Title>더이상 표시할 컨텐츠가 없습니다.</Title>
+    </LoaderWrap>
+  );
+};

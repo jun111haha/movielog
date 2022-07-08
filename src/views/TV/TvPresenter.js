@@ -6,7 +6,8 @@ import Nav from "../../component/Nav";
 import Loading from "../../component/Loading";
 import { Section } from "../../component/Section";
 import PageHeader from "../../component/PageHeader";
-import Loader from "../../component/Loader";
+import { Loader } from "../../component/Loader";
+import { NotFindData } from "../../component/Loader";
 
 // const Container = styled.div`
 //   padding: 50px;
@@ -32,7 +33,6 @@ const Title = styled.h1`
 const Div = styled.div``;
 
 const TvPresenter = (props) => {
-  console.log(props.location);
   return (
     <Div>
       <Nav />
@@ -97,7 +97,11 @@ const TvPresenter = (props) => {
           </Div>
         )}
       </Container>
-      <div ref={props.target}>{props.isLoader && <Loader />}</div>
+      {props.datatFinish ? (
+        <NotFindData />
+      ) : (
+        <div ref={props.target}>{props.isLoader && <Loader />}</div>
+      )}
     </Div>
   );
 };

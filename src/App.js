@@ -25,8 +25,8 @@ function App() {
             <Route exact path="/" component={IntroComp} />
             <Route exact path="/movie" component={MovieComp} />
             <Route exact path="/tv" component={TvComp} />
-            <Route exact path="/tv/popular-tv" component={TvComp}></Route>
-            <Route exact path="/tv/top-rated" component={TvComp}></Route>
+            <Route exact path="/tv/popular-tv" component={TvComp} />
+            <Route exact path="/tv/top-rated" component={TvComp} />
             <Route exact path="/tv/:id" component={DetailsComp} />
             <Route exact path="/movie/:id" component={DetailsComp} />
             <Route exact path="*" component={NotFound} />

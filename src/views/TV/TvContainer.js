@@ -24,25 +24,33 @@ const TvContainer = (props) => {
           data: { total_pages: totalElements },
         } = await tvApi.airingToday(page);
         setAiringToday([...airingToday, ...airingTodayResult]);
-        if (page + 1 > totalElements) setDatatFinish(true);
-      } else if (pathname == "/tv/popular-tv") {
+        if (page + 1 > totalElements || page === 10) setDatatFinish(true);
+      } else if (pathname === "/tv/popular-tv") {
         const {
           data: { results: topPopularRequest },
+          data: { total_pages: totalElements },
         } = await tvApi.popular(page);
         setPopular([...popular, ...topPopularRequest]);
+        if (page + 1 > totalElements || page === 10) setDatatFinish(true);
       } else if (pathname === "/tv/top-rated") {
         const {
           data: { results: topRatedRequest },
+          data: { total_pages: totalElements },
         } = await tvApi.topRated(page);
         setTopRated([...topRated, ...topRatedRequest]);
+        if (page + 1 > totalElements || page === 10) setDatatFinish(true);
       }
       setLoading(false);
       setIsLoader(false);
-      console.log(page);
     } catch (error) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    setPage(1);
+    setDatatFinish(false);
+  }, [pathname]);
 
   useEffect(() => {
     fetchData();
@@ -53,18 +61,6 @@ const TvContainer = (props) => {
       setPage((prev) => prev + 1);
     }
   });
-
-  // useEffect(() => {
-  //   if (loading) {
-  //     const observer = new IntersectionObserver((entries) => {
-  //       if (entries[0].isIntersecting) {
-  //         setIsLoader(true);
-  //         IncreasePage();
-  //       }
-  //     });
-  //     observer.observe(target.current);
-  //   }
-  // }, []);
 
   const handleScrolling = useCallback(([entry]) => {
     if (entry.isIntersecting) {
@@ -80,7 +76,6 @@ const TvContainer = (props) => {
       // 관찰요소와 40%만큼 겹쳤을 때 onIntersect을 수행
       observer = new IntersectionObserver(handleScrolling, { threshold: 1 });
       observer.observe(current);
-      console.log(observer);
 
       return () => observer && observer.disconnect();
     }
@@ -96,6 +91,7 @@ const TvContainer = (props) => {
         location={pathname}
         target={target}
         isLoader={isLoader}
+        datatFinish={datatFinish}
       />
     </>
   );
