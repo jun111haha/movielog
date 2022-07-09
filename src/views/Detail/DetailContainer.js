@@ -10,6 +10,7 @@ const DetailCantainer = () => {
   const [movieCredits, setMovieCredits] = useState([]);
   const [tvCredits, setTvCredits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [key, setKey] = useState();
 
   const { id } = useParams();
   const pathname = useLocation().pathname.split("/")[1];
@@ -19,6 +20,7 @@ const DetailCantainer = () => {
       if (pathname === "movie") {
         const { data: movieResult } = await moviesApi.movieDetail(id);
         setMovieResult(movieResult);
+        setKey(movieResult.videos.results[0].key);
 
         const {
           data: { cast: movieCredits },
@@ -39,7 +41,6 @@ const DetailCantainer = () => {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getDetail();
   }, []);
@@ -48,9 +49,10 @@ const DetailCantainer = () => {
     <DetailPresenter
       movieDetail={movieResult}
       movieCredits={movieCredits}
-      tvResult={tvResult}
+      tvDetail={tvResult}
       tvCredits={tvCredits}
       loading={loading}
+      pathKey={key}
     />
   );
 };

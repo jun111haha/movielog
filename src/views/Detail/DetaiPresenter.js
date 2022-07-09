@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loading from "../../component/Loading";
+import YouTube from "react-youtube";
 
 const BackgroundImage = styled.div`
   position: fixed;
@@ -32,9 +33,29 @@ const DetailPresenter = (props) => {
         <Loading />
       ) : (
         <BackgroundImage
-          bgImage={`https://image.tmdb.org/t/p/original/${props.movieDetail.backdrop_path}`}
+          bgImage={`https://image.tmdb.org/t/p/original/${
+            props.movieDetail.backdrop_path ||
+            (props.tvDetail.backdrop_path && props.movieDetail.backdrop_path) ||
+            props.tvDetail.backdrop_path
+          }`}
         />
       )}
+      <YouTube
+        videoId={props.pathKey}
+        opts={{
+          width: "560",
+          height: "315",
+          playerVars: {
+            autoplay: 1, //자동재생 O
+            rel: 0, //관련 동영상 표시하지 않음 (근데 별로 쓸모 없는듯..)
+            modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
+          },
+        }}
+        //이벤트 리스너
+        onEnd={(e) => {
+          e.target.stopVideo(0);
+        }}
+      ></YouTube>
     </Container>
   );
 };
