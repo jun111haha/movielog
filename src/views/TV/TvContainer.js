@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+// import useIntersect from "../../utils/userIntersect";
 import { tvApi } from "../../Api";
 import TvPresenter from "./TvPresenter";
 
@@ -24,37 +25,38 @@ const TvContainer = (props) => {
           data: { total_pages: totalElements },
         } = await tvApi.airingToday(page);
         setAiringToday([...airingToday, ...airingTodayResult]);
-        if (page + 1 > totalElements || page === 10) setDatatFinish(true);
+        if (page + 1 > totalElements || page === 4) setDatatFinish(true);
       } else if (pathname === "/tv/popular-tv") {
         const {
           data: { results: topPopularRequest },
           data: { total_pages: totalElements },
         } = await tvApi.popular(page);
         setPopular([...popular, ...topPopularRequest]);
-        if (page + 1 > totalElements || page === 10) setDatatFinish(true);
+        if (page + 1 > totalElements || page === 4) setDatatFinish(true);
       } else if (pathname === "/tv/top-rated") {
         const {
           data: { results: topRatedRequest },
           data: { total_pages: totalElements },
         } = await tvApi.topRated(page);
         setTopRated([...topRated, ...topRatedRequest]);
-        if (page + 1 > totalElements || page === 10) setDatatFinish(true);
+        if (page + 1 > totalElements || page === 4) setDatatFinish(true);
       }
       setLoading(false);
       setIsLoader(false);
+      console.log(page);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
+    fetchData();
+  }, [page]);
+
+  useEffect(() => {
     setPage(1);
     setDatatFinish(false);
   }, [pathname]);
-
-  useEffect(() => {
-    fetchData();
-  }, [page]);
 
   const IncreasePage = useCallback(() => {
     if (datatFinish === false) {

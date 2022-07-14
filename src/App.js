@@ -9,10 +9,10 @@ import NotFound from "./component/NotFound";
 // const IntroComp = lazy(() => import("./views/Intro/IntroContainer"));
 // const DetailsComp = lazy(() => import("./views/Detail/DetailContainer"));
 
-const MovieComp = lazy(() => import("./views/Movie/MovieContainer"));
-const TvComp = lazy(() => import("./views/TV/TvContainer"));
-const IntroComp = lazy(() => import("./views/Intro/IntroContainer"));
-const DetailsComp = lazy(() => import("./views/Detail/DetailContainer"));
+const MovieComp = lazy(() => import("./views/Movie"));
+const TvComp = lazy(() => import("./views/TV"));
+const IntroComp = lazy(() => import("./views/Intro"));
+const DetailsComp = lazy(() => import("./views/Detail"));
 
 function App() {
   return (

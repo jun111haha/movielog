@@ -4,13 +4,13 @@ import { tvApi, moviesApi } from "../../Api";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const DetailCantainer = () => {
-  const [movieResult, setMovieResult] = useState([]);
-  const [tvResult, setTvResult] = useState([]);
+const DetailCantainer = (props) => {
+  const [movieDetail, setMovieDetail] = useState([]);
   const [movieCredits, setMovieCredits] = useState([]);
+  const [tvDetail, setTvDetail] = useState([]);
   const [tvCredits, setTvCredits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [key, setKey] = useState();
+  const [video, setVideo] = useState();
 
   const { id } = useParams();
   const pathname = useLocation().pathname.split("/")[1];
@@ -18,17 +18,28 @@ const DetailCantainer = () => {
   const getDetail = async () => {
     try {
       if (pathname === "movie") {
-        const { data: movieResult } = await moviesApi.movieDetail(id);
-        setMovieResult(movieResult);
-        setKey(movieResult.videos.results[0].key);
+        const {
+          data: movieDetail,
+          data: {
+            videos: { results: videos },
+          },
+        } = await moviesApi.movieDetail(id);
+        setMovieDetail(movieDetail);
+        setVideo(videos);
 
         const {
           data: { cast: movieCredits },
         } = await moviesApi.credits(id);
         setMovieCredits(movieCredits);
       } else {
-        const { data: tvResult } = await tvApi.tvDetail(id);
-        setTvResult(tvResult);
+        const {
+          data: tvDetail,
+          data: {
+            videos: { results: videos },
+          },
+        } = await tvApi.tvDetail(id);
+        setTvDetail(tvDetail);
+        setVideo(videos);
 
         const {
           data: { cast: tvCredits },
@@ -47,12 +58,13 @@ const DetailCantainer = () => {
 
   return (
     <DetailPresenter
-      movieDetail={movieResult}
+      movieDetail={movieDetail}
       movieCredits={movieCredits}
-      tvDetail={tvResult}
+      tvDetail={tvDetail}
       tvCredits={tvCredits}
       loading={loading}
-      pathKey={key}
+      pathName={pathname}
+      video={video}
     />
   );
 };
