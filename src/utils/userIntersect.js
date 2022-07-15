@@ -1,6 +1,12 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 
-const useIntersect = (props) => {
+const useIntersect = (onIntersect) => {
+  const IncreasePage = useCallback(() => {
+    if (datatFinish === false) {
+      setPage((prev) => prev + 1);
+    }
+  });
+
   const handleScrolling = useCallback(([entry]) => {
     if (entry.isIntersecting) {
       IncreasePage();
@@ -9,7 +15,7 @@ const useIntersect = (props) => {
 
   useEffect(() => {
     let observer;
-    const { current } = target;
+    const { current } = props.target;
     if (current) {
       setIsLoader(true);
       // 관찰요소와 40%만큼 겹쳤을 때 onIntersect을 수행

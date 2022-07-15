@@ -24,6 +24,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={IntroComp} />
             <Route exact path="/movie" component={MovieComp} />
+            <Route exact path="/movie/movie-upcoming" component={MovieComp} />
+            <Route exact path="/movie/movie-nowplaying" component={MovieComp} />
             <Route exact path="/tv" component={TvComp} />
             <Route exact path="/tv/popular-tv" component={TvComp} />
             <Route exact path="/tv/top-rated" component={TvComp} />

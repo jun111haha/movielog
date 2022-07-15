@@ -67,31 +67,74 @@ const Title = styled.div`
 const PageHeader = ({ location: { pathname } }) => {
   return (
     <Container>
-      <Header>
-        <List>
-          <Item>
-            <SLink selected={pathname === "/tv"} to="/tv">
-              현재 상영중인 프로그램
-            </SLink>
-          </Item>
-        </List>
+      <div>
+        {pathname.includes("/tv") && (
+          <Header>
+            <List>
+              <Item>
+                <SLink selected={pathname === "/tv"} to="/tv">
+                  현재 상영중인 프로그램
+                </SLink>
+              </Item>
+            </List>
 
-        <List>
-          <Item>
-            <SLink selected={pathname === "/tv/popular-tv"} to="/tv/popular-tv">
-              인기방영 프로그램
-            </SLink>
-          </Item>
-        </List>
+            <List>
+              <Item>
+                <SLink
+                  selected={pathname === "/tv/popular-tv"}
+                  to="/tv/popular-tv"
+                >
+                  인기방영 프로그램
+                </SLink>
+              </Item>
+            </List>
 
-        <List>
-          <Item>
-            <SLink selected={pathname === "/tv/top-rated"} to="/tv/top-rated">
-              순위별 프로그램
-            </SLink>
-          </Item>
-        </List>
-      </Header>
+            <List>
+              <Item>
+                <SLink
+                  selected={pathname === "/tv/top-rated"}
+                  to="/tv/top-rated"
+                >
+                  순위별 프로그램
+                </SLink>
+              </Item>
+            </List>
+          </Header>
+        )}
+        {pathname.includes("/movie") && (
+          <Header>
+            <List>
+              <Item>
+                <SLink selected={pathname === "/movie"} to="/movie">
+                  인기영화
+                </SLink>
+              </Item>
+            </List>
+
+            <List>
+              <Item>
+                <SLink
+                  selected={pathname === "/movie/movie-upcoming"}
+                  to="/movie/movie-upcoming"
+                >
+                  개봉예정 영화
+                </SLink>
+              </Item>
+            </List>
+
+            <List>
+              <Item>
+                <SLink
+                  selected={pathname === "/movie/movie-nowplaying"}
+                  to="/movie/movie-nowplaying"
+                >
+                  상영중인 영화
+                </SLink>
+              </Item>
+            </List>
+          </Header>
+        )}
+      </div>
     </Container>
   );
 };

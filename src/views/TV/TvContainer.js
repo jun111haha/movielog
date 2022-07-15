@@ -25,21 +25,21 @@ const TvContainer = (props) => {
           data: { total_pages: totalElements },
         } = await tvApi.airingToday(page);
         setAiringToday([...airingToday, ...airingTodayResult]);
-        if (page + 1 > totalElements || page === 4) setDatatFinish(true);
+        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
       } else if (pathname === "/tv/popular-tv") {
         const {
           data: { results: topPopularRequest },
           data: { total_pages: totalElements },
         } = await tvApi.popular(page);
         setPopular([...popular, ...topPopularRequest]);
-        if (page + 1 > totalElements || page === 4) setDatatFinish(true);
+        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
       } else if (pathname === "/tv/top-rated") {
         const {
           data: { results: topRatedRequest },
           data: { total_pages: totalElements },
         } = await tvApi.topRated(page);
         setTopRated([...topRated, ...topRatedRequest]);
-        if (page + 1 > totalElements || page === 4) setDatatFinish(true);
+        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
       }
       setLoading(false);
       setIsLoader(false);
@@ -76,7 +76,7 @@ const TvContainer = (props) => {
     if (current) {
       setIsLoader(true);
       // 관찰요소와 40%만큼 겹쳤을 때 onIntersect을 수행
-      observer = new IntersectionObserver(handleScrolling, { threshold: 1 });
+      observer = new IntersectionObserver(handleScrolling, { threshold: 0.5 });
       observer.observe(current);
 
       return () => observer && observer.disconnect();
