@@ -25,23 +25,20 @@ const MovieContainer = (props) => {
         } = await moviesApi.popular(page);
         setMoviePopular([...moviePopular, ...moviePopularRequest]);
         if (page + 1 > totalElements || page === 5) setDatatFinish(true);
-        console.log(page);
       } else if (pathname === "/movie/movie-upcoming") {
-        const {
-          data: { results: movieNowPlayingRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.nowPlaying(page);
-        setMovieNowPlaying([...movieNowPlaying, ...movieNowPlayingRequest]);
-        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
-        console.log(page);
-      } else if (pathname === "/movie/movie-nowplaying") {
         const {
           data: { results: movieUpcomingRequest },
           data: { total_page: totalElements },
         } = await moviesApi.upcoming(page);
         setMovieUpComing([...movieUpcoming, ...movieUpcomingRequest]);
         if (page + 1 > totalElements || page === 5) setDatatFinish(true);
-        console.log(page);
+      } else if (pathname === "/movie/movie-nowplaying") {
+        const {
+          data: { results: movieNowPlayingRequest },
+          data: { total_page: totalElements },
+        } = await moviesApi.nowPlaying(page);
+        setMovieNowPlaying([...movieNowPlaying, ...movieNowPlayingRequest]);
+        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
       }
 
       setLoading(false);
@@ -50,10 +47,6 @@ const MovieContainer = (props) => {
       console.log(error);
     }
   }
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     setPage(1);
@@ -88,7 +81,7 @@ const MovieContainer = (props) => {
 
       return () => observer && observer.disconnect();
     }
-  }, [handleScrolling]);
+  }, [handleScrolling, target]);
 
   return (
     <>

@@ -81,7 +81,7 @@ const TvContainer = (props) => {
 
       return () => observer && observer.disconnect();
     }
-  }, [handleScrolling]);
+  }, [handleScrolling, target]);
 
   return (
     <>

@@ -1,22 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import Loading from "../../component/Loading";
 import YouTube from "react-youtube";
 import Nav from "../../component/Nav";
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  height: calc(100vh);
+  position: relative;
+`;
+
 const BackgroundImage = styled.div`
-  position: fixed;
-  top: 0;
+  position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
   background-image: url(${(props) => props.bgImage});
-  background-position: center center;
   background-size: cover;
   filter: blur(3px);
   opacity: 0.5;
-  z-index: -1;
+  z-index: 0;
+`;
+
+const ContainerInner = styled.div`
+  padding: 100px 100px;
+  display: flex;
+  width: 100%;
+`;
+
+const Content = styled.div`
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  color: #ffff;
+  font-weight: bold;
+  margin-left: 10px;
+  z-index: 21;
+`;
+
+const ImgContent = styled.div`
+  margin-top: -30px;
+  margin-left: -70px;
+  width: 40%;
+  border-radius: 5px;
+  background-image: url(${(props) => props.bgImage});
+  background-position: center center;
+  background-size: cover;
+  z-index: 20;
 `;
 
 const Divider = styled.span`
@@ -24,61 +55,66 @@ const Divider = styled.span`
   font-size: 40px;
 `;
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  position: flex;
-`;
-
 const VideoContent = styled.div`
   position: absolute;
-  left: 68%;
-  top: 45%;
+  left: 55%;
+  top: 66%;
   transform: translate(-50%, -50%);
   @media (max-width: 768px) {
     width: 700px;
   }
 `;
 
+const opts = {
+  width: "640",
+  height: "390",
+  playerVars: {
+    autoplay: 1, // 자동재생 1
+    modestbranding: 1,
+  },
+};
+
 const DetailPresenter = (props) => {
   const { movieDetail, tvDetail, video } = props;
-  console.log(movieDetail);
-  console.log(tvDetail);
-  console.log(video);
+
   return (
     <Container>
       <Nav />
       {props.loading ? (
         <Loading />
       ) : (
-        <BackgroundImage
-          bgImage={`https://image.tmdb.org/t/p/original/${
-            props.movieDetail.backdrop_path ||
-            (props.tvDetail.backdrop_path && props.movieDetail.backdrop_path) ||
-            props.tvDetail.backdrop_path
-          }`}
-        />
-      )}
-      <VideoContent>
-        {video?.length > 0 ? (
-          <YouTube
-            videoId={video[0].key}
-            opts={{
-              width: "1000",
-              height: "600",
-              playerVars: {
-                autoplay: 1, //자동재생 O
-                rel: 0, //관련 동영상 표시하지 않음 (근데 별로 쓸모 없는듯..)
-                modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
-              },
-            }}
-            //이벤트 리스너
-            onEnd={(e) => {
-              e.target.stopVideo(0);
-            }}
+        <Fragment>
+          <BackgroundImage
+            bgImage={`https://image.tmdb.org/t/p/original/${
+              props.movieDetail.backdrop_path ||
+              (props.tvDetail.backdrop_path &&
+                props.movieDetail.backdrop_path) ||
+              props.tvDetail.backdrop_path
+            }`}
           />
-        ) : null}
-      </VideoContent>
+          <ContainerInner>
+            <ImgContent
+              bgImage={`https://image.tmdb.org/t/p/original/${
+                movieDetail.poster_path ||
+                (tvDetail.poster_path && movieDetail.poster_path) ||
+                tvDetail.poster_path
+              }`}
+            />
+            <Content>
+              {video?.length > 0 && (
+                <YouTube
+                  videoId={video[0].key}
+                  opts={opts}
+                  //이벤트 리스너
+                  onEnd={(e) => {
+                    e.target.stopVideo(0);
+                  }}
+                />
+              )}
+            </Content>
+          </ContainerInner>
+        </Fragment>
+      )}
     </Container>
   );
 };
