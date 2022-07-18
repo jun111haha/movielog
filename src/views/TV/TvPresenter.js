@@ -100,7 +100,7 @@ const TvPresenter = (props) => {
       {props.datatFinish ? (
         <NotFindData />
       ) : (
-        <div ref={props.target}>{props.isLoader && <Loader />}</div>
+        <div ref={props.intersectRef}>{props.isLoader && <Loader />}</div>
       )}
     </Div>
   );

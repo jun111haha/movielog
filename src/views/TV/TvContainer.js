@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-// import useIntersect from "../../utils/userIntersect";
+import useIntersect from "../../utils/userIntersect";
 import { tvApi } from "../../Api";
 import TvPresenter from "./TvPresenter";
 
@@ -8,7 +8,7 @@ const TvContainer = (props) => {
     location: { pathname },
   } = props;
 
-  const target = useRef();
+  const intersectRef = useRef(null);
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
   const [airingToday, setAiringToday] = useState([]);
@@ -16,72 +16,60 @@ const TvContainer = (props) => {
   const [isLoader, setIsLoader] = useState(true);
   const [datatFinish, setDatatFinish] = useState(false);
   const [page, setPage] = useState(1);
+  const { isIntersect } = useIntersect(intersectRef, {
+    rootMargin: "200px",
+    threshold: 1,
+  });
 
-  async function fetchData() {
+  const loadData = async () => {
     try {
-      if (pathname === "/tv") {
+      if (pathname === "/tv" && (isIntersect || datatFinish == false)) {
         const {
           data: { results: airingTodayResult },
           data: { total_pages: totalElements },
         } = await tvApi.airingToday(page);
+
         setAiringToday([...airingToday, ...airingTodayResult]);
-        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
-      } else if (pathname === "/tv/popular-tv") {
+        setPage((prev) => prev + 1);
+      } else if (
+        pathname === "/tv/popular-tv" &&
+        (isIntersect || datatFinish == false)
+      ) {
         const {
           data: { results: topPopularRequest },
           data: { total_pages: totalElements },
         } = await tvApi.popular(page);
+
         setPopular([...popular, ...topPopularRequest]);
-        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
-      } else if (pathname === "/tv/top-rated") {
+        setPage((prev) => prev + 1);
+      } else if (
+        pathname === "/tv/top-rated" &&
+        (isIntersect || datatFinish == false)
+      ) {
         const {
           data: { results: topRatedRequest },
           data: { total_pages: totalElements },
         } = await tvApi.topRated(page);
+
         setTopRated([...topRated, ...topRatedRequest]);
-        if (page + 1 > totalElements || page === 5) setDatatFinish(true);
+        setPage((prev) => prev + 1);
       }
       setLoading(false);
       setIsLoader(false);
-      console.log(page);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData();
-  }, [page]);
+    loadData();
+    setIsLoader(true);
+  }, [isIntersect, datatFinish]);
 
   useEffect(() => {
     setPage(1);
     setDatatFinish(false);
   }, [pathname]);
-
-  const IncreasePage = useCallback(() => {
-    if (datatFinish === false) {
-      setPage((prev) => prev + 1);
-    }
-  });
-
-  const handleScrolling = useCallback(([entry]) => {
-    if (entry.isIntersecting) {
-      IncreasePage();
-    }
-  });
-
-  useEffect(() => {
-    let observer;
-    const { current } = target;
-    if (current) {
-      setIsLoader(true);
-      // 관찰요소와 40%만큼 겹쳤을 때 onIntersect을 수행
-      observer = new IntersectionObserver(handleScrolling, { threshold: 0.5 });
-      observer.observe(current);
-
-      return () => observer && observer.disconnect();
-    }
-  }, [handleScrolling, target]);
 
   return (
     <>
@@ -91,7 +79,7 @@ const TvContainer = (props) => {
         airingToday={airingToday}
         loading={loading}
         location={pathname}
-        target={target}
+        intersectRef={intersectRef}
         isLoader={isLoader}
         datatFinish={datatFinish}
       />

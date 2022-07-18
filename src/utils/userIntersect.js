@@ -1,30 +1,44 @@
 import React, { useEffect, useCallback, useState } from "react";
 
-const useIntersect = (onIntersect) => {
-  const IncreasePage = useCallback(() => {
-    if (datatFinish === false) {
-      setPage((prev) => prev + 1);
-    }
-  });
+const useIntersect = (intersectRef, optionsObject) => {
+  const [isIntersect, setIsIntersect] = useState(false);
+  const { root = null, rootMargin = "0px", threshold = 1 } = optionsObject;
 
-  const handleScrolling = useCallback(([entry]) => {
-    if (entry.isIntersecting) {
-      IncreasePage();
+  const options = {
+    root: root,
+    rootMargin: rootMargin,
+    threshold: threshold,
+  };
+
+  // const IncreasePage = useCallback(() => {
+  //   if (datatFinish === false) {
+  //     setPage((prev) => prev + 1);
+  //   }
+  // });
+
+  const handleObserver = (entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setIsIntersect(true);
+    } else {
+      setIsIntersect(false);
     }
-  });
+  };
+
+  // const handleScrolling = useCallback(([entry]) => {
+  //   if (entry.isIntersecting) {
+  //     IncreasePage();
+  //   }
+  // });
 
   useEffect(() => {
-    let observer;
-    const { current } = props.target;
-    if (current) {
-      setIsLoader(true);
-      // 관찰요소와 40%만큼 겹쳤을 때 onIntersect을 수행
-      observer = new IntersectionObserver(handleScrolling, { threshold: 1 });
-      observer.observe(current);
-
-      return () => observer && observer.disconnect();
-    }
-  }, [handleScrolling]);
+    const observer = new IntersectionObserver(handleObserver, options);
+    if (intersectRef.current) observer.observe(intersectRef.current);
+    return () => observer.disconnect();
+  }, []);
+  return {
+    isIntersect,
+  };
 };
 
 export default useIntersect;
