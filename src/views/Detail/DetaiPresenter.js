@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Loading from "../../component/Loading";
 import YouTube from "react-youtube";
 import Nav from "../../component/Nav";
+import Slick from "../../component/Slick";
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ const BackgroundImage = styled.div`
   background-size: cover;
   filter: blur(3px);
   opacity: 0.5;
-  z-index: 0;
+  z-index: -1;
 `;
 
 const ContainerInner = styled.div`
@@ -50,6 +51,41 @@ const ImgContent = styled.div`
   z-index: 20;
 `;
 
+const Title = styled.h1`
+  padding: 0px 5px;
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+`;
+
+const Year = styled.span`
+  padding: 0px 5px;
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+`;
+
+const Genres = styled.div`
+  padding: 0px 10px;
+  color: white;
+  margin-bottom: 10px;
+  display: flex;
+`;
+
+const OverView = styled.h1`
+  padding: 0px 10px;
+  line-height: 1.3;
+  padding-top: 1rem;
+  font-size: 1rem;
+  max-width: 600px;
+  height: 80px;
+  margin-bottom: 10px;
+`;
+
 const Divider = styled.span`
   margin: 0px 5px;
   font-size: 40px;
@@ -66,16 +102,16 @@ const VideoContent = styled.div`
 `;
 
 const opts = {
-  width: "640",
-  height: "390",
+  width: "660",
+  height: "400",
   playerVars: {
-    autoplay: 1, // 자동재생 1
+    autoplay: 0, // 자동재생 1
     modestbranding: 1,
   },
 };
 
 const DetailPresenter = (props) => {
-  const { movieDetail, tvDetail, video } = props;
+  const { movieDetail, tvDetail, video, tvCredits } = props;
 
   return (
     <Container>
@@ -101,6 +137,33 @@ const DetailPresenter = (props) => {
               }`}
             />
             <Content>
+              <Title>
+                {movieDetail?.title || tvDetail.name}(
+                {movieDetail?.release_date
+                  ? movieDetail?.release_date.split("-")[0]
+                  : ""}
+                {tvDetail?.first_air_date
+                  ? tvDetail.first_air_date.split("-")[0]
+                  : ""}
+                )
+              </Title>
+
+              <Genres>
+                {movieDetail?.genres &&
+                  movieDetail?.genres.map((genre, index) =>
+                    index === movieDetail?.genres.length - 1
+                      ? genre.name
+                      : `${genre.name} / `
+                  )}
+
+                {tvDetail?.genres &&
+                  tvDetail?.genres.map((genre, index) =>
+                    index === tvDetail?.genres.length - 1
+                      ? genre.name
+                      : `${genre.name} / `
+                  )}
+              </Genres>
+              <OverView>{tvDetail?.overview || movieDetail?.overview}</OverView>
               {video?.length > 0 && (
                 <YouTube
                   videoId={video[0].key}
