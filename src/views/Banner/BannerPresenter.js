@@ -49,6 +49,25 @@ const BannerFadeBottom = styled.div`
   );
 `;
 
+const BannerButton = styled.div`
+  width: 100px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0.2vw;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgba(51, 51, 51, 0.5);
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.35s;
+    cursor: pointer;
+  }
+`;
+
 const truncate = (str, n) => {
   if (str) {
     return str.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -70,6 +89,7 @@ const BannerPresenter = (props) => {
                 props.movie.name ||
                 props.movie.original_name}
             </BannerTitle>
+            <BannerButton>예고편 PLAY</BannerButton>
             <BannerDescription>
               {truncate(props.movie.overview, 300)}
             </BannerDescription>
