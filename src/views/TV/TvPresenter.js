@@ -20,16 +20,16 @@ const Container = styled.div`
   padding: 0 20px;
 `;
 
-const Title = styled.h1`
-  align-items: center;
-  padding: 0px 20px;
-  color: white;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-`;
+// const Title = styled.h1`
+//   align-items: center;
+//   padding: 0px 20px;
+//   color: white;
+//   font-size: 2rem;
+//   font-weight: 600;
+//   margin-top: 10px;
+//   display: flex;
+//   justify-content: center;
+// `;
 const Div = styled.div``;
 
 const TvPresenter = (props) => {

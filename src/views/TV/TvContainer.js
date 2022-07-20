@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useIntersect from "../../utils/userIntersect";
 import { tvApi } from "../../Api";
 import TvPresenter from "./TvPresenter";
