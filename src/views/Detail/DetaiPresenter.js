@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Loading from "../../component/Loading";
 import YouTube from "react-youtube";
 import Nav from "../../component/Nav";
-import Slick from "../../component/Slick";
 
 const Container = styled.div`
   display: flex;
@@ -79,11 +78,10 @@ const Genres = styled.div`
 const OverView = styled.h1`
   padding: 0px 10px;
   line-height: 1.3;
-  padding-top: 1rem;
   font-size: 1rem;
-  max-width: 600px;
+  max-width: 900px;
   height: 80px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 `;
 
 const Divider = styled.span`
@@ -102,10 +100,10 @@ const VideoContent = styled.div`
 `;
 
 const opts = {
-  width: "660",
+  width: "700",
   height: "400",
   playerVars: {
-    autoplay: 0, // 자동재생 1
+    autoplay: 1, // 자동재생 1
     modestbranding: 1,
   },
 };

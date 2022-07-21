@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { moviesApi } from "../../Api";
 import BannerPresenter from "./BannerPresenter";
+import { Fragment } from "react";
 
 const BannerContainer = () => {
   const [movie, setMovie] = useState([]);
@@ -26,11 +27,7 @@ const BannerContainer = () => {
     fetchData();
   }, []);
 
-  return (
-    <>
-      <BannerPresenter movie={movie} loading={loading} />
-    </>
-  );
+  return <BannerPresenter movie={movie} loading={loading} />;
 };
 
 export default BannerContainer;

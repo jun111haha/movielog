@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loading from "../../component/Loading";
+import { Fragment } from "react";
 
 const Container = styled.div`
   background-image: ${(props) =>
@@ -78,7 +79,7 @@ const truncate = (str, n) => {
 
 const BannerPresenter = (props) => {
   return (
-    <>
+    <Fragment>
       {props.loading ? (
         <Loading />
       ) : (
@@ -97,7 +98,7 @@ const BannerPresenter = (props) => {
           <BannerFadeBottom />
         </Container>
       )}
-    </>
+    </Fragment>
   );
 };
 

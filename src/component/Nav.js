@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { Fragment } from "react";
+import { FaSearch } from "react-icons/fa";
+import SearchContainer from "../views/Search/SearchContainer";
 
 const SLink = styled(Link)`
   padding: 15px 20px;
@@ -37,7 +40,7 @@ const Nav = (props) => {
   } = props;
 
   return (
-    <>
+    <Fragment>
       <Header>
         <List>
           <Item>
@@ -62,8 +65,12 @@ const Nav = (props) => {
             </SLink>
           </Item>
         </List>
+
+        <List>
+          <SearchContainer></SearchContainer>
+        </List>
       </Header>
-    </>
+    </Fragment>
   );
 };
 
