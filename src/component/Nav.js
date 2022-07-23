@@ -25,7 +25,7 @@ const Header = styled.header`
   position: fixed;
   display: flex;
   padding: 0px 30px;
-  width: 98%;
+  width: 100%;
   height: 55px;
   align-items: center;
   background-color: black;
@@ -65,9 +65,12 @@ const Nav = (props) => {
             </SLink>
           </Item>
         </List>
-
         <List>
-          <SearchContainer></SearchContainer>
+          <Item>
+            <SLink selected={pathname.includes("/search")} to="/search">
+              검색
+            </SLink>
+          </Item>
         </List>
       </Header>
     </Fragment>

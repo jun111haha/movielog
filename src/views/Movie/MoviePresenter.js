@@ -8,6 +8,7 @@ import { Section } from "../../component/Section";
 import { Loader } from "../../component/Loader";
 import { NotFindData } from "../../component/Loader";
 import PageHeader from "../../component/PageHeader";
+import { Fragment } from "react";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -27,7 +28,7 @@ const Div = styled.div``;
 
 const MoviePresenter = (props) => {
   return (
-    <Div>
+    <Fragment>
       <Nav />
       <BannerContainer />
       <Container>
@@ -38,7 +39,7 @@ const MoviePresenter = (props) => {
           <Div>
             {props.location === "/movie" && props.moviePopular.length > 0 && (
               <Div>
-                <Section>
+                <Section center={"center"}>
                   {props.moviePopular.map((data, index) => {
                     return (
                       <Poster
@@ -57,7 +58,7 @@ const MoviePresenter = (props) => {
             {props.location === "/movie/movie-upcoming" &&
               props.movieUpcoming.length > 0 && (
                 <Div>
-                  <Section>
+                  <Section center={"center"}>
                     {props.movieUpcoming.map((data, index) => {
                       return (
                         <Poster
@@ -76,7 +77,7 @@ const MoviePresenter = (props) => {
             {props.location === "/movie/movie-nowplaying" &&
               props.movieNowPlaying.length > 0 && (
                 <Div>
-                  <Section>
+                  <Section center={"center"}>
                     {props.movieNowPlaying.map((data, index) => {
                       return (
                         <Poster
@@ -100,7 +101,7 @@ const MoviePresenter = (props) => {
       ) : (
         <div ref={props.intersectRef}>{props.isLoader && <Loader />}</div>
       )}
-    </Div>
+    </Fragment>
   );
 };
 

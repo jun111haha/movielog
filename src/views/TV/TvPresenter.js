@@ -45,7 +45,7 @@ const TvPresenter = (props) => {
           <Div>
             {props.location === "/tv" && props.airingToday.length > 0 && (
               <Div>
-                <Section>
+                <Section center={"center"}>
                   {props.airingToday.map((data, index) => {
                     return (
                       <Poster
@@ -62,7 +62,7 @@ const TvPresenter = (props) => {
             )}
             {props.location === "/tv/popular-tv" && props.popular.length > 0 && (
               <Div>
-                <Section>
+                <Section center={"center"}>
                   {props.popular.map((data, index) => {
                     return (
                       <Poster
@@ -79,7 +79,7 @@ const TvPresenter = (props) => {
             )}
             {props.location === "/tv/top-rated" && props.topRated.length > 0 && (
               <Div>
-                <Section>
+                <Section center={"center"}>
                   {props.topRated.map((data, index) => {
                     return (
                       <Poster

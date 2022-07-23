@@ -89,11 +89,18 @@ const Divider = styled.span`
   font-size: 40px;
 `;
 
+// const VideoContent = styled.div`
+//   position: absolute;
+//   left: 55%;
+//   top: 66%;
+//   transform: translate(-50%, -50%);
+//   @media (max-width: 768px) {
+//     width: 700px;
+//   }
+// `;
+
 const VideoContent = styled.div`
-  position: absolute;
-  left: 55%;
-  top: 66%;
-  transform: translate(-50%, -50%);
+  margin-top: 10px;
   @media (max-width: 768px) {
     width: 700px;
   }
@@ -162,16 +169,18 @@ const DetailPresenter = (props) => {
                   )}
               </Genres>
               <OverView>{tvDetail?.overview || movieDetail?.overview}</OverView>
-              {video?.length > 0 && (
-                <YouTube
-                  videoId={video[0].key}
-                  opts={opts}
-                  //이벤트 리스너
-                  onEnd={(e) => {
-                    e.target.stopVideo(0);
-                  }}
-                />
-              )}
+              <VideoContent>
+                {video?.length > 0 && (
+                  <YouTube
+                    videoId={video[0].key}
+                    opts={opts}
+                    //이벤트 리스너
+                    onEnd={(e) => {
+                      e.target.stopVideo(0);
+                    }}
+                  />
+                )}
+              </VideoContent>
             </Content>
           </ContainerInner>
         </Fragment>

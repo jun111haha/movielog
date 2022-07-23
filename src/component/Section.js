@@ -10,7 +10,8 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: ${(props) => props.center};
+  margin-left: ${(props) => props.margin};
   max-width: 2400px;
   flex-wrap: wrap;
   @media (max-width: 768px) {
@@ -18,10 +19,12 @@ const Content = styled.div`
   }
 `;
 
-export const Section = ({ children }) => {
+export const Section = ({ children, center, margin }) => {
   return (
     <Container>
-      <Content>{children}</Content>
+      <Content center={center} margin={margin}>
+        {children}
+      </Content>
     </Container>
   );
 };

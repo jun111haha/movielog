@@ -1,3 +1,3 @@
-import { default as SearchContainer } from "./BannerContainer";
+import { default as SearchContainer } from "./SearchContainer";
 
 export default SearchContainer;

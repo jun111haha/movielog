@@ -13,13 +13,13 @@ const MovieComp = lazy(() => import("./views/Movie"));
 const TvComp = lazy(() => import("./views/TV"));
 const IntroComp = lazy(() => import("./views/Intro"));
 const DetailsComp = lazy(() => import("./views/Detail"));
+const SearchComap = lazy(() => import("./views/Search"));
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <GlobalStyle />
-        <GlobalFonts />
         <Suspense fallback={<Loading></Loading>}>
           <Switch>
             <Route exact path="/" component={IntroComp} />
@@ -31,6 +31,7 @@ function App() {
             <Route exact path="/tv/top-rated" component={TvComp} />
             <Route exact path="/tv/:id" component={DetailsComp} />
             <Route exact path="/movie/:id" component={DetailsComp} />
+            <Route exact path="/search" component={SearchComap} />
             <Route exact path="*" component={NotFound} />
           </Switch>
         </Suspense>

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const useIntersect = (intersectRef, optionsObject) => {
   const [isIntersect, setIsIntersect] = useState(false);
@@ -10,12 +10,6 @@ const useIntersect = (intersectRef, optionsObject) => {
     threshold: threshold,
   };
 
-  // const IncreasePage = useCallback(() => {
-  //   if (datatFinish === false) {
-  //     setPage((prev) => prev + 1);
-  //   }
-  // });
-
   const handleObserver = (entries) => {
     const target = entries[0];
     if (target.isIntersecting) {
@@ -24,12 +18,6 @@ const useIntersect = (intersectRef, optionsObject) => {
       setIsIntersect(false);
     }
   };
-
-  // const handleScrolling = useCallback(([entry]) => {
-  //   if (entry.isIntersecting) {
-  //     IncreasePage();
-  //   }
-  // });
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, options);
