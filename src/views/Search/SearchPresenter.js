@@ -30,15 +30,18 @@ const Title = styled.h1`
   display: flex;
 `;
 
-const Input = styled.input`
+const TextInput = styled.input`
   all: unset;
-  color: white;
+  color: grey;
   height: 50px;
   font-size: 2rem;
   text-align: center;
   &:focus {
     border-bottom: 2px solid #ffff;
     transition: border-bottom 0.3s ease-in-out;
+  }
+  &::placeholder {
+    color: grey;
   }
 `;
 
@@ -76,11 +79,11 @@ const SearchPresenter = (props) => {
       <Nav />
       <Form onSubmit={handleSubmit}>
         <SearchBox>
-          <Input
+          <TextInput
             placeholder="검색어를 입력해주세요"
             value={search}
             onChange={changeInput}
-          ></Input>
+          ></TextInput>
           <Button>
             <SearchIcon />
           </Button>

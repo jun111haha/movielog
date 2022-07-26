@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = axios.create({
+export const Api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   params: {
     api_key: "",
@@ -10,32 +10,32 @@ export const api = axios.create({
 
 export const moviesApi = {
   nowPlaying: (page) =>
-    api.get("movie/now_playing", {
+    Api.get("movie/now_playing", {
       params: {
         page: page,
       },
     }),
   upcoming: (page) =>
-    api.get("movie/upcoming", {
+    Api.get("movie/upcoming", {
       params: {
         page: page,
       },
     }),
   popular: (page) =>
-    api.get("movie/popular", {
+    Api.get("movie/popular", {
       params: {
         page: page,
       },
     }),
-  credits: (id) => api.get(`movie/${id}/credits`),
+  credits: (id) => Api.get(`movie/${id}/credits`),
   movieDetail: (id) =>
-    api.get(`movie/${id}`, {
+    Api.get(`movie/${id}`, {
       params: {
         append_to_response: "videos",
       },
     }),
   search: (search) =>
-    api.get("search/movie", {
+    Api.get("search/movie", {
       params: {
         query: search,
       },
@@ -44,34 +44,34 @@ export const moviesApi = {
 
 export const tvApi = {
   topRated: (page) =>
-    api.get(`tv/top_rated`, {
+    Api.get(`tv/top_rated`, {
       params: {
         page: page,
       },
     }),
 
   popular: (page) =>
-    api.get(`tv/popular`, {
+    Api.get(`tv/popular`, {
       params: {
         page: page,
       },
     }),
   airingToday: (page) =>
-    api.get(`tv/airing_today`, {
+    Api.get(`tv/airing_today`, {
       params: {
         page: page,
       },
     }),
-  netflixOriginals: () => api.get("discover/tv"),
-  credits: (id) => api.get(`tv/${id}/credits`),
+  netflixOriginals: () => Api.get("discover/tv"),
+  credits: (id) => Api.get(`tv/${id}/credits`),
   tvDetail: (id) =>
-    api.get(`tv/${id}`, {
+    Api.get(`tv/${id}`, {
       params: {
         append_to_response: "videos",
       },
     }),
   search: (search) =>
-    api.get("search/tv", {
+    Api.get("search/tv", {
       params: {
         query: search,
       },

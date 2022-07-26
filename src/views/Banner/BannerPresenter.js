@@ -69,15 +69,15 @@ const BannerButton = styled.div`
   }
 `;
 
-const truncate = (str, n) => {
-  if (str) {
-    return str.length > n ? str.substr(0, n - 1) + "..." : str;
-  } else {
-    return "설명이 없습니다.";
-  }
-};
-
 const BannerPresenter = (props) => {
+  const truncate = (str, n) => {
+    if (str) {
+      return str.length > n ? str.substr(0, n - 1) + "..." : str;
+    } else {
+      return "설명이 없습니다.";
+    }
+  };
+
   return (
     <Fragment>
       {props.loading ? (
@@ -90,7 +90,7 @@ const BannerPresenter = (props) => {
                 props.movie.name ||
                 props.movie.original_name}
             </BannerTitle>
-            <BannerButton>예고편 PLAY</BannerButton>
+            {/* <BannerButton>예고편 PLAY</BannerButton> */}
             <BannerDescription>
               {truncate(props.movie.overview, 300)}
             </BannerDescription>
