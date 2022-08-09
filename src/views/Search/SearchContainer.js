@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchPresenter from "./SearchPresenter";
 import { tvApi, moviesApi } from "../../Api";
 

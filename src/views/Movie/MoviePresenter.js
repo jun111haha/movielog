@@ -17,6 +17,7 @@ const Container = styled.div`
 const Div = styled.div``;
 
 const MoviePresenter = (props) => {
+  const { moviePopular, movieUpcoming } = props;
   return (
     <Fragment>
       <Nav />
@@ -27,10 +28,10 @@ const MoviePresenter = (props) => {
           <Loading />
         ) : (
           <Div>
-            {props.location === "/movie" && props.moviePopular.length > 0 && (
+            {props.location === "/movie" && moviePopular?.length > 0 && (
               <Div>
                 <Section center={"center"}>
-                  {props.moviePopular.map((data, index) => {
+                  {moviePopular.map((data, index) => {
                     return (
                       <Poster
                         id={data.id}
@@ -46,10 +47,10 @@ const MoviePresenter = (props) => {
               </Div>
             )}
             {props.location === "/movie/movie-upcoming" &&
-              props.movieUpcoming.length > 0 && (
+              movieUpcoming?.length > 0 && (
                 <Div>
                   <Section center={"center"}>
-                    {props.movieUpcoming.map((data, index) => {
+                    {movieUpcoming.map((data, index) => {
                       return (
                         <Poster
                           id={data.id}

@@ -52,8 +52,10 @@ const DetailCantainer = (props) => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

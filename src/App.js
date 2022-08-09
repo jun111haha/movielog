@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./config/global";
-import GlobalFonts from "./static/fonts/fonts";
 import Loading from "./component/Loading";
 import NotFound from "./component/NotFound";
 // const MovieComp = lazy(() => import("./views/Movie/MovieContainer"));

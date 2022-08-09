@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import Message from "../../component/Message";
-import { Fragment } from "react";
 import Nav from "../../component/Nav";
 import Loading from "../../component/Loading";
 import Poster from "../../component/Poster";

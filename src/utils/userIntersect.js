@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useIntersect = (intersectRef, optionsObject) => {
   const [isIntersect, setIsIntersect] = useState(false);
-  const { root = null, rootMargin = "0px", threshold = 1 } = optionsObject;
+  const { root = null, rootMargin = "200px", threshold = 1 } = optionsObject;
 
   const options = {
     root: root,
@@ -23,7 +23,7 @@ const useIntersect = (intersectRef, optionsObject) => {
     const observer = new IntersectionObserver(handleObserver, options);
     if (intersectRef.current) observer.observe(intersectRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [intersectRef, options]);
   return {
     isIntersect,
   };

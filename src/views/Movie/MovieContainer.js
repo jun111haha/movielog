@@ -1,118 +1,76 @@
 import React, { useState, useEffect, useRef } from "react";
+import { observer } from "mobx-react";
 import useIntersect from "../../utils/userIntersect";
-import { moviesApi } from "../../Api";
 import MoviePresenter from "./MoviePresenter";
-import useStore from "../../store/useStore";
+import useStores from "../../store/useStores";
+import { throttling } from "../../utils/useThrottling";
 
-const MovieContainer = (props) => {
+const MovieContainer = observer((props) => {
   const {
     location: { pathname },
   } = props;
 
-  const { MovieListStore } = useStore();
+  const throttler = throttling();
   const intersectRef = useRef(null);
-  const [moviePopular, setMoviePopular] = useState([]);
-  const [movieUpcoming, setMovieUpComing] = useState([]);
-  const [movieNowPlaying, setMovieNowPlaying] = useState([]);
+  const { movieListStore } = useStores();
   const [loading, setLoading] = useState(true);
   const [isLoader, setIsLoader] = useState(true);
   const [datatFinish, setDatatFinish] = useState(false);
-  const [page, setPage] = useState(1);
+
+  const [popularPage, setPopularPage] = useState(1);
+  const [upcomingPage, setUpcomingPage] = useState(1);
+  const [nowPlayingPage, setNowPlayingPage] = useState(1);
+
   const { isIntersect } = useIntersect(intersectRef, {
     rootMargin: "200px",
     threshold: 1,
   });
 
-  const loadData = async () => {
-    try {
-      if (pathname === "/movie" && (isIntersect || datatFinish == false)) {
-        const {
-          data: { results: moviePopularRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.popular(page);
-        setMoviePopular([...moviePopular, ...moviePopularRequest]);
-        setPage((prev) => prev + 1);
-      } else if (
-        pathname === "/movie/movie-upcoming" &&
-        (isIntersect || datatFinish == false)
-      ) {
-        const {
-          data: { results: movieUpcomingRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.upcoming(page);
-        setMovieUpComing([...movieUpcoming, ...movieUpcomingRequest]);
-        setPage((prev) => prev + 1);
-      } else if (
-        pathname === "/movie/movie-nowplaying" &&
-        (isIntersect || datatFinish == false)
-      ) {
-        const {
-          data: { results: movieNowPlayingRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.nowPlaying(page);
-        setMovieNowPlaying([...movieNowPlaying, ...movieNowPlayingRequest]);
-        setPage((prev) => prev + 1);
-      }
-      setLoading(false);
-      setIsLoader(false);
-    } catch (error) {
-      console.log(error);
+  const loadData = () => {
+    if (pathname === "/movie" && (isIntersect || datatFinish === false)) {
+      movieListStore.getMoviePopularList(popularPage);
+      setPopularPage((prev) => prev + 1);
+    } else if (
+      pathname === "/movie/movie-upcoming" &&
+      (isIntersect || datatFinish === false)
+    ) {
+      movieListStore.getMovieUpcomingList(upcomingPage);
+      setUpcomingPage((prev) => prev + 1);
+    } else if (
+      pathname === "/movie/movie-nowplaying" &&
+      (isIntersect || datatFinish === false)
+    ) {
+      movieListStore.getMovieNowPlayingList(nowPlayingPage);
+      setNowPlayingPage((prev) => prev + 1);
     }
-  };
 
-  const loadData2 = async () => {
-    try {
-      if (pathname === "/movie" && (isIntersect || datatFinish == false)) {
-        const {
-          data: { results: moviePopularRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.popular(page);
-        setMoviePopular([...moviePopular, ...moviePopularRequest]);
-        setPage((prev) => prev + 1);
-      } else if (
-        pathname === "/movie/movie-upcoming" &&
-        (isIntersect || datatFinish == false)
-      ) {
-        const {
-          data: { results: movieUpcomingRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.upcoming(page);
-        setMovieUpComing([...movieUpcoming, ...movieUpcomingRequest]);
-        setPage((prev) => prev + 1);
-      } else if (
-        pathname === "/movie/movie-nowplaying" &&
-        (isIntersect || datatFinish == false)
-      ) {
-        const {
-          data: { results: movieNowPlayingRequest },
-          data: { total_page: totalElements },
-        } = await moviesApi.nowPlaying(page);
-        setMovieNowPlaying([...movieNowPlaying, ...movieNowPlayingRequest]);
-        setPage((prev) => prev + 1);
-      }
-      setLoading(false);
-      setIsLoader(false);
-    } catch (error) {
-      console.log(error);
-    }
+    setLoading(false);
+    setIsLoader(false);
   };
 
   useEffect(() => {
-    loadData();
-    setIsLoader(true);
+    let isComponentMounted = true;
+    if (isComponentMounted) {
+      throttler.throttle(loadData, 500);
+      setIsLoader(true);
+    }
+
+    return () => {
+      isComponentMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
 
   useEffect(() => {
-    setPage(1);
     setDatatFinish(false);
   }, [pathname]);
 
   return (
     <>
       <MoviePresenter
-        moviePopular={moviePopular}
-        movieUpcoming={movieUpcoming}
-        movieNowPlaying={movieNowPlaying}
+        moviePopular={movieListStore.moviePopularList}
+        movieUpcoming={movieListStore.movieUpcomingList}
+        movieNowPlaying={movieListStore.movieNowPlayingList}
         loading={loading}
         location={pathname}
         intersectRef={intersectRef}
@@ -121,6 +79,6 @@ const MovieContainer = (props) => {
       />
     </>
   );
-};
+});
 
 export default MovieContainer;

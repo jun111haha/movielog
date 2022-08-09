@@ -4,13 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import MovieListStore from "./store/movieStore";
+import TvListStore from "./store/tvStore";
 import { Provider } from "mobx-react";
 
 const movieListStore = new MovieListStore();
+const tvListStore = new TvListStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider movieListStore={movieListStore}>
+    <Provider movieListStore={movieListStore} tvListStore={tvListStore}>
       <App />
     </Provider>
   </React.StrictMode>,

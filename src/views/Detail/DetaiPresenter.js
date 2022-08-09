@@ -59,14 +59,14 @@ const Title = styled.h1`
   display: flex;
 `;
 
-const Year = styled.span`
-  padding: 0px 5px;
-  color: white;
-  font-size: 3rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  display: flex;
-`;
+// const Year = styled.span`
+//   padding: 0px 5px;
+//   color: white;
+//   font-size: 3rem;
+//   font-weight: 600;
+//   margin-bottom: 10px;
+//   display: flex;
+// `;
 
 const Genres = styled.div`
   padding: 0px 10px;
@@ -84,10 +84,10 @@ const OverView = styled.h1`
   margin-bottom: 50px;
 `;
 
-const Divider = styled.span`
-  margin: 0px 5px;
-  font-size: 40px;
-`;
+// const Divider = styled.span`
+//   margin: 0px 5px;
+//   font-size: 40px;
+// `;
 
 // const VideoContent = styled.div`
 //   position: absolute;
@@ -116,7 +116,7 @@ const opts = {
 };
 
 const DetailPresenter = (props) => {
-  const { movieDetail, tvDetail, video, tvCredits } = props;
+  const { movieDetail, tvDetail, video } = props;
 
   return (
     <Container>
