@@ -16,6 +16,7 @@ export default class tvStore {
       tvDetailList: observable,
       tvVideoList: observable,
 
+      tvDetailReset: action,
       getAiringTodayList: action,
       getPopularList: action,
       getTopRatingList: action,
@@ -55,16 +56,14 @@ export default class tvStore {
   };
 
   getTvDetailList = async (id) => {
-    const {
-      data: tvDetail,
-      data: {
-        videos: { results: videos },
-      },
-    } = await tvApi.tvDetail(id);
+    const { data: tvDetail } = await tvApi.tvDetail(id);
 
     runInAction(() => {
       this.tvDetailList = tvDetail;
-      this.tvVideoList = videos;
     });
+  };
+
+  tvDetailReset = () => {
+    this.tvDetailList = [];
   };
 }

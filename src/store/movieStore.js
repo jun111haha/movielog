@@ -15,10 +15,12 @@ export default class MovieListStore {
       movieNowPlayingList: observable,
       movieDetailList: observable,
       movieVedioList: observable,
+
       getMoviePopularList: action,
       getMovieUpcomingList: action,
       getMovieNowPlayingList: action,
       getMovieDetailList: action,
+      movieDetailReset: action,
     });
   }
 
@@ -62,16 +64,14 @@ export default class MovieListStore {
   };
 
   getMovieDetailList = async (id) => {
-    const {
-      data: movieDetail,
-      data: {
-        videos: { results: videos },
-      },
-    } = await moviesApi.movieDetail(id);
+    const { data: movieDetail } = await moviesApi.movieDetail(id);
 
     runInAction(() => {
       this.movieDetailList = movieDetail;
-      this.movieVedioList = videos;
     });
+  };
+
+  movieDetailReset = () => {
+    this.movieDetailList = [];
   };
 }
