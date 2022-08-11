@@ -110,7 +110,7 @@ const opts = {
   width: "700",
   height: "400",
   playerVars: {
-    autoplay: 1, // 자동재생 1
+    autoplay: 0, // 자동재생 1
     modestbranding: 1,
   },
 };
@@ -125,22 +125,31 @@ const DetailPresenter = (props) => {
         <Loading />
       ) : (
         <Fragment>
-          <BackgroundImage
-            bgImage={`https://image.tmdb.org/t/p/original/${
-              props.movieDetail.backdrop_path ||
-              (props.tvDetail.backdrop_path &&
-                props.movieDetail.backdrop_path) ||
-              props.tvDetail.backdrop_path
-            }`}
-          />
-          <ContainerInner>
-            <ImgContent
-              bgImage={`https://image.tmdb.org/t/p/original/${
-                movieDetail.poster_path ||
-                (tvDetail.poster_path && movieDetail.poster_path) ||
-                tvDetail.poster_path
-              }`}
+          {movieDetail.backdrop_path && (
+            <BackgroundImage
+              bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}
             />
+          )}
+
+          {tvDetail.backdrop_path && (
+            <BackgroundImage
+              bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.backdrop_path}`}
+            />
+          )}
+
+          <ContainerInner>
+            {movieDetail.poster_path && (
+              <ImgContent
+                bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.poster_path}`}
+              />
+            )}
+
+            {tvDetail.poster_path && (
+              <ImgContent
+                bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.poster_path}`}
+              />
+            )}
+
             <Content>
               <Title>
                 {movieDetail?.title || tvDetail.name}(
@@ -169,10 +178,11 @@ const DetailPresenter = (props) => {
                   )}
               </Genres>
               <OverView>{tvDetail?.overview || movieDetail?.overview}</OverView>
+
               <VideoContent>
-                {video?.length > 0 && (
+                {video?.results.length > 0 && (
                   <YouTube
-                    videoId={video[0].key}
+                    videoId={video.results[0].key}
                     opts={opts}
                     //이벤트 리스너
                     onEnd={(e) => {
