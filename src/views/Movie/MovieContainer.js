@@ -28,18 +28,21 @@ const MovieContainer = observer((props) => {
 
   const loadData = () => {
     if (pathname === "/movie" && (isIntersect || datatFinish === false)) {
+      popularPage > 3 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMoviePopularList(popularPage);
       setPopularPage((prev) => prev + 1);
     } else if (
       pathname === "/movie/movie-upcoming" &&
       (isIntersect || datatFinish === false)
     ) {
+      upcomingPage > 3 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMovieUpcomingList(upcomingPage);
       setUpcomingPage((prev) => prev + 1);
     } else if (
       pathname === "/movie/movie-nowplaying" &&
       (isIntersect || datatFinish === false)
     ) {
+      nowPlayingPage > 3 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMovieNowPlayingList(nowPlayingPage);
       setNowPlayingPage((prev) => prev + 1);
     }
