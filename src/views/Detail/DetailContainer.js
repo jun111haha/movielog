@@ -13,11 +13,11 @@ const DetailCantainer = observer(() => {
 
   const getDetail = () => {
     if (pathname === "movie") {
-      movieListStore.getMovieDetailList(id);
       tvListStore.tvDetailReset();
+      movieListStore.getMovieDetailList(id);
     } else {
-      tvListStore.getTvDetailList(id);
       movieListStore.movieDetailReset();
+      tvListStore.getTvDetailList(id);
     }
     setLoading(false);
   };
@@ -34,9 +34,7 @@ const DetailCantainer = observer(() => {
   return (
     <DetailPresenter
       movieDetail={movieListStore.movieDetailList}
-      // movieCredits={movieCredits}
       tvDetail={tvListStore.tvDetailList}
-      // tvCredits={tvCredits}
       loading={loading}
       pathName={pathname}
       video={
