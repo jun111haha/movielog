@@ -1,6 +1,6 @@
 # Movielog
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-<img src="https://img.shields.io/badge/style-components-DB7093?style=for-the-badge&logo=style-components&logoColor=black">
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=black">
 
 
 ## 프로젝트 소개
