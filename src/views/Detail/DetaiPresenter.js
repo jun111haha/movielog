@@ -107,11 +107,12 @@ const VideoContent = styled.div`
 `;
 
 const opts = {
-  width: "700",
-  height: "400",
+  width: "480",
+  height: "270",
   playerVars: {
     autoplay: 0, // 자동재생 1
     modestbranding: 1,
+    origin: window.location.href,
   },
 };
 

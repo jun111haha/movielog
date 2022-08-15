@@ -71,8 +71,10 @@ const SearchPresenter = (props) => {
     handleSubmit,
     changeInput,
     loading,
-    searchEmpty,
+    movieSearchEmpty,
+    tvSearchEmpty,
   } = props;
+
   return (
     <Container>
       <Nav />
@@ -129,7 +131,9 @@ const SearchPresenter = (props) => {
               </Section>
             </>
           )}
-          {searchEmpty && <Message text="검색결과가 없습니다." color="white" />}
+          {movieSearchEmpty && tvSearchEmpty && (
+            <Message text="검색결과가 없습니다." color="white" />
+          )}
         </>
       )}
     </Container>

@@ -7,6 +7,8 @@ export default class tvStore {
   tvTopRatingList = [];
   tvDetailList = [];
   tvVideoList = [];
+  tvSearchList = [];
+  tvEmptyCheck = false;
 
   constructor() {
     makeObservable(this, {
@@ -15,12 +17,15 @@ export default class tvStore {
       tvTopRatingList: observable,
       tvDetailList: observable,
       tvVideoList: observable,
+      tvSearchList: observable,
+      tvEmptyCheck: observable,
 
       tvDetailReset: action,
       getAiringTodayList: action,
       getPopularList: action,
       getTopRatingList: action,
       getTvDetailList: action,
+      getTvSearhList: action,
     });
   }
   getAiringTodayList = async (page) => {
@@ -60,6 +65,17 @@ export default class tvStore {
 
     runInAction(() => {
       this.tvDetailList = tvDetail;
+    });
+  };
+
+  getTvSearhList = async (value) => {
+    const {
+      data: { results: tvSearchResult },
+    } = await tvApi.search(value);
+
+    runInAction(() => {
+      this.tvSearchList = tvSearchResult;
+      this.tvEmptyCheck = tvSearchResult.length > 0 ? false : true;
     });
   };
 

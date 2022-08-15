@@ -7,6 +7,8 @@ export default class MovieListStore {
   movieNowPlayingList = [];
   movieDetailList = [];
   movieVedioList = [];
+  movieSearchList = [];
+  movieEmptyCheck = false;
 
   constructor() {
     makeObservable(this, {
@@ -15,12 +17,15 @@ export default class MovieListStore {
       movieNowPlayingList: observable,
       movieDetailList: observable,
       movieVedioList: observable,
+      movieSearchList: observable,
+      movieEmptyCheck: observable,
 
       getMoviePopularList: action,
       getMovieUpcomingList: action,
       getMovieNowPlayingList: action,
       getMovieDetailList: action,
       movieDetailReset: action,
+      getMovieSearchList: action,
     });
   }
 
@@ -68,6 +73,17 @@ export default class MovieListStore {
 
     runInAction(() => {
       this.movieDetailList = movieDetail;
+    });
+  };
+
+  getMovieSearchList = async (value) => {
+    const {
+      data: { results: movieSearchResult },
+    } = await moviesApi.search(value);
+
+    runInAction(() => {
+      this.movieSearchList = movieSearchResult;
+      this.movieEmptyCheck = movieSearchResult.length > 0 ? false : true;
     });
   };
 

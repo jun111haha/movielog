@@ -3,14 +3,12 @@ import { observer } from "mobx-react";
 import useIntersect from "../../utils/userIntersect";
 import MoviePresenter from "./MoviePresenter";
 import useStores from "../../store/useStores";
-import { throttling } from "../../utils/useThrottling";
 
 const MovieContainer = observer((props) => {
   const {
     location: { pathname },
   } = props;
 
-  const throttler = throttling();
   const intersectRef = useRef(null);
   const { movieListStore } = useStores();
   const [loading, setLoading] = useState(true);
@@ -28,21 +26,21 @@ const MovieContainer = observer((props) => {
 
   const loadData = () => {
     if (pathname === "/movie" && (isIntersect || datatFinish === false)) {
-      popularPage > 3 ? setDatatFinish(true) : setDatatFinish(false);
+      popularPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMoviePopularList(popularPage);
       setPopularPage((prev) => prev + 1);
     } else if (
       pathname === "/movie/movie-upcoming" &&
       (isIntersect || datatFinish === false)
     ) {
-      upcomingPage > 3 ? setDatatFinish(true) : setDatatFinish(false);
+      upcomingPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMovieUpcomingList(upcomingPage);
       setUpcomingPage((prev) => prev + 1);
     } else if (
       pathname === "/movie/movie-nowplaying" &&
       (isIntersect || datatFinish === false)
     ) {
-      nowPlayingPage > 3 ? setDatatFinish(true) : setDatatFinish(false);
+      nowPlayingPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMovieNowPlayingList(nowPlayingPage);
       setNowPlayingPage((prev) => prev + 1);
     }
@@ -52,20 +50,24 @@ const MovieContainer = observer((props) => {
   };
 
   useEffect(() => {
-    let isComponentMounted = true;
-    if (isComponentMounted) {
-      throttler.throttle(loadData, 500);
-      setIsLoader(true);
-    }
+    // let isComponentMounted = true;
+    // if (isComponentMounted) {
+    //   throttler.throttle(loadData, 500);
+    //   setIsLoader(true);
+    // }
 
-    return () => {
-      isComponentMounted = false;
-    };
+    // return () => {
+    //   isComponentMounted = false;
+    // };
+
+    loadData();
+    setIsLoader(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
 
   useEffect(() => {
     setDatatFinish(false);
+    setIsLoader(false);
   }, [pathname]);
 
   return (

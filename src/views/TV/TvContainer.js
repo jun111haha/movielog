@@ -3,14 +3,12 @@ import useIntersect from "../../utils/userIntersect";
 import TvPresenter from "./TvPresenter";
 import { observer } from "mobx-react";
 import useStores from "../../store/useStores";
-import { throttling } from "../../utils/useThrottling";
 
 const TvContainer = observer((props) => {
   const {
     location: { pathname },
   } = props;
 
-  const throttler = throttling();
   const intersectRef = useRef(null);
   const { tvListStore } = useStores();
 
@@ -18,8 +16,8 @@ const TvContainer = observer((props) => {
   const [isLoader, setIsLoader] = useState(true);
   const [datatFinish, setDatatFinish] = useState(false);
 
-  const [popularPage, setPopularPage] = useState(1);
   const [airingTodayPage, setAiringTodayPage] = useState(1);
+  const [popularPage, setPopularPage] = useState(1);
   const [topRatingPage, setTopRatingPage] = useState(1);
 
   const { isIntersect } = useIntersect(intersectRef, {
@@ -31,37 +29,44 @@ const TvContainer = observer((props) => {
     if (pathname === "/tv" && (isIntersect || datatFinish === false)) {
       tvListStore.getAiringTodayList(airingTodayPage);
       setAiringTodayPage((prev) => prev + 1);
+      airingTodayPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
     } else if (
       pathname === "/tv/popular-tv" &&
       (isIntersect || datatFinish === false)
     ) {
       tvListStore.getPopularList(popularPage);
       setPopularPage((prev) => prev + 1);
+      popularPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
     } else if (
       pathname === "/tv/top-rated" &&
       (isIntersect || datatFinish === false)
     ) {
       tvListStore.getTopRatingList(topRatingPage);
       setTopRatingPage((prev) => prev + 1);
+      topRatingPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
     }
     setLoading(false);
     setIsLoader(false);
   };
 
   useEffect(() => {
-    let isComponentMounted = true;
-    if (isComponentMounted) {
-      throttler.throttle(loadData, 500);
-      setIsLoader(true);
-    }
-    return () => {
-      isComponentMounted = false;
-    };
+    // let isComponentMounted = true;
+    // if (isComponentMounted) {
+    //   throttler.throttle(loadData, 500);
+    //   setIsLoader(true);
+    // }
+    // return () => {
+    //   isComponentMounted = false;
+    // };
+
+    loadData();
+    setIsLoader(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
 
   useEffect(() => {
     setDatatFinish(false);
+    setIsLoader(false);
   }, [pathname]);
 
   return (
