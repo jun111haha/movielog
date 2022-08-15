@@ -1,6 +1,7 @@
-#### 공부할것
+# Movielog
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
 
-- mobx 상태관리 붙여보기
-- ... > https://junistory.blogspot.com/2017/06/css-ellipsis.html > material ui tooltip 같이 붙이기
-- interfaction observer 붙여서 api 호출 > page 2,3,4...
-- 컴포넌트 데이터 캐싱처리 하는방법
+## 프로젝트 소개
+TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 API를 활용하여 영화를 검색하고 찾아보며 영화 예고편을 제공해줍니다.
+
+## 
