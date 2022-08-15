@@ -9,4 +9,5 @@
 ## 프로젝트 소개
 TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 API를 활용하여 영화를 검색하고 찾아보며 영화 예고편을 제공해줍니다.
 
-![Uploading 스크린샷 2022-08-16 오전 12.01.01.png…]()
+<img width="1283" alt="스크린샷 2022-08-16 오전 12 01 01" src="https://user-images.githubusercontent.com/59434443/184660631-002e0286-b5b9-452c-88f0-2513abc4f21a.png">
+
