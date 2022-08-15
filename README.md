@@ -11,4 +11,7 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 
 ## 웹사이트 화면
 - Home
-<img width="1680" alt="스크린샷 2022-08-16 오전 12 23 36" src="https://user-images.githubusercontent.com/59434443/184665526-12e6dffa-3341-450f-a794-9e838ae1cc0a.png">
+- 둘러보기
+- 검색
+- 컨텐츠 종료
+- 디테일
