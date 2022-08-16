@@ -30,4 +30,8 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 
 
 ## 프로젝트를 통해 배운점
-
+- React Framework를 활용하여 함수형 컴포넌트 방식으로 프론트 구성하는 방법
+- Mobx를 사용해서 상태관리를 하는 방법
+- Styeld components를 사용해서 컴포넌트를 CSS-in-JS 방식으로 스타일링 하는 방법
+- 오픈API 를 활용하여 axios를 사용해 데이터를 가져오는 방법
+- Material-UI 를 활용한 UI Framework 활용하는 방법
