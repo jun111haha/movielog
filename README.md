@@ -19,11 +19,11 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 ### 둘러보기
 <img width="1680" alt="스크린샷 2022-08-17 오전 12 29 41" src="https://user-images.githubusercontent.com/59434443/184919545-83176b38-23da-4c5e-a1f4-0fc4a1e339b9.png">
 <img width="1680" alt="스크린샷 2022-08-17 오전 12 29 59" src="https://user-images.githubusercontent.com/59434443/184919641-c58bd333-37b8-4250-8c97-b519fa4f9a7a.png">
-
+### 디테일
+<img width="1680" alt="스크린샷 2022-08-17 오전 12 30 10" src="https://user-images.githubusercontent.com/59434443/184919781-4bf28f89-d60d-472a-ba2e-2074c3251cec.png">
 ### 검색
+<img width="1680" alt="스크린샷 2022-08-17 오전 12 30 21" src="https://user-images.githubusercontent.com/59434443/184919906-cc7917cc-ecbb-4c72-a69f-4cfd8fd9449e.png">
 
-- 컨텐츠 종료
-- 디테일
 
 ## 프로젝트를 통해 배운점
 
