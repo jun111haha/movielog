@@ -1,72 +1,49 @@
 import React, { useEffect, useState } from "react";
 import DetailPresenter from "./DetaiPresenter";
-import { tvApi, moviesApi } from "../../Api";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import useStores from "../../store/useStores";
+import { observer } from "mobx-react";
 
-const DetailCantainer = (props) => {
-  const [movieDetail, setMovieDetail] = useState([]);
-  const [movieCredits, setMovieCredits] = useState([]);
-  const [tvDetail, setTvDetail] = useState([]);
-  const [tvCredits, setTvCredits] = useState([]);
+const DetailCantainer = observer(() => {
   const [loading, setLoading] = useState(true);
-  const [video, setVideo] = useState();
-
   const { id } = useParams();
   const pathname = useLocation().pathname.split("/")[1];
+  const { movieListStore, tvListStore } = useStores();
 
-  const getDetail = async () => {
-    try {
-      if (pathname === "movie") {
-        const {
-          data: movieDetail,
-          data: {
-            videos: { results: videos },
-          },
-        } = await moviesApi.movieDetail(id);
-        setMovieDetail(movieDetail);
-        setVideo(videos);
-
-        const {
-          data: { cast: movieCredits },
-        } = await moviesApi.credits(id);
-        setMovieCredits(movieCredits);
-      } else {
-        const {
-          data: tvDetail,
-          data: {
-            videos: { results: videos },
-          },
-        } = await tvApi.tvDetail(id);
-        setTvDetail(tvDetail);
-        setVideo(videos);
-
-        const {
-          data: { cast: tvCredits },
-        } = await tvApi.credits(id);
-        setTvCredits(tvCredits);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
+  const getDetail = () => {
+    if (pathname === "movie") {
+      tvListStore.tvDetailReset();
+      movieListStore.getMovieDetailList(id);
+    } else {
+      movieListStore.movieDetailReset();
+      tvListStore.getTvDetailList(id);
     }
+    setLoading(false);
   };
+
   useEffect(() => {
     getDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    return () => setLoading(false);
   }, []);
 
   return (
     <DetailPresenter
-      movieDetail={movieDetail}
-      movieCredits={movieCredits}
-      tvDetail={tvDetail}
-      tvCredits={tvCredits}
+      movieDetail={movieListStore.movieDetailList}
+      tvDetail={tvListStore.tvDetailList}
       loading={loading}
       pathName={pathname}
-      video={video}
+      video={
+        movieListStore.movieDetailList.videos
+          ? movieListStore.movieDetailList.videos
+          : tvListStore.tvDetailList.videos
+      }
     />
   );
-};
+});
 
 export default DetailCantainer;

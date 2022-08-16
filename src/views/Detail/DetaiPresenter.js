@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Loading from "../../component/Loading";
 import YouTube from "react-youtube";
 import Nav from "../../component/Nav";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 const Container = styled.div`
   display: flex;
@@ -59,14 +60,14 @@ const Title = styled.h1`
   display: flex;
 `;
 
-const Year = styled.span`
-  padding: 0px 5px;
-  color: white;
-  font-size: 3rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  display: flex;
-`;
+// const Year = styled.span`
+//   padding: 0px 5px;
+//   color: white;
+//   font-size: 3rem;
+//   font-weight: 600;
+//   margin-bottom: 10px;
+//   display: flex;
+// `;
 
 const Genres = styled.div`
   padding: 0px 10px;
@@ -84,10 +85,10 @@ const OverView = styled.h1`
   margin-bottom: 50px;
 `;
 
-const Divider = styled.span`
-  margin: 0px 5px;
-  font-size: 40px;
-`;
+// const Divider = styled.span`
+//   margin: 0px 5px;
+//   font-size: 40px;
+// `;
 
 // const VideoContent = styled.div`
 //   position: absolute;
@@ -112,80 +113,100 @@ const opts = {
   playerVars: {
     autoplay: 1, // 자동재생 1
     modestbranding: 1,
+    origin: window.location.href,
   },
 };
 
 const DetailPresenter = (props) => {
-  const { movieDetail, tvDetail, video, tvCredits } = props;
+  const { movieDetail, tvDetail, video } = props;
 
   return (
-    <Container>
-      <Nav />
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <Fragment>
-          <BackgroundImage
-            bgImage={`https://image.tmdb.org/t/p/original/${
-              props.movieDetail.backdrop_path ||
-              (props.tvDetail.backdrop_path &&
-                props.movieDetail.backdrop_path) ||
-              props.tvDetail.backdrop_path
-            }`}
-          />
-          <ContainerInner>
-            <ImgContent
-              bgImage={`https://image.tmdb.org/t/p/original/${
-                movieDetail.poster_path ||
-                (tvDetail.poster_path && movieDetail.poster_path) ||
-                tvDetail.poster_path
-              }`}
-            />
-            <Content>
-              <Title>
-                {movieDetail?.title || tvDetail.name}(
-                {movieDetail?.release_date
-                  ? movieDetail?.release_date.split("-")[0]
-                  : ""}
-                {tvDetail?.first_air_date
-                  ? tvDetail.first_air_date.split("-")[0]
-                  : ""}
-                )
-              </Title>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>상세 페이지</title>
+        </Helmet>
+      </HelmetProvider>
+      <Container>
+        <Nav />
+        {props.loading ? (
+          <Loading />
+        ) : (
+          <Fragment>
+            {movieDetail.backdrop_path && (
+              <BackgroundImage
+                bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}
+              />
+            )}
 
-              <Genres>
-                {movieDetail?.genres &&
-                  movieDetail?.genres.map((genre, index) =>
-                    index === movieDetail?.genres.length - 1
-                      ? genre.name
-                      : `${genre.name} / `
-                  )}
+            {tvDetail.backdrop_path && (
+              <BackgroundImage
+                bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.backdrop_path}`}
+              />
+            )}
 
-                {tvDetail?.genres &&
-                  tvDetail?.genres.map((genre, index) =>
-                    index === tvDetail?.genres.length - 1
-                      ? genre.name
-                      : `${genre.name} / `
+            <ContainerInner>
+              {movieDetail.poster_path && (
+                <ImgContent
+                  bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.poster_path}`}
+                />
+              )}
+
+              {tvDetail.poster_path && (
+                <ImgContent
+                  bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.poster_path}`}
+                />
+              )}
+
+              <Content>
+                <Title>
+                  {movieDetail?.title || tvDetail.name}(
+                  {movieDetail?.release_date
+                    ? movieDetail?.release_date.split("-")[0]
+                    : ""}
+                  {tvDetail?.first_air_date
+                    ? tvDetail.first_air_date.split("-")[0]
+                    : ""}
+                  )
+                </Title>
+
+                <Genres>
+                  {movieDetail?.genres &&
+                    movieDetail?.genres.map((genre, index) =>
+                      index === movieDetail?.genres.length - 1
+                        ? genre.name
+                        : `${genre.name} / `
+                    )}
+
+                  {tvDetail?.genres &&
+                    tvDetail?.genres.map((genre, index) =>
+                      index === tvDetail?.genres.length - 1
+                        ? genre.name
+                        : `${genre.name} / `
+                    )}
+                </Genres>
+                <OverView>
+                  {tvDetail?.overview || movieDetail?.overview}
+                </OverView>
+
+                <VideoContent>
+                  {video?.results.length > 0 && (
+                    <YouTube
+                      videoId={video.results[0].key}
+                      opts={opts}
+                      //이벤트 리스너
+                      onEnd={(e) => {
+                        e.target.stopVideo(0);
+                      }}
+                    />
                   )}
-              </Genres>
-              <OverView>{tvDetail?.overview || movieDetail?.overview}</OverView>
-              <VideoContent>
-                {video?.length > 0 && (
-                  <YouTube
-                    videoId={video[0].key}
-                    opts={opts}
-                    //이벤트 리스너
-                    onEnd={(e) => {
-                      e.target.stopVideo(0);
-                    }}
-                  />
-                )}
-              </VideoContent>
-            </Content>
-          </ContainerInner>
-        </Fragment>
-      )}
-    </Container>
+                </VideoContent>
+              </Content>
+            </ContainerInner>
+          </Fragment>
+        )}
+      </Container>
+    </>
   );
 };
 
