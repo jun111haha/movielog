@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=black">
   <img src="https://img.shields.io/badge/mobx-FF9955?style=for-the-badge&logo=mobx&logoColor=black">
   <img src="https://img.shields.io/badge/TheMovieDatabase-01B4E4?style=for-the-badge&logo=TheMovieDatabase&logoColor=black">
+  <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=black">
 </div>
 
 ## 프로젝트 소개
