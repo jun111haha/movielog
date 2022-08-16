@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Loading from "../../component/Loading";
 import YouTube from "react-youtube";
 import Nav from "../../component/Nav";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 const Container = styled.div`
   display: flex;
@@ -107,10 +108,10 @@ const VideoContent = styled.div`
 `;
 
 const opts = {
-  width: "480",
-  height: "270",
+  width: "700",
+  height: "400",
   playerVars: {
-    autoplay: 0, // 자동재생 1
+    autoplay: 1, // 자동재생 1
     modestbranding: 1,
     origin: window.location.href,
   },
@@ -120,83 +121,92 @@ const DetailPresenter = (props) => {
   const { movieDetail, tvDetail, video } = props;
 
   return (
-    <Container>
-      <Nav />
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <Fragment>
-          {movieDetail.backdrop_path && (
-            <BackgroundImage
-              bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}
-            />
-          )}
-
-          {tvDetail.backdrop_path && (
-            <BackgroundImage
-              bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.backdrop_path}`}
-            />
-          )}
-
-          <ContainerInner>
-            {movieDetail.poster_path && (
-              <ImgContent
-                bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.poster_path}`}
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>상세 페이지</title>
+        </Helmet>
+      </HelmetProvider>
+      <Container>
+        <Nav />
+        {props.loading ? (
+          <Loading />
+        ) : (
+          <Fragment>
+            {movieDetail.backdrop_path && (
+              <BackgroundImage
+                bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}
               />
             )}
 
-            {tvDetail.poster_path && (
-              <ImgContent
-                bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.poster_path}`}
+            {tvDetail.backdrop_path && (
+              <BackgroundImage
+                bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.backdrop_path}`}
               />
             )}
 
-            <Content>
-              <Title>
-                {movieDetail?.title || tvDetail.name}(
-                {movieDetail?.release_date
-                  ? movieDetail?.release_date.split("-")[0]
-                  : ""}
-                {tvDetail?.first_air_date
-                  ? tvDetail.first_air_date.split("-")[0]
-                  : ""}
-                )
-              </Title>
+            <ContainerInner>
+              {movieDetail.poster_path && (
+                <ImgContent
+                  bgImage={`https://image.tmdb.org/t/p/original/${movieDetail.poster_path}`}
+                />
+              )}
 
-              <Genres>
-                {movieDetail?.genres &&
-                  movieDetail?.genres.map((genre, index) =>
-                    index === movieDetail?.genres.length - 1
-                      ? genre.name
-                      : `${genre.name} / `
+              {tvDetail.poster_path && (
+                <ImgContent
+                  bgImage={`https://image.tmdb.org/t/p/original/${tvDetail.poster_path}`}
+                />
+              )}
+
+              <Content>
+                <Title>
+                  {movieDetail?.title || tvDetail.name}(
+                  {movieDetail?.release_date
+                    ? movieDetail?.release_date.split("-")[0]
+                    : ""}
+                  {tvDetail?.first_air_date
+                    ? tvDetail.first_air_date.split("-")[0]
+                    : ""}
+                  )
+                </Title>
+
+                <Genres>
+                  {movieDetail?.genres &&
+                    movieDetail?.genres.map((genre, index) =>
+                      index === movieDetail?.genres.length - 1
+                        ? genre.name
+                        : `${genre.name} / `
+                    )}
+
+                  {tvDetail?.genres &&
+                    tvDetail?.genres.map((genre, index) =>
+                      index === tvDetail?.genres.length - 1
+                        ? genre.name
+                        : `${genre.name} / `
+                    )}
+                </Genres>
+                <OverView>
+                  {tvDetail?.overview || movieDetail?.overview}
+                </OverView>
+
+                <VideoContent>
+                  {video?.results.length > 0 && (
+                    <YouTube
+                      videoId={video.results[0].key}
+                      opts={opts}
+                      //이벤트 리스너
+                      onEnd={(e) => {
+                        e.target.stopVideo(0);
+                      }}
+                    />
                   )}
-
-                {tvDetail?.genres &&
-                  tvDetail?.genres.map((genre, index) =>
-                    index === tvDetail?.genres.length - 1
-                      ? genre.name
-                      : `${genre.name} / `
-                  )}
-              </Genres>
-              <OverView>{tvDetail?.overview || movieDetail?.overview}</OverView>
-
-              <VideoContent>
-                {video?.results.length > 0 && (
-                  <YouTube
-                    videoId={video.results[0].key}
-                    opts={opts}
-                    //이벤트 리스너
-                    onEnd={(e) => {
-                      e.target.stopVideo(0);
-                    }}
-                  />
-                )}
-              </VideoContent>
-            </Content>
-          </ContainerInner>
-        </Fragment>
-      )}
-    </Container>
+                </VideoContent>
+              </Content>
+            </ContainerInner>
+          </Fragment>
+        )}
+      </Container>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Loading from "../../component/Loading";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 const Layout = styled.div`
   display: flex;
@@ -83,6 +84,11 @@ const IntroPresenter = (props) => {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>인트로</title>
+        </Helmet>
+      </HelmetProvider>
       {props.loading ? (
         <Loading></Loading>
       ) : (

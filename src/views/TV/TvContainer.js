@@ -65,8 +65,8 @@ const TvContainer = observer((props) => {
   }, [isIntersect, datatFinish]);
 
   useEffect(() => {
-    setDatatFinish(false);
     setIsLoader(false);
+    setDatatFinish(false);
   }, [pathname]);
 
   return (

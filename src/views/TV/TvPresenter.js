@@ -8,6 +8,7 @@ import { Section } from "../../component/Section";
 import PageHeader from "../../component/PageHeader";
 import { Loader } from "../../component/Loader";
 import { NotFindData } from "../../component/Loader";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 // const Container = styled.div`
 //   padding: 50px;
@@ -34,75 +35,82 @@ const Div = styled.div``;
 
 const TvPresenter = (props) => {
   return (
-    <Div>
-      <Nav />
-      <BannerContainer />
-      <Container>
-        <PageHeader />
-        {props.loading ? (
-          <Loading />
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>티비 프로그램 둘러보기</title>
+        </Helmet>
+      </HelmetProvider>
+      <Div>
+        <Nav />
+        <BannerContainer />
+        <Container>
+          <PageHeader />
+          {props.loading ? (
+            <Loading />
+          ) : (
+            <Div>
+              {props.location === "/tv" && props.airingToday.length > 0 && (
+                <Div>
+                  <Section center={"center"}>
+                    {props.airingToday.map((data, index) => {
+                      return (
+                        <Poster
+                          key={index}
+                          id={data.id}
+                          imgUrl={data.poster_path}
+                          title={data.name}
+                          rating={data.vote_average}
+                        ></Poster>
+                      );
+                    })}
+                  </Section>
+                </Div>
+              )}
+              {props.location === "/tv/popular-tv" && props.popular.length > 0 && (
+                <Div>
+                  <Section center={"center"}>
+                    {props.popular.map((data, index) => {
+                      return (
+                        <Poster
+                          key={index}
+                          id={data.id}
+                          imgUrl={data.poster_path}
+                          title={data.name}
+                          rating={data.vote_average}
+                        ></Poster>
+                      );
+                    })}
+                  </Section>
+                </Div>
+              )}
+              {props.location === "/tv/top-rated" && props.topRated.length > 0 && (
+                <Div>
+                  <Section center={"center"}>
+                    {props.topRated.map((data, index) => {
+                      return (
+                        <Poster
+                          key={index}
+                          id={data.id}
+                          imgUrl={data.poster_path}
+                          title={data.name}
+                          rating={data.vote_average}
+                        ></Poster>
+                      );
+                    })}
+                  </Section>
+                </Div>
+              )}
+            </Div>
+          )}
+        </Container>
+        {props.datatFinish ? (
+          <NotFindData />
         ) : (
-          <Div>
-            {props.location === "/tv" && props.airingToday.length > 0 && (
-              <Div>
-                <Section center={"center"}>
-                  {props.airingToday.map((data, index) => {
-                    return (
-                      <Poster
-                        key={index}
-                        id={data.id}
-                        imgUrl={data.poster_path}
-                        title={data.name}
-                        rating={data.vote_average}
-                      ></Poster>
-                    );
-                  })}
-                </Section>
-              </Div>
-            )}
-            {props.location === "/tv/popular-tv" && props.popular.length > 0 && (
-              <Div>
-                <Section center={"center"}>
-                  {props.popular.map((data, index) => {
-                    return (
-                      <Poster
-                        key={index}
-                        id={data.id}
-                        imgUrl={data.poster_path}
-                        title={data.name}
-                        rating={data.vote_average}
-                      ></Poster>
-                    );
-                  })}
-                </Section>
-              </Div>
-            )}
-            {props.location === "/tv/top-rated" && props.topRated.length > 0 && (
-              <Div>
-                <Section center={"center"}>
-                  {props.topRated.map((data, index) => {
-                    return (
-                      <Poster
-                        key={index}
-                        id={data.id}
-                        imgUrl={data.poster_path}
-                        title={data.name}
-                        rating={data.vote_average}
-                      ></Poster>
-                    );
-                  })}
-                </Section>
-              </Div>
-            )}
-          </Div>
+          <div ref={props.intersectRef}>{props.isLoader && <Loader />}</div>
         )}
-      </Container>
-      {props.datatFinish ? (
-        <NotFindData />
-      ) : (
-        <div ref={props.intersectRef}>{props.isLoader && <Loader />}</div>
-      )}
-    </Div>
+      </Div>
+    </>
   );
 };
 
