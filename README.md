@@ -37,3 +37,4 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 - 오픈API 를 활용하여 axios를 사용해 데이터를 가져오는 방법
 - Material-UI 를 활용한 UI Framework 활용하는 방법
 - intersection observer 를 활용하여 무한스크롤 적용하는 방법 
+- YouTube Api 를 활용하여 예고편을 띄우는 방법
