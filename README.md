@@ -12,7 +12,8 @@
 </div>
 
 ## 프로젝트 소개
-TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 API를 활용하여 영화를 검색하고 찾아보며 영화 예고편을 제공해줍니다.
+TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 API를 활용하여 영화를 검색하고 찾아보며 영화 예고편을 제공해줍니다
+- URL
 https://jun111haha.github.io/
 
 ## 웹사이트 화면
