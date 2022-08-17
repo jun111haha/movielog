@@ -36,4 +36,4 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 - Styeld components를 사용해서 컴포넌트를 CSS-in-JS 방식으로 스타일링 하는 방법
 - 오픈API 를 활용하여 axios를 사용해 데이터를 가져오는 방법
 - Material-UI 를 활용한 UI Framework 활용하는 방법
-
+- intersection observer 를 활용하여 무한스크롤 적용하는 방법 
