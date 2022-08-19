@@ -18,18 +18,20 @@ https://jun111haha.github.io/
 
 ## 웹사이트 화면
 ### Home
-<img width="1680" alt="스크린샷 2022-08-19 오후 11 40 47" src="https://user-images.githubusercontent.com/59434443/185643782-0927db82-6785-4844-9821-a2ee44679c62.png">
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 40 47" src="https://user-images.githubusercontent.com/59434443/185644128-ada96c6e-18ea-46d7-9587-75e0c7ad10d2.png">
 
 ### 둘러보기
-<img width="1680" alt="스크린샷 2022-08-17 오전 12 29 41" src="https://user-images.githubusercontent.com/59434443/184919545-83176b38-23da-4c5e-a1f4-0fc4a1e339b9.png">
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 37 44" src="https://user-images.githubusercontent.com/59434443/185644251-e162bedd-f087-416c-9583-828dd2bbefe9.png">
 
-<img width="1680" alt="스크린샷 2022-08-17 오전 12 29 59" src="https://user-images.githubusercontent.com/59434443/184919641-c58bd333-37b8-4250-8c97-b519fa4f9a7a.png">
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 38 03" src="https://user-images.githubusercontent.com/59434443/185644332-0114d039-856c-45a8-9a0d-8c387794bdef.png">
+
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 38 15" src="https://user-images.githubusercontent.com/59434443/185644417-0acc7a96-0eba-4680-abe9-041b65937316.png">
 
 ### 디테일
-<img width="1680" alt="스크린샷 2022-08-17 오전 12 30 10" src="https://user-images.githubusercontent.com/59434443/184919781-4bf28f89-d60d-472a-ba2e-2074c3251cec.png">
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 38 26" src="https://user-images.githubusercontent.com/59434443/185644529-eef696ac-d3a1-40df-b9d7-23d71a103c6a.png">
 
 ### 검색
-<img width="1680" alt="스크린샷 2022-08-17 오전 12 30 21" src="https://user-images.githubusercontent.com/59434443/184919906-cc7917cc-ecbb-4c72-a69f-4cfd8fd9449e.png">
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 38 40" src="https://user-images.githubusercontent.com/59434443/185644624-e08b5afe-c18d-45b4-883b-c5d59a385a1a.png">
 
 
 ## 프로젝트를 통해 배운점
