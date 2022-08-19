@@ -18,7 +18,7 @@ https://jun111haha.github.io/
 
 ## 웹사이트 화면
 ### Home
-<img width="1680" alt="스크린샷 2022-08-19 오후 11 40 47" src="https://user-images.githubusercontent.com/59434443/185644128-ada96c6e-18ea-46d7-9587-75e0c7ad10d2.png">
+<img width="1680" alt="스크린샷 2022-08-19 오후 11 45 47" src="https://user-images.githubusercontent.com/59434443/185644828-6d3a81e0-0970-47ac-837f-577fe2438e03.png">
 
 ### 둘러보기
 <img width="1680" alt="스크린샷 2022-08-19 오후 11 37 44" src="https://user-images.githubusercontent.com/59434443/185644251-e162bedd-f087-416c-9583-828dd2bbefe9.png">
