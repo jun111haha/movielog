@@ -50,17 +50,14 @@ const TvContainer = observer((props) => {
   };
 
   useEffect(() => {
-    // let isComponentMounted = true;
-    // if (isComponentMounted) {
-    //   throttler.throttle(loadData, 500);
-    //   setIsLoader(true);
-    // }
-    // return () => {
-    //   isComponentMounted = false;
-    // };
-
-    loadData();
+    let timer = setTimeout(() => {
+      loadData();
+    }, 600);
     setIsLoader(true);
+
+    return () => {
+      clearTimeout(timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
 

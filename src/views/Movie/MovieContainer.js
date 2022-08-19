@@ -26,21 +26,21 @@ const MovieContainer = observer((props) => {
 
   const loadData = () => {
     if (pathname === "/movie" && (isIntersect || datatFinish === false)) {
-      popularPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
+      popularPage >= 6 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMoviePopularList(popularPage);
       setPopularPage((prev) => prev + 1);
     } else if (
       pathname === "/movie/movie-upcoming" &&
       (isIntersect || datatFinish === false)
     ) {
-      upcomingPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
+      upcomingPage >= 6 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMovieUpcomingList(upcomingPage);
       setUpcomingPage((prev) => prev + 1);
     } else if (
       pathname === "/movie/movie-nowplaying" &&
       (isIntersect || datatFinish === false)
     ) {
-      nowPlayingPage >= 5 ? setDatatFinish(true) : setDatatFinish(false);
+      nowPlayingPage >= 6 ? setDatatFinish(true) : setDatatFinish(false);
       movieListStore.getMovieNowPlayingList(nowPlayingPage);
       setNowPlayingPage((prev) => prev + 1);
     }
@@ -50,18 +50,14 @@ const MovieContainer = observer((props) => {
   };
 
   useEffect(() => {
-    // let isComponentMounted = true;
-    // if (isComponentMounted) {
-    //   throttler.throttle(loadData, 500);
-    //   setIsLoader(true);
-    // }
-
-    // return () => {
-    //   isComponentMounted = false;
-    // };
-
-    loadData();
+    let timer = setTimeout(() => {
+      loadData();
+    }, 600);
     setIsLoader(true);
+
+    return () => {
+      clearTimeout(timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
 
