@@ -9,6 +9,9 @@ import NotFound from "./component/NotFound";
 // const DetailsComp = lazy(() => import("./views/Detail/DetailContainer"));
 
 const MovieComp = lazy(() => import("./views/Movie"));
+const MoviePopularComp = lazy(() =>
+  import("./views/Movie/container/MoviePopularContainer")
+);
 const TvComp = lazy(() => import("./views/TV"));
 const IntroComp = lazy(() => import("./views/Intro"));
 const DetailsComp = lazy(() => import("./views/Detail"));
@@ -22,7 +25,7 @@ function App() {
         <Suspense fallback={<Loading></Loading>}>
           <Switch>
             <Route exact path="/" component={IntroComp} />
-            <Route exact path="/movie" component={MovieComp} />
+            <Route exact path="/movie" component={MoviePopularComp} />
             <Route exact path="/movie/movie-upcoming" component={MovieComp} />
             <Route exact path="/movie/movie-nowplaying" component={MovieComp} />
             <Route exact path="/tv" component={TvComp} />
