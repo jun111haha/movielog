@@ -4,6 +4,7 @@ import Poster from "../../../component/Poster";
 import useIntersect from "../../../utils/userIntersect";
 import useStores from "../../../store/useStores";
 import MoviePresenterComponent from "../presenter/MoviePresenterComponent";
+import { debounce } from "lodash";
 
 const MoviePopularContainer = observer(() => {
   const intersectRef = useRef(null);
@@ -17,36 +18,50 @@ const MoviePopularContainer = observer(() => {
     threshold: 1,
   });
 
-  //   const loadData = () => {
-  //     if (isIntersect || datatFinish === false) {
-  //       popularPage >= 6 ? setDatatFinish(true) : setDatatFinish(false);
-  //       movieListStore.getMoviePopularList(popularPage);
-  //       setPopularPage((prev) => prev + 1);
-  //     }
+  // const loadData = () => {
+  //   if (isIntersect && datatFinish === false) {
+  //     movieListStore.moviePopularPage > 6
+  //       ? setDatatFinish(true)
+  //       : movieListStore.getMoviePopularList(movieListStore.moviePopularPage++);
+  //   }
 
-  //     setLoading(false);
-  //     setIsLoader(false);
-  //   };
+  //   setLoading(false);
+  //   setIsLoader(false);
+  // };
+
+  const getLoadData = debounce(() => {
+    if (isIntersect && datatFinish === false) {
+      movieListStore.moviePopularPage > 6
+        ? setDatatFinish(true)
+        : movieListStore.getMoviePopularList(movieListStore.moviePopularPage++);
+    }
+
+    setLoading(false);
+    setIsLoader(false);
+  }, 500);
 
   useEffect(() => {
-    let timer = setTimeout(() => {
-      if (isIntersect && datatFinish === false) {
-        movieListStore.moviePopularPage > 6
-          ? setDatatFinish(true)
-          : movieListStore.getMoviePopularList(
-              movieListStore.moviePopularPage++
-            );
-      }
+    // let timer = setTimeout(() => {
+    //   if (isIntersect && datatFinish === false) {
+    //     movieListStore.moviePopularPage > 6
+    //       ? setDatatFinish(true)
+    //       : movieListStore.getMoviePopularList(
+    //           movieListStore.moviePopularPage++
+    //         );
+    //   }
 
-      setLoading(false);
-      setIsLoader(false);
-    }, 600);
+    //   setLoading(false);
+    //   setIsLoader(false);
+    // }, 600);
 
+    // setIsLoader(true);
+
+    // return () => {
+    //   clearTimeout(timer);
+    // };
+
+    getLoadData();
     setIsLoader(true);
-
-    return () => {
-      clearTimeout(timer);
-    };
   }, [isIntersect, datatFinish]);
 
   //   useEffect(() => {

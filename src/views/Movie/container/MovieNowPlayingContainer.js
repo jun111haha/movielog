@@ -1,5 +1,66 @@
 import React, { useState, useEffect, useRef } from "react";
 import { observer } from "mobx-react";
-import useIntersect from "../../utils/userIntersect";
-import MoviePresenter from "./MoviePresenter";
-import useStores from "../../store/useStores";
+import Poster from "../../../component/Poster";
+import useIntersect from "../../../utils/userIntersect";
+import useStores from "../../../store/useStores";
+import MoviePresenterComponent from "../presenter/MoviePresenterComponent";
+import { debounce } from "lodash";
+
+const MovieNowPlayingContainer = observer(() => {
+  const intersectRef = useRef(null);
+  const { movieListStore } = useStores();
+  const [loading, setLoading] = useState(true);
+  const [isLoader, setIsLoader] = useState(true);
+  const [datatFinish, setDatatFinish] = useState(false);
+  const { isIntersect } = useIntersect(intersectRef, {
+    rootMargin: "200px",
+    threshold: 1,
+  });
+
+  const getLoadData = debounce(() => {
+    if (isIntersect && datatFinish === false) {
+      movieListStore.movieNowPlayingPage > 6
+        ? setDatatFinish(true)
+        : movieListStore.getMovieNowPlayingList(
+            movieListStore.movieNowPlayingPage++
+          );
+    }
+
+    setLoading(false);
+    setIsLoader(false);
+  }, 500);
+
+  useEffect(() => {
+    getLoadData();
+    setIsLoader(true);
+  }, [isIntersect, datatFinish]);
+
+  return (
+    <>
+      <MoviePresenterComponent
+        movie={
+          <>
+            {movieListStore.movieNowPlayingList.map((data, index) => {
+              return (
+                <Poster
+                  id={data.id}
+                  key={index}
+                  imgUrl={data.poster_path}
+                  title={data.title ? data.title : data.original_title}
+                  rating={data.vote_average}
+                  isMovie={true}
+                />
+              );
+            })}
+          </>
+        }
+        loading={loading}
+        intersectRef={intersectRef}
+        isLoader={isLoader}
+        datatFinish={datatFinish}
+      />
+    </>
+  );
+});
+
+export default MovieNowPlayingContainer;
