@@ -8,9 +8,16 @@ import NotFound from "./component/NotFound";
 // const IntroComp = lazy(() => import("./views/Intro/IntroContainer"));
 // const DetailsComp = lazy(() => import("./views/Detail/DetailContainer"));
 
-const MovieComp = lazy(() => import("./views/Movie"));
 const MoviePopularComp = lazy(() =>
   import("./views/Movie/container/MoviePopularContainer")
+);
+
+const MovieUpcomingComp = lazy(() =>
+  import("./views/Movie/container/MovieUpcomingContainer")
+);
+
+const MovieNowplayingComp = lazy(() =>
+  import("./views/Movie/container/MovieNowPlayingContainer")
 );
 const TvComp = lazy(() => import("./views/TV"));
 const IntroComp = lazy(() => import("./views/Intro"));
@@ -26,8 +33,16 @@ function App() {
           <Switch>
             <Route exact path="/" component={IntroComp} />
             <Route exact path="/movie" component={MoviePopularComp} />
-            <Route exact path="/movie/movie-upcoming" component={MovieComp} />
-            <Route exact path="/movie/movie-nowplaying" component={MovieComp} />
+            <Route
+              exact
+              path="/movie/movie-upcoming"
+              component={MovieUpcomingComp}
+            />
+            <Route
+              exact
+              path="/movie/movie-nowplaying"
+              component={MovieNowplayingComp}
+            />
             <Route exact path="/tv" component={TvComp} />
             <Route exact path="/tv/popular-tv" component={TvComp} />
             <Route exact path="/tv/top-rated" component={TvComp} />
