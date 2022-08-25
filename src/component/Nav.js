@@ -33,7 +33,7 @@ const Header = styled.header`
 `;
 
 const LoginDiv = styled.div`
-  margin-right: 30px;
+  padding: 0px 30px;
   margin-left: auto;
 `;
 
@@ -51,12 +51,10 @@ const Nav = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = "unset";
   };
 
   const wrapperRef = useRef();
@@ -71,11 +69,8 @@ const Nav = (props) => {
 
   const handleClickOutside = (event) => {
     if (wrapperRef && !wrapperRef.current.contains(event.target)) {
-      setIsModalOpen(true);
-      document.body.style.overflow = "hidden";
     } else {
       setIsModalOpen(false);
-      document.body.style.overflow = "unset";
     }
   };
 
@@ -109,11 +104,13 @@ const Nav = (props) => {
           <LoginButton>내로그</LoginButton>
           <LoginButton onClick={openModal}>로그인</LoginButton>
 
-          <SignIn
-            isOpen={isModalOpen}
-            close={closeModal}
-            open={openModal}
-          ></SignIn>
+          {isModalOpen ? (
+            <SignIn
+              isOpen={isModalOpen}
+              close={closeModal}
+              open={openModal}
+            ></SignIn>
+          ) : null}
         </LoginDiv>
       </Header>
     </div>
