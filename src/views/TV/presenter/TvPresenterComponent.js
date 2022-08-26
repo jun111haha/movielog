@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import BannerContainer from "../Banner/BannerContainer";
-import Poster from "../../component/Poster";
-import Nav from "../../component/Nav";
-import Loading from "../../component/Loading";
-import { Section } from "../../component/Section";
-import PageHeader from "../../component/PageHeader";
-import { Loader } from "../../component/Loader";
-import { NotFindData } from "../../component/Loader";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import BannerContainer from "../../Banner/BannerContainer";
+import Nav from "../../../component/Nav";
+import Loading from "../../../component/Loading";
+import { Section } from "../../../component/Section";
+import PageHeader from "../../../component/PageHeader";
+import { Loader } from "../../../component/Loader";
+import { NotFindData } from "../../../component/Loader";
 
 // const Container = styled.div`
 //   padding: 50px;
@@ -33,7 +32,8 @@ const Container = styled.div`
 // `;
 const Div = styled.div``;
 
-const TvPresenter = (props) => {
+const TvPresenterComponent = (props) => {
+  const { tv } = props;
   return (
     <>
       <HelmetProvider>
@@ -49,59 +49,7 @@ const TvPresenter = (props) => {
           {props.loading ? (
             <Loading />
           ) : (
-            <Div>
-              {props.location === "/tv" && props.airingToday.length > 0 && (
-                <Div>
-                  <Section center={"center"}>
-                    {props.airingToday.map((data, index) => {
-                      return (
-                        <Poster
-                          key={index}
-                          id={data.id}
-                          imgUrl={data.poster_path}
-                          title={data.name}
-                          rating={data.vote_average}
-                        ></Poster>
-                      );
-                    })}
-                  </Section>
-                </Div>
-              )}
-              {props.location === "/tv/popular-tv" && props.popular.length > 0 && (
-                <Div>
-                  <Section center={"center"}>
-                    {props.popular.map((data, index) => {
-                      return (
-                        <Poster
-                          key={index}
-                          id={data.id}
-                          imgUrl={data.poster_path}
-                          title={data.name}
-                          rating={data.vote_average}
-                        ></Poster>
-                      );
-                    })}
-                  </Section>
-                </Div>
-              )}
-              {props.location === "/tv/top-rated" && props.topRated.length > 0 && (
-                <Div>
-                  <Section center={"center"}>
-                    {props.topRated.map((data, index) => {
-                      return (
-                        <Poster
-                          key={index}
-                          id={data.id}
-                          imgUrl={data.poster_path}
-                          title={data.name}
-                          rating={data.vote_average}
-                        ></Poster>
-                      );
-                    })}
-                  </Section>
-                </Div>
-              )}
-            </Div>
+            <Section center={"center"}>{tv}</Section>
           )}
         </Container>
         {props.datatFinish ? (
@@ -114,4 +62,4 @@ const TvPresenter = (props) => {
   );
 };
 
-export default TvPresenter;
+export default TvPresenterComponent;

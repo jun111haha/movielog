@@ -3,10 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./config/global";
 import Loading from "./component/Loading";
 import NotFound from "./component/NotFound";
-// const MovieComp = lazy(() => import("./views/Movie/MovieContainer"));
-// const TvComp = lazy(() => import("./views/TV/TvContainer"));
-// const IntroComp = lazy(() => import("./views/Intro/IntroContainer"));
-// const DetailsComp = lazy(() => import("./views/Detail/DetailContainer"));
 
 const MoviePopularComp = lazy(() =>
   import("./views/Movie/container/MoviePopularContainer")
@@ -19,7 +15,18 @@ const MovieUpcomingComp = lazy(() =>
 const MovieNowplayingComp = lazy(() =>
   import("./views/Movie/container/MovieNowPlayingContainer")
 );
-const TvComp = lazy(() => import("./views/TV"));
+
+const TvAiringTodayComp = lazy(() =>
+  import("./views/TV/container/TvAiringTodayContainer")
+);
+
+const TvPopularComp = lazy(() =>
+  import("./views/TV/container/TvPopularContainer")
+);
+
+const TvTopRatedComp = lazy(() =>
+  import("./views/TV/container/TvTopRatedContainer")
+);
 const IntroComp = lazy(() => import("./views/Intro"));
 const DetailsComp = lazy(() => import("./views/Detail"));
 const SearchComap = lazy(() => import("./views/Search"));
@@ -43,9 +50,9 @@ function App() {
               path="/movie/movie-nowplaying"
               component={MovieNowplayingComp}
             />
-            <Route exact path="/tv" component={TvComp} />
-            <Route exact path="/tv/popular-tv" component={TvComp} />
-            <Route exact path="/tv/top-rated" component={TvComp} />
+            <Route exact path="/tv" component={TvAiringTodayComp} />
+            <Route exact path="/tv/popular-tv" component={TvPopularComp} />
+            <Route exact path="/tv/top-rated" component={TvTopRatedComp} />
             <Route exact path="/tv/:id" component={DetailsComp} />
             <Route exact path="/movie/:id" component={DetailsComp} />
             <Route exact path="/search" component={SearchComap} />
