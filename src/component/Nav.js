@@ -1,10 +1,8 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { Fragment } from "react";
-import { FaSearch } from "react-icons/fa";
-import SearchContainer from "../views/Search/SearchContainer";
+import SignIn from "./SignIn";
 
 const SLink = styled(Link)`
   padding: 15px 20px;
@@ -28,10 +26,21 @@ const Header = styled.header`
   width: 100%;
   height: 55px;
   align-items: center;
-  background-color: black;
+  background: rgba(0, 0, 0, 0.9);
   z-index: 10;
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
   text-shadow: black 1px 1px 10px;
+`;
+
+const LoginDiv = styled.div`
+  padding: 0px 30px;
+  margin-left: auto;
+`;
+
+const LoginButton = styled.button`
+  font-size: 15px;
+  padding: 15px 20px;
+  color: #808080;
 `;
 
 const Nav = (props) => {
@@ -39,8 +48,34 @@ const Nav = (props) => {
     location: { pathname },
   } = props;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const wrapperRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
+    } else {
+      setIsModalOpen(false);
+    }
+  };
+
   return (
-    <Fragment>
+    <div ref={wrapperRef}>
       <Header>
         <List>
           <Item>
@@ -48,32 +83,37 @@ const Nav = (props) => {
               소개
             </SLink>
           </Item>
-        </List>
-
-        <List>
           <Item>
             <SLink selected={pathname.includes("/tv")} to="/tv">
               TV프로그램
             </SLink>
           </Item>
-        </List>
 
-        <List>
           <Item>
             <SLink selected={pathname.includes("/movie")} to="/movie">
               영화
             </SLink>
           </Item>
-        </List>
-        <List>
           <Item>
             <SLink selected={pathname.includes("/search")} to="/search">
               검색
             </SLink>
           </Item>
         </List>
+        <LoginDiv>
+          <LoginButton>내로그</LoginButton>
+          <LoginButton onClick={openModal}>로그인</LoginButton>
+
+          {isModalOpen ? (
+            <SignIn
+              isOpen={isModalOpen}
+              close={closeModal}
+              open={openModal}
+            ></SignIn>
+          ) : null}
+        </LoginDiv>
       </Header>
-    </Fragment>
+    </div>
   );
 };
 

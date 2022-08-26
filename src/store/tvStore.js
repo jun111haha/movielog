@@ -3,8 +3,11 @@ import { tvApi } from "../Api";
 
 export default class tvStore {
   tvAiringTodayList = [];
+  tvAiringTodayPage = 1;
   tvPopularList = [];
+  tvPopularPage = 1;
   tvTopRatingList = [];
+  tvTopRatingPage = 1;
   tvDetailList = [];
   tvVideoList = [];
   tvSearchList = [];
@@ -19,6 +22,9 @@ export default class tvStore {
       tvVideoList: observable,
       tvSearchList: observable,
       tvEmptyCheck: observable,
+      tvAiringTodayPage: observable,
+      tvPopularPage: observable,
+      tvTopRatingPage: observable,
 
       tvDetailReset: action,
       getAiringTodayList: action,

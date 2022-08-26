@@ -3,8 +3,11 @@ import { moviesApi } from "../Api";
 
 export default class MovieListStore {
   moviePopularList = [];
+  moviePopularPage = 1;
   movieUpcomingList = [];
+  movieUpcomingPage = 1;
   movieNowPlayingList = [];
+  movieNowPlayingPage = 1;
   movieDetailList = [];
   movieVedioList = [];
   movieSearchList = [];
@@ -13,8 +16,11 @@ export default class MovieListStore {
   constructor() {
     makeObservable(this, {
       moviePopularList: observable,
+      moviePopularPage: observable,
       movieUpcomingList: observable,
+      movieUpcomingPage: observable,
       movieNowPlayingList: observable,
+      movieNowPlayingPage: observable,
       movieDetailList: observable,
       movieVedioList: observable,
       movieSearchList: observable,

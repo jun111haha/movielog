@@ -81,4 +81,4 @@ const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
   );
 };
 
-export default Poster;
+export default React.memo(Poster);
