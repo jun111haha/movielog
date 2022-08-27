@@ -27,8 +27,15 @@ const TvPopularComp = lazy(() =>
 const TvTopRatedComp = lazy(() =>
   import("./views/TV/container/TvTopRatedContainer")
 );
+
+const MovieDetailComp = lazy(() =>
+  import("./views/Detail/container/MovieDetailContainer")
+);
+
+const TvDetailComp = lazy(() =>
+  import("./views/Detail/container/TvDetailContainer")
+);
 const IntroComp = lazy(() => import("./views/Intro"));
-const DetailsComp = lazy(() => import("./views/Detail"));
 const SearchComap = lazy(() => import("./views/Search"));
 
 function App() {
@@ -53,8 +60,8 @@ function App() {
             <Route exact path="/tv" component={TvAiringTodayComp} />
             <Route exact path="/tv/popular-tv" component={TvPopularComp} />
             <Route exact path="/tv/top-rated" component={TvTopRatedComp} />
-            <Route exact path="/tv/:id" component={DetailsComp} />
-            <Route exact path="/movie/:id" component={DetailsComp} />
+            <Route exact path="/tv/:id" component={TvDetailComp} />
+            <Route exact path="/movie/:id" component={MovieDetailComp} />
             <Route exact path="/search" component={SearchComap} />
             <Route exact path="*" component={NotFound} />
           </Switch>
