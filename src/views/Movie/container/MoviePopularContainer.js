@@ -18,17 +18,6 @@ const MoviePopularContainer = observer(() => {
     threshold: 1,
   });
 
-  // const loadData = () => {
-  //   if (isIntersect && datatFinish === false) {
-  //     movieListStore.moviePopularPage > 6
-  //       ? setDatatFinish(true)
-  //       : movieListStore.getMoviePopularList(movieListStore.moviePopularPage++);
-  //   }
-
-  //   setLoading(false);
-  //   setIsLoader(false);
-  // };
-
   const getLoadData = debounce(() => {
     if (isIntersect && datatFinish === false) {
       movieListStore.moviePopularPage > 6
@@ -41,33 +30,10 @@ const MoviePopularContainer = observer(() => {
   }, 500);
 
   useEffect(() => {
-    // let timer = setTimeout(() => {
-    //   if (isIntersect && datatFinish === false) {
-    //     movieListStore.moviePopularPage > 6
-    //       ? setDatatFinish(true)
-    //       : movieListStore.getMoviePopularList(
-    //           movieListStore.moviePopularPage++
-    //         );
-    //   }
-
-    //   setLoading(false);
-    //   setIsLoader(false);
-    // }, 600);
-
-    // setIsLoader(true);
-
-    // return () => {
-    //   clearTimeout(timer);
-    // };
-
     getLoadData();
     setIsLoader(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
-
-  //   useEffect(() => {
-  //     setIsLoader(false);
-  //     setDatatFinish(false);
-  //   }, []);
 
   return (
     <>

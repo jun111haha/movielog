@@ -3,11 +3,13 @@ import DetailPresenterComponent from "../presenter/DetailPresenterComponent";
 import useStores from "../../../store/useStores";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react";
-import { BackgroundImage } from "../presenter/DetailPresenterStyled";
-import { ImgContent } from "../presenter/DetailPresenterStyled";
-import { Title } from "../presenter/DetailPresenterStyled";
-import { Genres } from "../presenter/DetailPresenterStyled";
-import { OverView } from "../presenter/DetailPresenterStyled";
+import {
+  ImgContent,
+  BackgroundImage,
+  Title,
+  Genres,
+  OverView,
+} from "../styled/DetailPresenterStyled";
 
 const MovieDetailContainer = observer(() => {
   const { id } = useParams();
@@ -27,14 +29,22 @@ const MovieDetailContainer = observer(() => {
   return (
     <DetailPresenterComponent
       backgroundImage={
-        <BackgroundImage
-          bgImage={`https://image.tmdb.org/t/p/original/${movieListStore.movieDetailList.backdrop_path}`}
-        />
+        <>
+          {movieListStore.movieDetailList.backdrop_path && (
+            <BackgroundImage
+              bgImage={`https://image.tmdb.org/t/p/original/${movieListStore.movieDetailList.backdrop_path}`}
+            />
+          )}
+        </>
       }
       imgContent={
-        <ImgContent
-          bgImage={`https://image.tmdb.org/t/p/original/${movieListStore.movieDetailList.poster_path}`}
-        />
+        <>
+          {movieListStore.movieDetailList.poster_path && (
+            <ImgContent
+              bgImage={`https://image.tmdb.org/t/p/original/${movieListStore.movieDetailList.poster_path}`}
+            />
+          )}
+        </>
       }
       title={
         <>

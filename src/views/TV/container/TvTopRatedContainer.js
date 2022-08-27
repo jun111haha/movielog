@@ -31,6 +31,7 @@ const TvTopRatedContainer = observer(() => {
   useEffect(() => {
     getLoadData();
     setIsLoader(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersect, datatFinish]);
   return (
     <>
