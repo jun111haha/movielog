@@ -57,63 +57,61 @@ const Nav = (props) => {
     setIsModalOpen(false);
   };
 
-  const wrapperRef = useRef();
+  // const wrapperRef = useRef();
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
-  const handleClickOutside = (event) => {
-    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
-    } else {
-      setIsModalOpen(false);
-    }
-  };
+  // const handleClickOutside = (event) => {
+  //   if (wrapperRef && !wrapperRef.current.contains(event.target)) {
+  //   } else {
+  //     setIsModalOpen(false);
+  //   }
+  // };
 
   return (
-    <div ref={wrapperRef}>
-      <Header>
-        <List>
-          <Item>
-            <SLink selected={pathname === "/"} to="/">
-              소개
-            </SLink>
-          </Item>
-          <Item>
-            <SLink selected={pathname.includes("/tv")} to="/tv">
-              TV프로그램
-            </SLink>
-          </Item>
+    <Header>
+      <List>
+        <Item>
+          <SLink selected={pathname === "/"} to="/">
+            소개
+          </SLink>
+        </Item>
+        <Item>
+          <SLink selected={pathname.includes("/tv")} to="/tv">
+            TV프로그램
+          </SLink>
+        </Item>
 
-          <Item>
-            <SLink selected={pathname.includes("/movie")} to="/movie">
-              영화
-            </SLink>
-          </Item>
-          <Item>
-            <SLink selected={pathname.includes("/search")} to="/search">
-              검색
-            </SLink>
-          </Item>
-        </List>
-        <LoginDiv>
-          <LoginButton>내로그</LoginButton>
-          <LoginButton onClick={openModal}>로그인</LoginButton>
+        <Item>
+          <SLink selected={pathname.includes("/movie")} to="/movie">
+            영화
+          </SLink>
+        </Item>
+        <Item>
+          <SLink selected={pathname.includes("/search")} to="/search">
+            검색
+          </SLink>
+        </Item>
+      </List>
+      <LoginDiv>
+        <LoginButton>내로그</LoginButton>
+        <LoginButton onClick={openModal}>로그인</LoginButton>
 
-          {isModalOpen ? (
-            <SignIn
-              isOpen={isModalOpen}
-              close={closeModal}
-              open={openModal}
-            ></SignIn>
-          ) : null}
-        </LoginDiv>
-      </Header>
-    </div>
+        {isModalOpen ? (
+          <SignIn
+            isOpen={isModalOpen}
+            close={closeModal}
+            open={openModal}
+          ></SignIn>
+        ) : null}
+      </LoginDiv>
+    </Header>
   );
 };
 
