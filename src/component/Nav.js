@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "./SignIn";
+import { observer } from "mobx-react";
+import useStores from "../store/useStores";
 
 const SLink = styled(Link)`
   padding: 15px 20px;
@@ -43,12 +45,19 @@ const LoginButton = styled.button`
   color: #808080;
 `;
 
-const Nav = (props) => {
+const LoginState = styled.div`
+  font-size: 15px;
+  padding: 15px 20px;
+  color: #808080;
+`;
+
+const Nav = observer((props) => {
   const {
     location: { pathname },
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { userListStore } = useStores();
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -100,8 +109,17 @@ const Nav = (props) => {
         </Item>
       </List>
       <LoginDiv>
-        <LoginButton>내로그</LoginButton>
-        <LoginButton onClick={openModal}>로그인</LoginButton>
+        {userListStore.userList?.nickname ? (
+          <LoginButton>내로그</LoginButton>
+        ) : null}
+
+        {userListStore.userList?.nickname ? (
+          <LoginButton>
+            {userListStore.userList.nickname} 님 안녕하세요!
+          </LoginButton>
+        ) : (
+          <LoginButton onClick={openModal}>로그인</LoginButton>
+        )}
 
         {isModalOpen ? (
           <SignIn
@@ -113,6 +131,6 @@ const Nav = (props) => {
       </LoginDiv>
     </Header>
   );
-};
+});
 
 export default withRouter(Nav);
