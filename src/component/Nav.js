@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useRef, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "./SignIn";
 import { observer } from "mobx-react";
@@ -45,17 +45,18 @@ const LoginButton = styled.button`
   color: #808080;
 `;
 
-const LoginState = styled.div`
+const LoginState = styled.span`
   font-size: 15px;
   padding: 15px 20px;
   color: #808080;
 `;
 
-const Nav = observer((props) => {
+const Nav = (props) => {
   const {
     location: { pathname },
   } = props;
 
+  const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { userListStore } = useStores();
   const openModal = () => {
@@ -66,71 +67,79 @@ const Nav = observer((props) => {
     setIsModalOpen(false);
   };
 
-  // const wrapperRef = useRef();
+  const logOut = () => {
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("token");
+    history.replace("/");
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", handleClickOutside);
+  const node = useRef();
+  useEffect(() => {
+    const clickOutside = (e) => {
+      // 모달이 열려 있고 모달의 바깥쪽을 눌렀을 때 창 닫기
+      if (isModalOpen && node.current && !node.current.contains(e.target)) {
+        setIsModalOpen(false);
+      }
+    };
 
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
+    console.log(isModalOpen);
 
-  // const handleClickOutside = (event) => {
-  //   if (wrapperRef && !wrapperRef.current.contains(event.target)) {
-  //   } else {
-  //     setIsModalOpen(false);
-  //   }
-  // };
+    document.addEventListener("mousedown", clickOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, [isModalOpen]);
 
   return (
-    <Header>
-      <List>
-        <Item>
-          <SLink selected={pathname === "/"} to="/">
-            소개
-          </SLink>
-        </Item>
-        <Item>
-          <SLink selected={pathname.includes("/tv")} to="/tv">
-            TV프로그램
-          </SLink>
-        </Item>
+    <div>
+      <Header>
+        <List>
+          <Item>
+            <SLink selected={pathname === "/"} to="/">
+              소개
+            </SLink>
+          </Item>
+          <Item>
+            <SLink selected={pathname.includes("/tv")} to="/tv">
+              TV프로그램
+            </SLink>
+          </Item>
 
-        <Item>
-          <SLink selected={pathname.includes("/movie")} to="/movie">
-            영화
-          </SLink>
-        </Item>
-        <Item>
-          <SLink selected={pathname.includes("/search")} to="/search">
-            검색
-          </SLink>
-        </Item>
-      </List>
-      <LoginDiv>
-        {userListStore.userList?.nickname ? (
-          <LoginButton>내로그</LoginButton>
-        ) : null}
+          <Item>
+            <SLink selected={pathname.includes("/movie")} to="/movie">
+              영화
+            </SLink>
+          </Item>
+          <Item>
+            <SLink selected={pathname.includes("/search")} to="/search">
+              검색
+            </SLink>
+          </Item>
+        </List>
+        <LoginDiv>
+          {localStorage.getItem("nickname") ? (
+            <LoginButton>내로그</LoginButton>
+          ) : null}
 
-        {userListStore.userList?.nickname ? (
-          <LoginButton>
-            {userListStore.userList.nickname} 님 안녕하세요!
-          </LoginButton>
-        ) : (
-          <LoginButton onClick={openModal}>로그인</LoginButton>
-        )}
+          {localStorage.getItem("nickname") ? (
+            <LoginButton onClick={logOut}>로그아웃</LoginButton>
+          ) : null}
 
-        {isModalOpen ? (
-          <SignIn
-            isOpen={isModalOpen}
-            close={closeModal}
-            open={openModal}
-          ></SignIn>
-        ) : null}
-      </LoginDiv>
-    </Header>
+          {localStorage.getItem("nickname") ? (
+            <LoginState>
+              {localStorage.getItem("nickname")} 님 안녕하세요!
+            </LoginState>
+          ) : (
+            <LoginButton onClick={openModal}>로그인</LoginButton>
+          )}
+
+          {isModalOpen ? <SignIn isOpen={isModalOpen}></SignIn> : null}
+        </LoginDiv>
+      </Header>
+    </div>
   );
-});
+};
 
 export default withRouter(Nav);

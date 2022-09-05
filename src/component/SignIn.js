@@ -66,17 +66,17 @@ const KakaoBubble = styled(ImBubble)`
   margin-bottom: 0.25rem;
 `;
 
-const SignIn = ({ isOpen, close, open }) => {
+const SignIn = ({ isOpen }) => {
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
   useEffect(() => {
     document.body.style.cssText = `
-    position: fixed; 
-    top: -${window.scrollY}px;
-    overflow-y: scroll;
-    width: 100%;`;
+      position: fixed; 
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
     return () => {
       const scrollY = document.body.style.top;
       document.body.style.cssText = "";

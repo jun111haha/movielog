@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { CLIENT_ID, REDIRECT_URI } from "../config/Oatuh";
 import axios from "axios";
 import useStores from "../store/useStores";
+import { GetUserData } from "./GetUserData";
 
 const KaKaoLogin = () => {
   const history = useHistory();
@@ -59,7 +60,7 @@ const KaKaoLogin = () => {
         // setCookie("appToken", res.data.appToken, { path: "/" });
         window.localStorage.setItem("token", res.data.appToken);
         if (localStorage.getItem("token")) {
-          userListStore.getUserData(localStorage.getItem("token"));
+          GetUserData(localStorage.getItem("token"));
         }
         history.replace("/movie");
       })

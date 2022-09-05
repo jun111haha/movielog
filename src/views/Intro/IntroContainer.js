@@ -5,6 +5,8 @@ import IntroPresenter from "./IntroPresenter";
 const IntroContainer = () => {
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const introCheck = false;
 
   const fetchData = async () => {
     try {
@@ -20,11 +22,22 @@ const IntroContainer = () => {
     }
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  return <IntroPresenter movie={!loading && movie} loading={loading} />;
+  return (
+    <IntroPresenter
+      movie={!loading && movie}
+      loading={loading}
+      isModalOpen={isModalOpen}
+      openModal={openModal}
+    />
+  );
 };
 
 export default IntroContainer;

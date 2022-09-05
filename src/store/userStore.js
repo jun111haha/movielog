@@ -22,7 +22,6 @@ export default class UserListStore {
       })
       .then((res) => {
         this.userList = res.data;
-        console.log(this.userList);
       })
       .catch((err) => {
         console.log("유저정보 받아오기 실패", err);
