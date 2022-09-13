@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "./SignIn";
-import { observer } from "mobx-react";
 import useStores from "../store/useStores";
 
 const SLink = styled(Link)`
@@ -58,7 +57,6 @@ const Nav = (props) => {
 
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { userListStore } = useStores();
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -70,27 +68,25 @@ const Nav = (props) => {
   const logOut = () => {
     localStorage.removeItem("nickname");
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
     history.replace("/");
   };
 
-  const node = useRef();
+  const modalRef = useRef();
+
   useEffect(() => {
-    const clickOutside = (e) => {
-      // 모달이 열려 있고 모달의 바깥쪽을 눌렀을 때 창 닫기
-      if (isModalOpen && node.current && !node.current.contains(e.target)) {
-        setIsModalOpen(false);
-      }
-    };
-
-    console.log(isModalOpen);
-
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener("mousedown", clickModalOutside);
 
     return () => {
-      // Cleanup the event listener
-      document.removeEventListener("mousedown", clickOutside);
+      document.removeEventListener("mousedown", clickModalOutside);
     };
-  }, [isModalOpen]);
+  });
+
+  const clickModalOutside = (event) => {
+    if (isModalOpen && !modalRef.current.contains(event.target)) {
+      closeModal();
+    }
+  };
 
   return (
     <div>
@@ -135,7 +131,9 @@ const Nav = (props) => {
             <LoginButton onClick={openModal}>로그인</LoginButton>
           )}
 
-          {isModalOpen ? <SignIn isOpen={isModalOpen}></SignIn> : null}
+          {isModalOpen ? (
+            <SignIn isOpen={isModalOpen} modalRef={modalRef}></SignIn>
+          ) : null}
         </LoginDiv>
       </Header>
     </div>

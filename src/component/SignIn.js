@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { KAKAO_AUTH_URL } from "../config/Oatuh";
 import { ImBubble } from "react-icons/im";
@@ -66,14 +66,14 @@ const KakaoBubble = styled(ImBubble)`
   margin-bottom: 0.25rem;
 `;
 
-const SignIn = ({ isOpen }) => {
+const SignIn = ({ modalRef }) => {
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
   useEffect(() => {
     document.body.style.cssText = `
-      position: fixed; 
+      position: fixed;
       top: -${window.scrollY}px;
       overflow-y: scroll;
       width: 100%;`;
@@ -85,23 +85,19 @@ const SignIn = ({ isOpen }) => {
   }, []);
 
   return (
-    <>
-      {isOpen ? (
-        <Modal>
-          <LoginContainer>
-            <LoginWrapper>
-              <Emoji>👋</Emoji>
-              <Header>반갑습니다!</Header>
-              <Article>영화의 모든것!</Article>
-              <KakaoBtn onClick={kakaoLogin}>
-                <KakaoBubble />
-                <p>카카오로 바로 시작</p>
-              </KakaoBtn>
-            </LoginWrapper>
-          </LoginContainer>
-        </Modal>
-      ) : null}
-    </>
+    <Modal>
+      <LoginContainer>
+        <LoginWrapper ref={modalRef}>
+          <Emoji>👋</Emoji>
+          <Header>반갑습니다!</Header>
+          <Article>영화의 모든것!</Article>
+          <KakaoBtn onClick={kakaoLogin}>
+            <KakaoBubble />
+            <p>카카오로 바로 시작</p>
+          </KakaoBtn>
+        </LoginWrapper>
+      </LoginContainer>
+    </Modal>
   );
 };
 

@@ -87,6 +87,7 @@ const ButtonGroup = styled.div`
 `;
 
 const IntroPresenter = (props) => {
+  const { modalRef } = props;
   let history = useHistory();
   return (
     <>
@@ -120,7 +121,7 @@ const IntroPresenter = (props) => {
                   </MoreButton>
                   <MoreButton onClick={props.openModal}>로그인</MoreButton>
                   {props.isModalOpen ? (
-                    <SignIn isOpen={props.isModalOpen}></SignIn>
+                    <SignIn modalRef={modalRef}></SignIn>
                   ) : null}
                 </ButtonGroup>
               </Container>

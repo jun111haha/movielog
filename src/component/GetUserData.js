@@ -12,8 +12,8 @@ export const GetUserData = async (appToken) => {
     })
     .then((res) => {
       userData = res.data;
-      console.log(userData);
       localStorage.setItem("nickname", res.data.nickname);
+      localStorage.setItem("id", res.data.kakao_id);
     })
     .catch((err) => {
       console.log("유저정보 받아오기 실패", err);

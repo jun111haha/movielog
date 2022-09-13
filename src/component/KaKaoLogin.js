@@ -65,7 +65,7 @@ const KaKaoLogin = () => {
         history.replace("/movie");
       })
       .catch((err) => {
-        console.log("🧨jwt토큰 받기 실패", err);
+        console.log("jwt토큰 받기 실패", err);
       });
   };
   return <></>;
