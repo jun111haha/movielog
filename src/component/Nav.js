@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React, { useState, useRef, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "./SignIn";
+import useStores from "../store/useStores";
 
 const SLink = styled(Link)`
   padding: 15px 20px;
@@ -43,11 +44,18 @@ const LoginButton = styled.button`
   color: #808080;
 `;
 
+const LoginState = styled.span`
+  font-size: 15px;
+  padding: 15px 20px;
+  color: #808080;
+`;
+
 const Nav = (props) => {
   const {
     location: { pathname },
   } = props;
 
+  const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
@@ -57,25 +65,31 @@ const Nav = (props) => {
     setIsModalOpen(false);
   };
 
-  const wrapperRef = useRef();
+  const logOut = () => {
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    history.replace("/");
+  };
+
+  const modalRef = useRef();
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", clickModalOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", clickModalOutside);
     };
-  }, []);
+  });
 
-  const handleClickOutside = (event) => {
-    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
-    } else {
-      setIsModalOpen(false);
+  const clickModalOutside = (event) => {
+    if (isModalOpen && !modalRef.current.contains(event.target)) {
+      closeModal();
     }
   };
 
   return (
-    <div ref={wrapperRef}>
+    <div>
       <Header>
         <List>
           <Item>
@@ -101,15 +115,24 @@ const Nav = (props) => {
           </Item>
         </List>
         <LoginDiv>
-          <LoginButton>내로그</LoginButton>
-          <LoginButton onClick={openModal}>로그인</LoginButton>
+          {localStorage.getItem("nickname") ? (
+            <LoginButton>내로그</LoginButton>
+          ) : null}
+
+          {localStorage.getItem("nickname") ? (
+            <LoginButton onClick={logOut}>로그아웃</LoginButton>
+          ) : null}
+
+          {localStorage.getItem("nickname") ? (
+            <LoginState>
+              {localStorage.getItem("nickname")} 님 안녕하세요!
+            </LoginState>
+          ) : (
+            <LoginButton onClick={openModal}>로그인</LoginButton>
+          )}
 
           {isModalOpen ? (
-            <SignIn
-              isOpen={isModalOpen}
-              close={closeModal}
-              open={openModal}
-            ></SignIn>
+            <SignIn isOpen={isModalOpen} modalRef={modalRef}></SignIn>
           ) : null}
         </LoginDiv>
       </Header>

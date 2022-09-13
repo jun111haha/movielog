@@ -3,6 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Loading from "../../component/Loading";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import SignIn from "../../component/SignIn";
 
 const Layout = styled.div`
   display: flex;
@@ -39,6 +40,8 @@ const Name = styled.p`
 `;
 
 const MoreButton = styled.button`
+  padding: 0.5rem;
+  margin: 0.5rem;
   width: 230px;
   padding: 0.8rem 0;
   border: 3px solid white;
@@ -79,9 +82,13 @@ const Background = styled.div`
   }
 `;
 
-const IntroPresenter = (props) => {
-  let history = useHistory();
+const ButtonGroup = styled.div`
+  display: flex;
+`;
 
+const IntroPresenter = (props) => {
+  const { modalRef } = props;
+  let history = useHistory();
   return (
     <>
       <HelmetProvider>
@@ -93,27 +100,33 @@ const IntroPresenter = (props) => {
         <Loading></Loading>
       ) : (
         <Layout>
+          <Background
+            backdropPath={
+              props.movie.backdrop_path && props.movie.backdrop_path
+            }
+          />
           <Main>
             <HomeIntro>
               <Container>
                 <Title>오늘의 영화</Title>
                 <Name>{props.movie.original_title}</Name>
                 <Name>{props.movie.title}</Name>
-                <MoreButton
-                  onClick={() => {
-                    history.push("/movie");
-                  }}
-                >
-                  더 보기
-                </MoreButton>
+                <ButtonGroup>
+                  <MoreButton
+                    onClick={() => {
+                      history.push("/movie");
+                    }}
+                  >
+                    더 보기
+                  </MoreButton>
+                  <MoreButton onClick={props.openModal}>로그인</MoreButton>
+                  {props.isModalOpen ? (
+                    <SignIn modalRef={modalRef}></SignIn>
+                  ) : null}
+                </ButtonGroup>
               </Container>
             </HomeIntro>
           </Main>
-          <Background
-            backdropPath={
-              props.movie.backdrop_path && props.movie.backdrop_path
-            }
-          />
         </Layout>
       )}
     </>

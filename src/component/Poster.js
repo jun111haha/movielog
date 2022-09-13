@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import StarRating from "./StarRating";
 import { Link } from "react-router-dom";
+import useConfirm from "../utils/useConfirm";
+import axios from "axios";
+import { BiListPlus } from "react-icons/bi";
 
 const Container = styled.div`
   font-size: 12px;
@@ -46,14 +49,51 @@ const Items = styled.div`
 const Title = styled.div`
   color: white;
   font-size: 18px;
+  display: flex;
 `;
 
 const Rating = styled.div`
   font-size: 14px;
   color: #dcdcdc;
+  display: flex;
+`;
+
+const InsertButton = styled(BiListPlus)`
+  display: flex;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
+  const data = {
+    kakaoId: localStorage.getItem("id"),
+    contentId: id,
+    contentUrl: imgUrl,
+    contentTitle: title,
+    contentRating: rating,
+  };
+
+  const insertLog = async () => {
+    await axios
+      .post("/api/v1/content", JSON.stringify(data), {
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then(() => {
+        alert("내 로그에 추가돼었습니다!");
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
+  };
+  const abort = () => console.log("Aborted");
+
+  const confirm = useConfirm("내 로그에 추가하시겠습니까?", insertLog, abort);
+
   return (
     <Container>
       <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
@@ -66,17 +106,16 @@ const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
             }
           />
         </ImageContainer>
-        <Items>
-          <Title>
-            {title && title.length > 15
-              ? `${title.substring(0, 15)}...`
-              : title}
-          </Title>
-          <Rating>
-            <StarRating voteAverage={rating} /> ({rating})
-          </Rating>
-        </Items>
       </Link>
+      <Items>
+        <Title>
+          {title && title.length > 15 ? `${title.substring(0, 15)}...` : title}
+        </Title>
+        <Rating>
+          <StarRating voteAverage={rating} /> ({rating})
+          {localStorage.getItem("id") && <InsertButton onClick={confirm} />}
+        </Rating>
+      </Items>
     </Container>
   );
 };

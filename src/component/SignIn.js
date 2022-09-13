@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import kakologo from "../assets/kakao--logo.png";
+import { KAKAO_AUTH_URL } from "../config/Oatuh";
+import { ImBubble } from "react-icons/im";
 
 const Modal = styled.div`
   position: fixed;
@@ -11,80 +12,68 @@ const Modal = styled.div`
   background: rgba(0, 0, 0, 0.6);
 `;
 
-const LoginModal = styled.div`
-  width: 480px;
-  height: 300px;
-  background-color: white;
-  position: relative;
-  box-sizing: border-box;
-  margin: 50px auto;
-  padding: 20px;
-  background: #e0e0e0;
+const LoginContainer = styled.div`
+  ${({ theme }) => theme.flex.flexBox};
+  height: 100vh;
 `;
 
-const Close = styled.span`
-  float: right;
-  font-size: 25px;
-  color: black;
+const LoginWrapper = styled.div`
+  ${({ theme }) => theme.flex.flexBox("column")};
+  width: 26.875rem;
+  height: 28.125rem;
+  border: 1px solid #e9ecef;
+  background: rgba(20, 20, 20, 1);
 `;
 
-const ModalContents = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-  padding: 0 20px 32px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+const Emoji = styled.div`
+  margin-bottom: 2.5rem;
+  font-size: 3rem;
+  animation: rotate_image 0.3s linear 4 alternate;
+  transform-origin: 50% 50%;
+  @keyframes rotate_image {
+    100% {
+      transform: rotate(45deg);
+    }
+  }
 `;
 
-const LoginMid = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const Header = styled.header`
+  margin-bottom: 0.7rem;
+  font-size: 1.8rem;
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  color: white;
 `;
 
-const SocialBox = styled.div`
-  margin-bottom: 20px;
+const Article = styled.article`
+  margin-bottom: 2.5rem;
+  color: ${({ theme }) => theme.colors.gray};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
 
-const KaKao = styled.button`
-  background-color: #feec34;
-  border-color: #feec34;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  justify-content: center;
+const KakaoBtn = styled.button`
+  ${({ theme }) => theme.flex.flexBox("", "center", "space-around")};
+  width: 20rem;
+  padding: 1rem 5.2rem;
+  margin-bottom: 2.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: ${({ theme }) => theme.colors.kakaoYellow};
+  font-size: 1rem;
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
 
-const KaKaoLogo = styled.img`
-  width: 24px;
-  height: 25px;
-  margin: 10px;
+const KakaoBubble = styled(ImBubble)`
+  margin-bottom: 0.25rem;
 `;
 
-const KaKaoText = styled.div`
-  width: 350px;
-  font-size: 15px;
-  text-align: center;
-  display: inline-block;
-  box-sizing: border-box;
-  color: black;
-`;
+const SignIn = ({ modalRef }) => {
+  const kakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
 
-const SignInIcon = styled.div`
-  width: 150px;
-  margin: 0 auto;
-`;
-
-const SignIn = ({ isOpen, close, open }) => {
   useEffect(() => {
     document.body.style.cssText = `
-      position: fixed; 
+      position: fixed;
       top: -${window.scrollY}px;
       overflow-y: scroll;
       width: 100%;`;
@@ -96,26 +85,19 @@ const SignIn = ({ isOpen, close, open }) => {
   }, []);
 
   return (
-    <>
-      {isOpen ? (
-        <Modal>
-          <LoginModal>
-            <Close onClick={close}>&times;</Close>
-            <ModalContents onClick={open}>
-              <SignInIcon />
-              <LoginMid>
-                <SocialBox>
-                  <KaKao>
-                    <KaKaoLogo src={kakologo} />
-                    <KaKaoText>카카오 계정으로 시작하기</KaKaoText>
-                  </KaKao>
-                </SocialBox>
-              </LoginMid>
-            </ModalContents>
-          </LoginModal>
-        </Modal>
-      ) : null}
-    </>
+    <Modal>
+      <LoginContainer>
+        <LoginWrapper ref={modalRef}>
+          <Emoji>👋</Emoji>
+          <Header>반갑습니다!</Header>
+          <Article>영화의 모든것!</Article>
+          <KakaoBtn onClick={kakaoLogin}>
+            <KakaoBubble />
+            <p>카카오로 바로 시작</p>
+          </KakaoBtn>
+        </LoginWrapper>
+      </LoginContainer>
+    </Modal>
   );
 };
 

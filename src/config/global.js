@@ -56,7 +56,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "Apple Gothic R";
     background-color: rgba(20,20,20,1);
     border: 0;
     font-size: 100%;
@@ -90,7 +89,6 @@ const GlobalStyle = createGlobalStyle`
   p,h2 {
     margin: 0;
   }
-
   input, button {
     background-color: transparent;
   }
