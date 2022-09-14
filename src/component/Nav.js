@@ -42,6 +42,9 @@ const LoginButton = styled.button`
   font-size: 15px;
   padding: 15px 20px;
   color: #808080;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const LoginState = styled.span`
@@ -116,7 +119,11 @@ const Nav = (props) => {
         </List>
         <LoginDiv>
           {localStorage.getItem("nickname") ? (
-            <LoginButton>내로그</LoginButton>
+            <LoginButton>
+              <SLink selected={pathname.includes("/mylog")} to="/mylog">
+                내로그
+              </SLink>
+            </LoginButton>
           ) : null}
 
           {localStorage.getItem("nickname") ? (

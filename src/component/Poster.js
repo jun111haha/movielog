@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import useConfirm from "../utils/useConfirm";
 import axios from "axios";
 import { BiListPlus } from "react-icons/bi";
+import { BiListMinus } from "react-icons/bi";
 
 const Container = styled.div`
   font-size: 12px;
@@ -66,18 +67,27 @@ const InsertButton = styled(BiListPlus)`
   }
 `;
 
-const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
-  const data = {
+const DeleteButton = styled(BiListMinus)`
+  display: flex;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Poster = ({ id, imgUrl, title, rating, isMovie, myLog }) => {
+  const insertData = {
     kakaoId: localStorage.getItem("id"),
     contentId: id,
     contentUrl: imgUrl,
     contentTitle: title,
     contentRating: rating,
+    contentCheck: isMovie,
   };
 
   const insertLog = async () => {
     await axios
-      .post("/api/v1/content", JSON.stringify(data), {
+      .post("/api/v1/content", JSON.stringify(insertData), {
         headers: {
           "Content-Type": `application/json`,
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -92,7 +102,11 @@ const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
   };
   const abort = () => console.log("Aborted");
 
-  const confirm = useConfirm("내 로그에 추가하시겠습니까?", insertLog, abort);
+  const insertconfirm = useConfirm(
+    "내 로그에 추가하시겠습니까?",
+    insertLog,
+    abort
+  );
 
   return (
     <Container>
@@ -113,7 +127,11 @@ const Poster = ({ id, imgUrl, title, rating, isMovie }) => {
         </Title>
         <Rating>
           <StarRating voteAverage={rating} /> ({rating})
-          {localStorage.getItem("id") && <InsertButton onClick={confirm} />}
+          {localStorage.getItem("id") && myLog ? (
+            <DeleteButton />
+          ) : (
+            <InsertButton onClick={insertconfirm} />
+          )}
         </Rating>
       </Items>
     </Container>

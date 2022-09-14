@@ -40,6 +40,7 @@ const TvDetailComp = lazy(() =>
 );
 const IntroComp = lazy(() => import("./views/Intro"));
 const SearchComap = lazy(() => import("./views/Search"));
+const MyLog = lazy(() => import("./views/MyLog/container/MyLogContainer"));
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
               <Route exact path="/movie/:id" component={MovieDetailComp} />
               <Route exact path="/search" component={SearchComap} />
               <Route exact path="/kakaoLogin" component={KaKaoLogin} />
+              <Route exact path="/mylog" component={MyLog}></Route>
               <Route exact path="*" component={NotFound} />
             </Switch>
           </Suspense>

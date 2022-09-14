@@ -12,6 +12,7 @@ const Content = styled.div`
   display: flex;
   justify-content: ${(props) => props.center};
   margin-left: ${(props) => props.margin};
+  padding-top: ${(props) => props.padding};
   max-width: 2400px;
   flex-wrap: wrap;
   @media (max-width: 768px) {
@@ -19,10 +20,10 @@ const Content = styled.div`
   }
 `;
 
-export const Section = ({ children, center, margin }) => {
+export const Section = ({ children, center, margin, padding }) => {
   return (
     <Container>
-      <Content center={center} margin={margin}>
+      <Content center={center} margin={margin} padding={padding}>
         {children}
       </Content>
     </Container>
