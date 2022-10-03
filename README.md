@@ -39,7 +39,7 @@ https://jun111haha.github.io/
 - intersection observer 를 활용하여 무한스크롤 적용하는 방법 
 - YouTube Api 를 활용하여 예고편을 띄우는 방법
 - 백엔드서버와 통신하는 방법
-- 소셜로그인 토큰으로 받아 
+- 소셜로그인 토큰으로 받아 인증 / 인가 처리
 
 ## 백엔드서버 깃허브
 - https://github.com/jun111haha/movielog-backend
