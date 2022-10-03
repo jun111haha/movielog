@@ -42,3 +42,6 @@ https://jun111haha.github.io/
 - Material-UI 를 활용한 UI Framework 활용하는 방법
 - intersection observer 를 활용하여 무한스크롤 적용하는 방법 
 - YouTube Api 를 활용하여 예고편을 띄우는 방법
+
+## 백엔드서버 깃허브
+- https://github.com/jun111haha/movielog-backend
