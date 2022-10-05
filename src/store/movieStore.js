@@ -1,5 +1,6 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { moviesApi } from "../Api";
+import axios from "axios";
 
 export default class MovieListStore {
   moviePopularList = [];
@@ -11,6 +12,8 @@ export default class MovieListStore {
   movieDetailList = [];
   movieVedioList = [];
   movieSearchList = [];
+  myLogList = [];
+  myLogListChangeCheck = false;
   movieEmptyCheck = false;
 
   constructor() {
@@ -25,6 +28,8 @@ export default class MovieListStore {
       movieVedioList: observable,
       movieSearchList: observable,
       movieEmptyCheck: observable,
+      myLogList: observable,
+      myLogListChangeCheck: observable,
 
       getMoviePopularList: action,
       getMovieUpcomingList: action,
@@ -32,6 +37,7 @@ export default class MovieListStore {
       getMovieDetailList: action,
       movieDetailReset: action,
       getMovieSearchList: action,
+      getMyLog: action,
     });
   }
 
@@ -95,5 +101,23 @@ export default class MovieListStore {
 
   movieDetailReset = () => {
     this.movieDetailList = [];
+  };
+
+  getMyLog = async (id) => {
+    await axios
+      .get(`/api/v1/content/${id}`, {
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        this.myLogList = res.data;
+        this.myLogListChangeCheck = false;
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+        window.location.replace("/movie");
+      });
   };
 }

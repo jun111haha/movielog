@@ -121,7 +121,7 @@ const Nav = (props) => {
           {localStorage.getItem("nickname") ? (
             <LoginButton>
               <SLink selected={pathname.includes("/mylog")} to="/mylog">
-                내로그
+                내보관함
               </SLink>
             </LoginButton>
           ) : null}

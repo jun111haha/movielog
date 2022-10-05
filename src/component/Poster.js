@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import StarRating from "./StarRating";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import useConfirm from "../utils/useConfirm";
 import axios from "axios";
 import { BiListPlus } from "react-icons/bi";
 import { BiListMinus } from "react-icons/bi";
+import useStores from "../store/useStores";
 
 const Container = styled.div`
   font-size: 12px;
@@ -76,6 +77,8 @@ const DeleteButton = styled(BiListMinus)`
 `;
 
 const Poster = ({ id, imgUrl, title, rating, isMovie, myLog }) => {
+  const { movieListStore } = useStores();
+
   const insertData = {
     kakaoId: localStorage.getItem("id"),
     contentId: id,
@@ -100,11 +103,33 @@ const Poster = ({ id, imgUrl, title, rating, isMovie, myLog }) => {
         alert(error.response.data.message);
       });
   };
+
+  const deleteLog = async () => {
+    await axios
+      .delete(`api/v1/content/delete/${id}`, {
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then(() => {
+        movieListStore.myLogListChangeCheck = true;
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
+  };
   const abort = () => console.log("Aborted");
 
-  const insertconfirm = useConfirm(
+  const insertConfirm = useConfirm(
     "내 로그에 추가하시겠습니까?",
     insertLog,
+    abort
+  );
+
+  const deleteConfirm = useConfirm(
+    "내 로그에서 삭제하시겠습니까?",
+    deleteLog,
     abort
   );
 
@@ -128,9 +153,9 @@ const Poster = ({ id, imgUrl, title, rating, isMovie, myLog }) => {
         <Rating>
           <StarRating voteAverage={rating} /> ({rating})
           {localStorage.getItem("id") && myLog ? (
-            <DeleteButton />
+            <DeleteButton onClick={deleteConfirm} />
           ) : (
-            <InsertButton onClick={insertconfirm} />
+            <InsertButton onClick={insertConfirm} />
           )}
         </Rating>
       </Items>
