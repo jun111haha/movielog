@@ -4,6 +4,7 @@ import { Link, withRouter, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "./SignIn";
 import useStores from "../store/useStores";
+import { useKeyClose } from "../utils/useKeyClose";
 
 const SLink = styled(Link)`
   padding: 15px 20px;
@@ -67,6 +68,8 @@ const Nav = (props) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useKeyClose(closeModal);
 
   const logOut = () => {
     localStorage.removeItem("nickname");

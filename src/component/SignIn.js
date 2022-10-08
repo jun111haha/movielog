@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { KAKAO_AUTH_URL } from "../config/Oatuh";
 import { ImBubble } from "react-icons/im";
+import { useKeyClose } from "../utils/useKeyClose";
 
 const Modal = styled.div`
   position: fixed;
