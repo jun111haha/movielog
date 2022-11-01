@@ -13,8 +13,6 @@
 
 ## 프로젝트 소개
 TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 API를 활용하여 영화를 검색하고 찾아보며 영화 예고편을 제공해줍니다
-- 배포URl <br>
-https://jun111haha.github.io/
 
 ## 웹사이트 화면
 ### Home
@@ -51,10 +49,13 @@ https://jun111haha.github.io/
 ## 실행방법
 원격 저장소 복제
 > $ git clone https://github.com/jun111haha/movielog.git
+<br>
 프로젝트 폴더로 이동
 > $ cd movielog
+<br>
 필요한 node_modules 설치
 > $ npm install
+<br>
 개발 서버 실행
 > $ npm run serve
 
