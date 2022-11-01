@@ -48,5 +48,15 @@ https://jun111haha.github.io/
 - 백엔드서버와 통신하는 방법
 - 소셜로그인 토큰으로 받아 인증 / 인가 처리
 
+## 실행방법
+원격 저장소 복제
+> $ git clone https://github.com/jun111haha/movielog.git
+프로젝트 폴더로 이동
+> $ cd movielog
+필요한 node_modules 설치
+> $ npm install
+개발 서버 실행
+> $ npm run serve
+
 ## 백엔드서버 깃허브
 - https://github.com/jun111haha/movielog-backend
