@@ -53,13 +53,19 @@ $ git clone https://github.com/jun111haha/movielog.git
 </pre>
 
 **2. 프로젝트 폴더로 이동**
-> $ cd movielog
+<pre>
+$ cd movielog
+</pre>
 
 **3. 필요한 node_modules 설치**
-> $ npm install
+<pre>
+$ npm install
+</pre>
 
 **4. 개발 서버 실행**
-> $ npm run serve
+<pre>
+$ npm run serve
+</pre>
 
 ## 백엔드서버 깃허브
 - https://github.com/jun111haha/movielog-backend
