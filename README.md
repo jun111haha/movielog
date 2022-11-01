@@ -48,9 +48,9 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 
 ## 실행방법
 **1. 원격 저장소 복제**
-<aside>
+<pre>
 $ git clone https://github.com/jun111haha/movielog.git
-</aside>
+</pre>
 
 **2. 프로젝트 폴더로 이동**
 > $ cd movielog
