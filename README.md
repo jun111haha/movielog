@@ -16,24 +16,24 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 
 ## 웹사이트 화면
 ### Home
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 44 29" src="https://user-images.githubusercontent.com/59434443/199276266-1eb924a5-305d-4e92-a917-a2fe02ce8782.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 49 14" src="https://user-images.githubusercontent.com/59434443/199522705-32c2c590-914a-4615-a47a-c17f538ed01c.png">
 
 ### 둘러보기
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 44 57" src="https://user-images.githubusercontent.com/59434443/199276351-9ba56d3d-65a6-4988-98e4-f41695277aab.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 49 39" src="https://user-images.githubusercontent.com/59434443/199522827-74d68cac-cbbd-477a-838b-9febb62d0066.png">
 
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 45 17" src="https://user-images.githubusercontent.com/59434443/199276417-d225dead-5b82-4a70-bd82-13ab86592d43.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 50 53" src="https://user-images.githubusercontent.com/59434443/199522869-1893f358-2d36-4f5f-b3ff-17e0fd3ba061.png">
 
 ### 디테일
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 48 32" src="https://user-images.githubusercontent.com/59434443/199276668-7b7c439e-ba89-40b8-8778-fb286bb278c8.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 51 12" src="https://user-images.githubusercontent.com/59434443/199522974-5831e018-e940-404a-bf56-a54aacbc67b4.png">
 
 ### 검색
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 45 38" src="https://user-images.githubusercontent.com/59434443/199276754-3aaff717-593d-45dc-86e7-7f1e06f33dd6.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 52 29" src="https://user-images.githubusercontent.com/59434443/199523098-7da5892f-788d-444b-8c55-4ac25484d77d.png">
 
 ### 내로그
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 45 49" src="https://user-images.githubusercontent.com/59434443/199276814-71356afe-02cc-461f-8fd2-737111476bd7.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 51 50" src="https://user-images.githubusercontent.com/59434443/199523187-90ba70a3-393f-455c-9e7b-26ebf1462d91.png">
 
 ### 소셜로그인
-<img width="1680" alt="스크린샷 2022-11-02 오전 12 46 04" src="https://user-images.githubusercontent.com/59434443/199276862-70c18805-e1ca-45f5-8884-771ff39b374a.png">
+<img width="1680" alt="스크린샷 2022-11-02 오후 11 49 21" src="https://user-images.githubusercontent.com/59434443/199523260-81a8d1bf-86d3-42ac-a3eb-5fac300ba9e5.png">
 
 ## 프로젝트를 통해 배운점
 - React Framework를 활용하여 함수형 컴포넌트 방식으로 프론트 구성하는 방법
