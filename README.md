@@ -47,7 +47,8 @@ TMDB(The Movie DataBase) API를 활용해서 만든 리액트 프로젝트로 AP
 - 소셜로그인 토큰으로 받아 인증 / 인가 처리
 
 ## 실행방법
-- Api.js 에 TMDB Apikey 등록   
+- Api.js 에 TMDB Apikey 등록
+
 **1. 원격 저장소 복제**
 <pre>
 $ git clone https://github.com/jun111haha/movielog.git
